@@ -1,0 +1,26 @@
+{
+    "name": "unigame.leoecs.proto.filters.runtime",
+    "rootNamespace": "UniGame.LeoEcs.Proto.Filters",
+    "references": [
+        "GUID:c1d53fc1b1b71c647b00626be502b7b1",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "LEO_ECS_PROTO_ENABLED"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.leopotam.proto",
+            "expression": "",
+            "define": "LEO_ECS_PROTO_ENABLED"
+        }
+    ],
+    "noEngineReferences": false
+}
