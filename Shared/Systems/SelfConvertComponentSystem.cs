@@ -1,8 +1,11 @@
 ﻿namespace Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.Shared.Systems
 {
     using System;
+    using global::UniGame.LeoEcs.Proto.Shared;
+    using global::UniGame.LeoEcs.Shared.Extensions;
     using Leopotam.EcsLite;
-    
+    using Leopotam.EcsProto;
+
     /// <summary>
     /// create target component on entity by triggered component
     /// </summary>
@@ -22,7 +25,7 @@
         private EcsFilter _filter;
         private EcsPool<TTarget> _targetPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -34,12 +37,10 @@
             _targetPool = _world.GetPool<TTarget>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
-            {
                 _targetPool.Add(entity);
-            }
         }
     }
 }

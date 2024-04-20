@@ -1,15 +1,17 @@
 ﻿namespace UniGame.LeoEcs.Shared.Extensions
 {
     using System;
+    using System.Runtime.CompilerServices;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniModules.UniCore.Runtime.Extension;
     using UniModules.UniCore.Runtime.Utils;
     using UniModules.UniGame.Context.Runtime.Context;
 
     public static class WorldGlobalExtensions
     {
-        private static MemorizeItem<EcsWorld, EntityContext> _globalValues = MemorizeTool
-            .Memorize<EcsWorld, EntityContext>(x =>
+        private static MemorizeItem<ProtoWorld, EntityContext> _globalValues = MemorizeTool
+            .Memorize<ProtoWorld, EntityContext>(x =>
             {
                 var context = new EntityContext();
                 var worldLifeTime = x.GetWorldLifeTime();
@@ -17,7 +19,7 @@
                 return context;
             });
 
-        public static bool HasFlag<T>(this EcsWorld world, T flag)
+        public static bool HasFlag<T>(this ProtoWorld world, T flag)
             where T  : Enum
         {
             var context = _globalValues[world];
@@ -28,14 +30,23 @@
             return isSet;
         }
         
-        public static T GetGlobal<T>(this EcsWorld world)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T GetGlobal<T>(this ProtoWorld world)
         {
             var globals = _globalValues[world];
             var value = globals.Get<T>();
             return value;
         }
         
-        public static T SetGlobal<T>(this EcsWorld world,T value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T SetGlobal<T>(this IProtoSystems systems,T value)
+        {
+            var world = systems.World();
+            return world.SetGlobal(value);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T SetGlobal<T>(this ProtoWorld world,T value)
         {
             var globals = _globalValues[world];
             globals.Publish(value);

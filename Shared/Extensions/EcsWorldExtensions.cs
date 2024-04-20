@@ -6,6 +6,8 @@ namespace UniGame.LeoEcs.Shared.Extensions
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniModules.UniCore.Runtime.DataFlow;
     using UniModules.UniCore.Runtime.Utils;
     using Unity.Collections;
@@ -18,10 +20,10 @@ namespace UniGame.LeoEcs.Shared.Extensions
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
-    public static class EcsWorldExtensions
+    public static class ProtoWorldExtensions
     {
-        private static MemorizeItem<EcsWorld,WorldContextData> _memorizeItem = MemorizeTool
-            .Memorize<EcsWorld, WorldContextData>(static x =>
+        private static MemorizeItem<ProtoWorld,WorldContextData> _memorizeItem = MemorizeTool
+            .Memorize<ProtoWorld, WorldContextData>(static x =>
             {
                 var lifeTime = new LifeTimeDefinition();
                 var worldData = new WorldContextData()
@@ -35,7 +37,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
                 UpdateWorldLifeTime(x,lifeTime).Forget();
                 return worldData;
                 
-                static async UniTask UpdateWorldLifeTime(EcsWorld world,LifeTimeDefinition lifeTime)
+                static async UniTask UpdateWorldLifeTime(ProtoWorld world,LifeTimeDefinition lifeTime)
                 {
                     while (world.IsAlive())
                     {
@@ -54,7 +56,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
                 
             },x => x.LifeTime.Terminate());
 
-        private static object[] _removingComponents = Array.Empty<object>();
+        private static Slice<object> _removingComponents = new Slice<object>();
         
 #if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -75,7 +77,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.NullChecks, false)]
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
-        public static ref TComponent AddComponentToEntity<TComponent>(this EcsWorld world, int entity)
+        public static ref TComponent AddComponentToEntity<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -89,27 +91,10 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EcsPackedEntity PackedEntity(this int entity, EcsWorld world)
+        public static EcsPackedEntity PackedEntity(this ProtoEntity entity, ProtoWorld world)
         {
             var packedEntity = world.PackEntity(entity);
             return packedEntity;
-        }
-        
-#if ENABLE_IL2CPP
-        [Il2CppSetOption (Option.NullChecks, false)]
-        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
-        public static bool AnyHas<TPool>(this EcsWorld world, List<int> entities)
-            where TPool : struct
-        {
-            var pool = world.GetPool<TPool>();
-            foreach (var entity in entities)
-            {
-                if (pool.Has(entity))
-                    return true;
-            }
-
-            return false;
         }
 
 #if ENABLE_IL2CPP
@@ -117,7 +102,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent GetComponent<TComponent>(this EcsWorld world, int entity)
+        public static ref TComponent GetComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -128,11 +113,11 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.NullChecks, false)]
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
-        public static IEnumerable<EcsPackedEntity> PackAll(this EcsWorld world, IEnumerable<int> entities)
+        public static IEnumerable<EcsPackedEntity> PackAll(this ProtoWorld world, IEnumerable<int> entities)
         {
             foreach (var entity in entities)
             {
-                yield return world.PackEntity(entity);
+                yield return world.PackEntity(ProtoEntity.FromIdx(entity));
             }
         }
         
@@ -141,12 +126,10 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void PackAll(this EcsWorld world,List<EcsPackedEntity> container, IEnumerable<int> entities)
+        public static void PackAll(this ProtoWorld world,List<EcsPackedEntity> container, IEnumerable<int> entities)
         {
             foreach (var entity in entities)
-            {
-                container.Add(world.PackEntity(entity));
-            }
+                container.Add(world.PackEntity(ProtoEntity.FromIdx(entity)));
         }
 
 #if ENABLE_IL2CPP
@@ -154,11 +137,12 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool UnpackAll(this EcsWorld world,List<int> result, List<EcsPackedEntity> packedEntities)
+        public static bool UnpackAll(this ProtoWorld world,List<ProtoEntity> result, List<ProtoPackedEntity> packedEntities)
         {
             var unpackResult = true;
             foreach (var ecsPackedEntity in packedEntities)
             {
+                
                 if (!ecsPackedEntity.Unpack(world, out var entity))
                 {
                     unpackResult = false;
@@ -175,7 +159,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int UnpackAll(this EcsWorld world,EcsPackedEntity[] from,int[] to)
+        public static int UnpackAll(this ProtoWorld world,ProtoPackedEntity[] from,ProtoEntity[] to)
         {
             var amount = 0;
             foreach (var ecsPackedEntity in from)
@@ -194,14 +178,14 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int PackAll(this EcsWorld world,int[] source,EcsPackedEntity[] result, int count)
+        public static int PackAll(this ProtoWorld world,int[] source,ProtoPackedEntity[] result, int count)
         {
             var counter = 0;
             for (var i = 0; i < count; i++)
             {
                 var entity = source[i];
                 if(entity < 0) continue;
-                result[counter] = world.PackEntity(source[i]);
+                result[counter] = world.PackEntity(ProtoEntity.FromIdx(source[i]));
                 counter++;
             }
             return counter;
@@ -212,7 +196,31 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int UnpackAll(this EcsWorld world, EcsPackedEntity[] packedEntities,int[] result, int amount)
+        public static int UnpackAll(this ProtoWorld world, EcsPackedEntity[] packedEntities,int[] result, int amount)
+        {
+            var counter = 0;
+            
+            for (var i = 0; i < amount; i++)
+            {
+                ref var packedEntity = ref packedEntities[i];
+                if (!packedEntity.Unpack(world, out var entity))
+                    continue;
+                
+                result[counter] = (int)entity;
+                counter++;
+            }
+
+            return counter;
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int UnpackAll(this ProtoWorld world, 
+            ProtoPackedEntity[] packedEntities,
+            ProtoEntity[] result, int amount)
         {
             var counter = 0;
             
@@ -234,7 +242,18 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRemoveComponent<TComponent>(this EcsWorld world, int entity)
+        public static bool TryRemoveComponent<TComponent>(this EcsWorld world, ProtoEntity entity)
+            where TComponent : struct
+        {
+            return TryRemoveComponent<TComponent>(world.Value, entity);
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryRemoveComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -244,14 +263,25 @@ namespace UniGame.LeoEcs.Shared.Extensions
             pool.Del(entity);
             return true;
         }
-        
 
 #if ENABLE_IL2CPP
         [Il2CppSetOption (Option.NullChecks, false)]
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void RemoveComponent<TComponent>(this EcsWorld world, int entity)
+        public static ProtoPool<TComponent> GetPool<TComponent>(this ProtoWorld world)
+            where TComponent : struct
+        {
+            var pool = world.Pool(typeof(TComponent));
+            return pool as ProtoPool<TComponent>;
+        }
+
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void RemoveComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -263,20 +293,30 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasComponent<TComponent>(this EcsWorld world, int entity)
+        public static bool HasComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
             return pool.Has(entity);
         }
         
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref TComponent AddComponent<TComponent>(this EcsWorld world, ProtoEntity entity)
+            where TComponent : struct
+        {
+            return ref world.Value.AddComponent<TComponent>(entity);
+        }
         
 #if ENABLE_IL2CPP
         [Il2CppSetOption (Option.NullChecks, false)]
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent AddComponent<TComponent>(this EcsWorld world, int entity)
+        public static ref TComponent AddComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -289,7 +329,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent GetOrAddComponent<TComponent>(this EcsWorld world, int entity)
+        public static ref TComponent GetOrAddComponent<TComponent>(this ProtoWorld world, ProtoEntity entity)
             where TComponent : struct
         {
             var pool = world.GetPool<TComponent>();
@@ -302,14 +342,14 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent AddRawComponent<TComponent>(this EcsWorld world, int entity, TComponent component)
+        public static ref TComponent AddRawComponent<TComponent>(this ProtoWorld world, ProtoEntity entity, TComponent component)
             where TComponent : struct
         {
-            var pool = world.GetPoolByType(typeof(TComponent));
+            var pool = world.Pool(typeof(TComponent));
             if (pool.Has(entity))
                 pool.Del(entity);
             
-            pool.AddRaw(entity,component);
+            pool.SetRaw(entity,component);
             var typePool = world.GetPool<TComponent>();
             return ref typePool.Get(entity);
         }
@@ -319,14 +359,16 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void RemoveComponents<TType>(this EcsWorld world, int entity)
+        public static void RemoveComponents<TType>(this ProtoWorld world, ProtoEntity entity)
         {
-            var components = world.GetComponents(entity, ref _removingComponents);
-            for (int i = 0; i < components; i++)
+            world.GetComponents(entity, _removingComponents);
+            var data = _removingComponents.Data();
+            
+            for (int i = 0; i < _removingComponents.Len(); i++)
             {
-                var component = _removingComponents[i];
+                var component = data[i];
                 if(component is not TType)continue;
-                var pool = world.GetPoolByType(component.GetType());
+                var pool = world.Pool(component.GetType());
                 pool.Del(entity);
             }
         }
@@ -336,7 +378,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void AddRawComponents(this EcsWorld world, int entity,int count, object[] components)
+        public static void AddRawComponents(this ProtoWorld world, ProtoEntity entity,int count, object[] components)
         {
             for (var i = 0; i < count; i++)
             {
@@ -350,13 +392,13 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void AddRawComponent(this EcsWorld world, int entity,Type componentType, object component)
+        public static void AddRawComponent(this ProtoWorld world, ProtoEntity entity,Type componentType, object component)
         {
-            var pool = world.GetPoolByType(componentType);
+            var pool = world.Pool(componentType);
             if (pool.Has(entity))
                 pool.Del(entity);
             
-            pool.AddRaw(entity,component);
+            pool.SetRaw(entity,component);
         }
 
 #if ENABLE_IL2CPP
@@ -364,12 +406,12 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FilterByComponent<T>(this EcsWorld world, IEnumerable<int> filter, List<int> result) where T : struct
+        public static void FilterByComponent<T>(this ProtoWorld world, IEnumerable<int> filter, List<int> result) where T : struct
         {
             var pool = world.GetPool<T>();
             foreach (var entity in filter)
             {
-                if (pool.Has(entity))
+                if (pool.Has((ProtoEntity)entity))
                     result.Add(entity);
             }
         }
@@ -379,7 +421,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FilterByComponent<T, T2>(this EcsWorld world, IEnumerable<int> filter, List<int> result)
+        public static void FilterByComponent<T, T2>(this ProtoWorld world, IEnumerable<int> filter, List<int> result)
             where T : struct
             where T2 : struct
         {
@@ -387,7 +429,8 @@ namespace UniGame.LeoEcs.Shared.Extensions
             var pool2 = world.GetPool<T2>();
             foreach (var entity in filter)
             {
-                if (pool.Has(entity) && pool2.Has(entity))
+                var protoEntity = (ProtoEntity)entity;
+                if (pool.Has(protoEntity) && pool2.Has(protoEntity))
                     result.Add(entity);
             }
         }
@@ -397,7 +440,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FilterByComponent<T, T2, T3>(this EcsWorld world, IEnumerable<int> filter, List<int> result)
+        public static void FilterByComponent<T, T2, T3>(this ProtoWorld world, IEnumerable<int> filter, List<int> result)
             where T : struct
             where T2 : struct
             where T3 : struct
@@ -407,7 +450,8 @@ namespace UniGame.LeoEcs.Shared.Extensions
             var pool3 = world.GetPool<T3>();
             foreach (var entity in filter)
             {
-                if (pool.Has(entity) && pool2.Has(entity) && pool3.Has(entity))
+                var protoEntity = (ProtoEntity)entity;
+                if (pool.Has(protoEntity) && pool2.Has(protoEntity) && pool3.Has(protoEntity))
                     result.Add(entity);
             }
         }
@@ -417,7 +461,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void FilterByComponent<T, T2, T3, T4>(this EcsWorld world, IEnumerable<int> filter, List<int> result)
+        public static void FilterByComponent<T, T2, T3, T4>(this ProtoWorld world, IEnumerable<int> filter, List<int> result)
             where T : struct
             where T2 : struct
             where T3 : struct
@@ -430,9 +474,30 @@ namespace UniGame.LeoEcs.Shared.Extensions
 
             foreach (var entity in filter)
             {
-                if (pool.Has(entity) && pool2.Has(entity) && pool3.Has(entity) && pool4.Has(entity))
+                var protoEntity = (ProtoEntity)entity;
+                if (pool.Has(protoEntity) && pool2.Has(protoEntity) && pool3.Has(protoEntity) && pool4.Has(protoEntity))
                     result.Add(entity);
             }
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoPackedEntity PackEntity(this EcsWorld world, int entity)
+        {
+            return world.Value.PackEntity((ProtoEntity)entity);
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void DelEntity(this EcsWorld world, int entity)
+        {
+            world.Value.DelEntity((ProtoEntity)entity);
         }
 
 #if ENABLE_IL2CPP
@@ -440,14 +505,14 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ILifeTime GetWorldLifeTime(this EcsWorld world) => _memorizeItem[world].LifeTime;
+        public static ILifeTime GetWorldLifeTime(this ProtoWorld world) => _memorizeItem[world].LifeTime;
 
 #if ENABLE_IL2CPP
         [Il2CppSetOption (Option.NullChecks, false)]
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ILifeTime GetLifeTime(this EcsWorld world) => _memorizeItem[world].LifeTime;
+        public static ILifeTime GetLifeTime(this ProtoWorld world) => _memorizeItem[world].LifeTime;
 
 
 #if ENABLE_IL2CPP
@@ -455,7 +520,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetSingleValue<TComponent>(this EcsWorld world,ref EcsPackedEntity value)
+        public static void SetSingleValue<TComponent>(this ProtoWorld world,ref EcsPackedEntity value)
         {
             var data = _memorizeItem[world];
             var hash = typeof(TComponent).GetHashCode();
@@ -467,7 +532,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
 
     public class WorldContextData
     {
-        public EcsWorld World;
+        public ProtoWorld World;
         public LifeTimeDefinition LifeTime;
         public NativeHashMap<int,EcsPackedEntity> SingleEntities;
     }

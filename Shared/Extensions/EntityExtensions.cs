@@ -4,6 +4,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
     using Abstract;
     using Core.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto.QoL;
     using UnityEngine;
 
     public static class EntityExtensions
@@ -12,7 +13,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
 
         public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, int entity, EcsWorld world)
         {
-            if (entity < 0 || world == null || world.IsAlive() == false) return lifeTime;
+            if (entity < 0 || world.IsAlive() == false) return lifeTime;
             
             lifeTime.AddCleanUpAction(() =>
             {
