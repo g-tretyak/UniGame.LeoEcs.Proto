@@ -27,7 +27,7 @@
         
         protected override void OnApply(
             GameObject target,
-            EcsWorld world, 
+            ProtoWorld world, 
             int entity)
         {
             var layoutId = layoutAsset.layoutId;

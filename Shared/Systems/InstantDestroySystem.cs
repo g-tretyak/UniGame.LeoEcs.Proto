@@ -3,7 +3,9 @@
     using System;
     using Components;
     using Leopotam.EcsLite;
-    
+    using Leopotam.EcsProto;
+    using UniGame.LeoEcs.Shared.Extensions;
+
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
 
@@ -14,16 +16,19 @@
     [Serializable]
     public class InstantDestroySystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
-            _filter = _world.Filter<InstantDestroyComponent>().End();
+            
+            _filter = _world
+                .Filter<InstantDestroyComponent>()
+                .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

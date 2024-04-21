@@ -4,7 +4,7 @@
     using UniModules.UniCore.Runtime.Utils;
 
     [Serializable]
-    public class IdEntitiesFilter : IEcsWorldSearchFilter
+    public class IdEntitiesFilter : IProtoWorldSearchFilter
     {
         public int[] entities = Array.Empty<int>();
 

@@ -1,4 +1,4 @@
-﻿namespace UniGame.LeoEcs.Proto.Shared
+﻿namespace UniGame.LeoEcs.Shared.Extensions
 {
     using System.Runtime.CompilerServices;
     using Leopotam.EcsLite;
@@ -7,21 +7,10 @@
 
     public static class EcsMigrationExtensions
     {
-        public static EcsFilter Filter<TComponent>(this EcsWorld world)
-            where TComponent : struct
-        {
-            return new EcsFilter().Filter<TComponent>(world);
-        }
-        
         public static EcsFilter Filter<TComponent>(this ProtoWorld world)
             where TComponent : struct
         {
             return new EcsFilter().Filter<TComponent>(world);
-        }
-        
-        public static EcsWorld GetWorld(this IEcsSystems world)
-        {
-            return world.World();
         }
                 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

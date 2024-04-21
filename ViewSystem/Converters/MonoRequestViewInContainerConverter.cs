@@ -49,7 +49,7 @@
         [Optional]
         public bool StayWorld;
         
-        public sealed override void Apply(GameObject target, EcsWorld world, int entity)
+        public sealed override void Apply(GameObject target, ProtoWorld world, int entity)
         {
             
 #if UNITY_EDITOR

@@ -2,11 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using Abstract;
     using Core.Runtime;
     using Core.Runtime.ScriptableObjects;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
     using UnityEngine;
 
@@ -34,7 +36,7 @@
         
         #endregion
 
-        public async UniTask Create(EcsWorld world,ILifeTime lifeTime)
+        public async UniTask Create(ProtoWorld world,ILifeTime lifeTime)
         {
             if (!createEntityForEachConverter)
             {
@@ -49,17 +51,24 @@
             {
                 var entity = world.NewEntity();
                 lifeTime.DestroyEntityWith(entity, world);
-                
-                Convert(entity,world,converter).Forget();
+                Convert((int)entity,world,converter).Forget();
             }
         }
 
-        public async UniTask Create(int entity, EcsWorld world)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public async UniTask Create(ProtoEntity entity, ProtoWorld world)
+        {
+            await Create((int)entity, world);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public async UniTask Create(int entity, ProtoWorld world)
         {
             await UniTask.WhenAll(converters.Select(x => Convert(entity, world, x)));
         }
 
-        private UniTask Convert(int entity, EcsWorld world, IEcsComponentConverter converter)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private UniTask Convert(int entity, ProtoWorld world, IEcsComponentConverter converter)
         {
             if (!converter.IsEnabled)
                 return UniTask.CompletedTask;

@@ -20,13 +20,13 @@
     [ECSDI]
     public class InitializeViewIdComponentSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         
         private EcsPool<ViewComponent> _viewComponentPool;
         private EcsPool<ViewIdComponent> _viewIdPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -40,7 +40,7 @@
             _viewIdPool = _world.GetPool<ViewIdComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var viewEntity in _filter)
             {

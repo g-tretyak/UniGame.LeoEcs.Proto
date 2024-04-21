@@ -5,6 +5,9 @@ using Unity.IL2CPP.CompilerServices;
 
 namespace UniGame.LeoEcs.Shared.Systems
 {
+    using Leopotam.EcsProto;
+    using Extensions;
+
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
@@ -12,7 +15,7 @@ namespace UniGame.LeoEcs.Shared.Systems
     public class UpdateCounterRequestSystem<TRequestType>: IEcsRunSystem,IEcsInitSystem
     {
         private EcsFilter _filter;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsPool<Component<TRequestType>> _pool;
         private int _counterLimit;
         
@@ -21,14 +24,14 @@ namespace UniGame.LeoEcs.Shared.Systems
             _counterLimit = counterLimit;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world.Filter<Component<TRequestType>>().End();
             _pool = _world.GetPool<Component<TRequestType>>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

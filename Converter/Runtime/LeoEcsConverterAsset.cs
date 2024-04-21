@@ -7,6 +7,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
     using System.Threading;
     using Leopotam.EcsLite;
     using Abstract;
+    using Leopotam.EcsProto;
     using UniModules.UniCore.Runtime.Utils;
     using UnityEngine;
 
@@ -53,7 +54,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public IEnumerable<IEcsComponentConverter> Converters => converters;
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             if (IsEnabled == false) return;
             
@@ -80,7 +81,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return converter;
         }
         
-        public void OnEntityDestroy(EcsWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, int entity)
         {
             foreach (var converter in converters)
             {
@@ -167,7 +168,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return result;
         }
         
-        protected virtual void OnApply(EcsWorld world, int entity, CancellationToken cancellationToken = default)
+        protected virtual void OnApply(ProtoWorld world, int entity, CancellationToken cancellationToken = default)
         {
             
         }

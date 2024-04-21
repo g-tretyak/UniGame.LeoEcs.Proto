@@ -4,15 +4,17 @@
     using System.Collections.Generic;
     using System.Reflection;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
 
     [Serializable]
     public class EcsDiWorldInjection : IEcsDiInjection
     {
-        private Type _worldType = typeof(EcsWorld);
-        private Type _ecsSystems = typeof(IEcsSystems);
+        private Type _worldType = typeof(ProtoWorld);
+        private Type _ecsSystems = typeof(IProtoSystems);
         
         public void ApplyInjection(
-            IEcsSystems ecsSystems, 
+            IProtoSystems ecsSystems, 
             FieldInfo field, 
             object target, 
             IReadOnlyList<IEcsDiInjection> injections)

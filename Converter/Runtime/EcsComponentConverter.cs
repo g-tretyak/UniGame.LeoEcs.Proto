@@ -5,6 +5,8 @@ using UniGame.LeoEcs.Converter.Runtime.Abstract;
 
 namespace UniGame.LeoEcs.Converter.Runtime
 {
+    using Leopotam.EcsProto;
+
     [Serializable]
     public abstract class EcsComponentConverter : IEcsComponentConverter
     {
@@ -14,7 +16,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public virtual string Name => GetType().Name;
         
-        public abstract void Apply(EcsWorld world, int entity);
+        public abstract void Apply(ProtoWorld world, int entity);
         
         protected bool IsSubstring(string value, string search)
         {

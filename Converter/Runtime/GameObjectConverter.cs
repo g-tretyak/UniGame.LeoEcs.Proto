@@ -3,6 +3,7 @@
     using System;
     using Leopotam.EcsLite;
     using Abstract;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Shared.Components;
     using UniGame.LeoEcs.Shared.Extensions;
     using UnityEngine;
@@ -34,7 +35,7 @@
         
         public bool IsEnabled => enabled;
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             var haveComponent = world.HasComponent<GameObjectComponent>(entity);
             if (!haveComponent)
@@ -50,7 +51,7 @@
             Apply(gameObjectComponent.Value, world, entity);
         }
 
-        public void Apply(GameObject target, EcsWorld world, int entity)
+        public void Apply(GameObject target, ProtoWorld world, int entity)
         {
             ref var gameObjectComponent = ref world
                 .GetOrAddComponent<GameObjectComponent>(entity);
@@ -59,7 +60,7 @@
             OnApply(target, world, entity);
         }
 
-        protected virtual void OnApply(GameObject target, EcsWorld world, int entity)
+        protected virtual void OnApply(GameObject target, ProtoWorld world, int entity)
         {
             
         }

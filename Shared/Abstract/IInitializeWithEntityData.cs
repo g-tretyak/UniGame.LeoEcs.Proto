@@ -1,9 +1,9 @@
 namespace UniGame.LeoEcs.Shared.Abstract
 {
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface IInitializeWithEntityData
     {
-        public void InitializeEcsData(EcsWorld world, int entity);
+        public void InitializeEcsData(ProtoWorld world, int entity);
     }
 }

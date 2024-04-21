@@ -8,11 +8,11 @@
     [Serializable]
     public class GameObjectEntityBuilder : IEntityEditorViewBuilder
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _gameObjectFilter;
         private EcsPool<GameObjectComponent> _gameObjectPool;
 
-        public void Initialize(EcsWorld world)
+        public void Initialize(ProtoWorld world)
         {
             _world = world;
             _gameObjectFilter = world.Filter<GameObjectComponent>().End();

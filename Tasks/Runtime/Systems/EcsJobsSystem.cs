@@ -24,16 +24,16 @@
     [ECSDI]
     public class EcsJobsSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         
         
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
 
         }

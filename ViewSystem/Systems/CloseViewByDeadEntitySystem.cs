@@ -20,12 +20,12 @@
     [ECSDI]
     public class CloseViewByDeadEntitySystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
 
         private EcsPool<ViewEntityLifeTimeComponent> _lifeTimePool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -34,7 +34,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

@@ -23,14 +23,14 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
     public class ViewServiceInitSystem : IEcsInitSystem
     {
         private readonly IGameViewSystem _gameViewSystem;
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
         public ViewServiceInitSystem(IGameViewSystem gameViewSystem)
         {
             _gameViewSystem = gameViewSystem;
         }
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             var entity = _world.NewEntity();

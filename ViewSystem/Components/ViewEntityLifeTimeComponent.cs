@@ -17,7 +17,7 @@
     [Serializable]
     public struct ViewEntityLifeTimeComponent
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
         public IView View;
     }
 }

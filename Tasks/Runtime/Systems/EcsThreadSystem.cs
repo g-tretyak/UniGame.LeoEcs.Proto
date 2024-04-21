@@ -11,7 +11,7 @@
         TThread _thread;
         ThreadWorkerHandler _worker;
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             if (_filter == null)
             {
@@ -34,7 +34,7 @@
             _thread.Execute(fromIndex, beforeIndex);
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TThread thread)
+        protected virtual void SetData(IProtoSystems systems, ref TThread thread)
         {
         }
     }
@@ -50,7 +50,7 @@
         TThread _thread;
         ThreadWorkerHandler _worker;
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             if (_filter == null)
             {
@@ -75,7 +75,7 @@
             _thread.Execute(fromIndex, beforeIndex);
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TThread thread)
+        protected virtual void SetData(IProtoSystems systems, ref TThread thread)
         {
         }
     }
@@ -93,7 +93,7 @@
         TThread _thread;
         ThreadWorkerHandler _worker;
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             if (_filter == null)
             {
@@ -120,7 +120,7 @@
             _thread.Execute(fromIndex, beforeIndex);
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TThread thread)
+        protected virtual void SetData(IProtoSystems systems, ref TThread thread)
         {
         }
     }
@@ -140,7 +140,7 @@
         TThread _thread;
         ThreadWorkerHandler _worker;
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             if (_filter == null)
             {
@@ -169,16 +169,16 @@
             _thread.Execute(fromIndex, beforeIndex);
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TThread thread)
+        protected virtual void SetData(IProtoSystems systems, ref TThread thread)
         {
         }
     }
 
     public abstract class EcsThreadSystemBase
     {
-        protected abstract int GetChunkSize(IEcsSystems systems);
-        protected abstract EcsFilter GetFilter(EcsWorld world);
-        protected abstract EcsWorld GetWorld(IEcsSystems systems);
+        protected abstract int GetChunkSize(IProtoSystems systems);
+        protected abstract EcsFilter GetFilter(ProtoWorld world);
+        protected abstract ProtoWorld GetWorld(IProtoSystems systems);
     }
 
     public interface IEcsThreadBase

@@ -24,8 +24,8 @@
         #endregion
 
         private ILifeTime _lifeTime;
-        private EcsPackedEntity _packedEntity;
-        private EcsWorld _world;
+        private ProtoPackedEntity _packedEntity;
+        private ProtoWorld _world;
 
         public ILifeTime LifeTime => _lifeTime;
 
@@ -33,7 +33,7 @@
 
         public string Name => GetType().Name;
 
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             _lifeTime = this.GetAssetLifeTime();
             _world = world;

@@ -29,7 +29,7 @@
 
         public virtual string Name => GetType().Name;
 
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             _dataConverter.SetUp(settings);
             _dataConverter.Apply(world,entity);
@@ -37,16 +37,16 @@
             OnApply(world,entity);
         }
         
-        public void OnEntityDestroy(EcsWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, int entity)
         {
             _dataConverter.OnEntityDestroy(world, entity);
 
             EntityDestroy(world, entity);
         }
 
-        protected virtual void EntityDestroy(EcsWorld world, int entity){}
+        protected virtual void EntityDestroy(ProtoWorld world, int entity){}
         
-        protected virtual void OnApply(EcsWorld world, int entity){}
+        protected virtual void OnApply(ProtoWorld world, int entity){}
         
         public bool IsMatch(string searchString)
         {

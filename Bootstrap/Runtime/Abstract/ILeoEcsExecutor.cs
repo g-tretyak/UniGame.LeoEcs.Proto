@@ -2,25 +2,15 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface ILeoEcsExecutor : IDisposable
     {
         bool IsActive { get; }
 
-        void Execute(EcsWorld world);
+        void Execute(ProtoWorld world);
 
-        void Add(IEcsSystems systems);
-
-        void Stop();
-    }
-    
-    public interface ISystemsPlugin : IDisposable
-    {
-        bool IsActive { get; }
-
-        void Execute(EcsWorld world);
-
-        void Add(IEcsSystems systems);
+        void Add(IProtoSystems systems);
 
         void Stop();
     }

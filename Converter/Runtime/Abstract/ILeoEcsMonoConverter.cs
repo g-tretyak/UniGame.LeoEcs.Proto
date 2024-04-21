@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface ILeoEcsMonoConverter : 
         IComponentConverterProvider,
@@ -11,14 +12,14 @@
     {
         bool AutoCreate { get; }
         
-        void Convert(EcsWorld world, int ecsEntity);
+        void Convert(ProtoWorld world, int ecsEntity);
 
         void DestroyEntity();
     }
 
     public interface IConnectableToEntity
     {
-        void ConnectEntity(EcsWorld world, int ecsEntity);
+        void ConnectEntity(ProtoWorld world, int ecsEntity);
     }
 
     public interface IComponentConverterProvider

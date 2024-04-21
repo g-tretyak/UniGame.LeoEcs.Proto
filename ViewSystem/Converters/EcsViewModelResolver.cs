@@ -27,7 +27,7 @@
 
         public async UniTask<IViewModel> CreateViewModel(IContext context, Type type)
         {
-            var world = await context.ReceiveFirstAsync<EcsWorld>();
+            var world = await context.ReceiveFirstAsync<ProtoWorld>();
             var lifeTime = context.LifeTime;
             var viewModel = await defaultConstructorFactory
                 .CreateViewModel(context, type);

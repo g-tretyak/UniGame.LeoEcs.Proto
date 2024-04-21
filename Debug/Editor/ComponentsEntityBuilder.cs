@@ -11,10 +11,10 @@
     [Serializable]
     public class ComponentsEntityBuilder : IEntityEditorViewBuilder
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsPool<NameComponent> _namePool;
 
-        public void Initialize(EcsWorld world)
+        public void Initialize(ProtoWorld world)
         {
             _world = world;
             _namePool = _world.GetPool<NameComponent>();

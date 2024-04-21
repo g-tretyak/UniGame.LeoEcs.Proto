@@ -21,7 +21,7 @@
     public class ShowQueuedViewOnSystem<TEvent,TView1,TView2> : IEcsInitSystem, IEcsRunSystem where TEvent : struct
     {
         private readonly EcsViewData _viewData;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         
         private EcsPool<ShowQueuedRequest> _showRequestPool;
         private EcsFilter _filter;
@@ -31,7 +31,7 @@
             _viewData = viewData;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -42,7 +42,7 @@
             _showRequestPool = _world.GetPool<ShowQueuedRequest>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

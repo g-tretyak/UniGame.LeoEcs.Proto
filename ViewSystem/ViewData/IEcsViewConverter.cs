@@ -8,8 +8,8 @@
         IConverterEntityDestroyHandler
     {
         bool IsEnabled { get; }
-        EcsWorld World { get; }
-        EcsPackedEntity PackedEntity { get; }
+        ProtoWorld World { get; }
+        ProtoPackedEntity PackedEntity { get; }
         int Entity { get; }
     }
 }

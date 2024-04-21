@@ -42,6 +42,6 @@
         /// <summary>
         /// Optional Data
         /// </summary>
-        public EcsPackedEntity Owner;
+        public ProtoPackedEntity Owner;
     }
 }

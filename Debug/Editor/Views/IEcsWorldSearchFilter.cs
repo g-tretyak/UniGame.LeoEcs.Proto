@@ -1,6 +1,6 @@
 ﻿namespace UniGame.LeoEcs.Debug.Editor
 {
-    public interface IEcsWorldSearchFilter
+    public interface IProtoWorldSearchFilter
     {
         public EcsFilterData Execute(EcsFilterData filterData);
     }

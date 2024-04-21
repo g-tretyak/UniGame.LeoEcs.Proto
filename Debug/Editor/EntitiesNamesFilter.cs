@@ -6,7 +6,7 @@
     using Shared.Components;
 
     [Serializable]
-    public class EntitiesNamesFilter : IEcsWorldSearchFilter
+    public class EntitiesNamesFilter : IProtoWorldSearchFilter
     {
         public int[] entities = Array.Empty<int>();
         public object[] componentsTypesOnEntity = Array.Empty<object>();

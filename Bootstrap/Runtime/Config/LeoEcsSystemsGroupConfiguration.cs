@@ -7,6 +7,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
     using System.Diagnostics;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniCore.Runtime.ProfilerTools;
     using UnityEngine;
     using UnityEngine.Serialization;
@@ -79,7 +80,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
             systems.AddRange(EcsSystems);
         }
 
-        public async UniTask InitializeFeatureAsync(IEcsSystems ecsSystems)
+        public async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             if (!IsFeatureEnabled) return;
 
@@ -160,7 +161,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
             return false;
         }
 
-        protected virtual UniTask OnInitializeFeatureAsync(IEcsSystems ecsSystems)
+        protected virtual UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }

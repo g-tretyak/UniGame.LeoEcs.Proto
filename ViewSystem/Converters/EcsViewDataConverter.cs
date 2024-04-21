@@ -29,8 +29,8 @@
         
         #region private fields
 
-        private EcsWorld _world;
-        private EcsPackedEntity _viewPackedEntity;
+        private ProtoWorld _world;
+        private ProtoPackedEntity _viewPackedEntity;
         private IUiView<TData> _view;
         private LifeTimeDefinition _entityLifeTime;
 
@@ -45,7 +45,7 @@
             settings = overrideSettings;
         }
         
-        protected override void OnApply(GameObject target, EcsWorld world, int targetEntity)
+        protected override void OnApply(GameObject target, ProtoWorld world, int targetEntity)
         {
             //reset lifetime
             _entityLifeTime ??= new LifeTimeDefinition();
@@ -106,7 +106,7 @@
             modelComponent.Model = model;
         }
 
-        public void OnEntityDestroy(EcsWorld world, int viewEntity)
+        public void OnEntityDestroy(ProtoWorld world, int viewEntity)
         {
             entity = -1;
             

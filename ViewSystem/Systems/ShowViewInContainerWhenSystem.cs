@@ -28,7 +28,7 @@
         where TView : IView
     {
         private ViewContainerSystemData _data;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         private EcsPool<ContainerViewMarker<TView>> _markerPool;
@@ -38,7 +38,7 @@
             _data = data;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             var mask = _data.FilterMask ?? _world.Filter<TEvent>();
@@ -46,7 +46,7 @@
             _markerPool = _world.GetPool<ContainerViewMarker<TView>>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {

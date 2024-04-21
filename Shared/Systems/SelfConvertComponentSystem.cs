@@ -1,7 +1,6 @@
-﻿namespace Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.Shared.Systems
+﻿namespace UniGame.Ecs.Shared
 {
     using System;
-    using global::UniGame.LeoEcs.Proto.Shared;
     using global::UniGame.LeoEcs.Shared.Extensions;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
@@ -21,7 +20,7 @@
         where TTrigger : struct
         where TTarget : struct
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         private EcsPool<TTarget> _targetPool;
 

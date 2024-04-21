@@ -3,6 +3,7 @@
     using System;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
     [Serializable]
@@ -14,7 +15,7 @@
 
         public string Name => GetType().Name;
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             Apply(gameObject, world, entity);
         }
@@ -23,7 +24,7 @@
         
         public virtual bool IsEnabled => _isEnabled;
         
-        public abstract void Apply(GameObject target, EcsWorld world, int entity);
+        public abstract void Apply(GameObject target, ProtoWorld world, int entity);
         
         public virtual bool IsMatch(string searchString)
         {

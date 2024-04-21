@@ -47,7 +47,7 @@ namespace UniGame.LeoEcs.Debug.Editor
             nameof(search),
             Icon = SdfIconType.Search)]
         [HideLabel]
-        [EnableIf(nameof(HasEcsWorld))]
+        [EnableIf(nameof(HasProtoWorld))]
         public string search;
 
         [Space(8)]
@@ -68,14 +68,14 @@ namespace UniGame.LeoEcs.Debug.Editor
         [HideInInspector]
         [InlineProperty]
         [HideLabel]
-        [EnableIf(nameof(HasEcsWorld))]
+        [EnableIf(nameof(HasProtoWorld))]
         public EntitiesEditorView view;
 
         #endregion
 
-        public bool HasEcsWorld => World != null;
+        public bool HasProtoWorld => World != null;
 
-        public EcsWorld World => LeoEcsGlobalData.World;
+        public ProtoWorld World => LeoEcsGlobalData.World;
         
         [PropertyOrder(-1)]
         [ResponsiveButtonGroup()]
@@ -88,7 +88,7 @@ namespace UniGame.LeoEcs.Debug.Editor
             
             Clear();
             
-            if(HasEcsWorld && World.IsAlive()) UpdateFilter();
+            if(HasProtoWorld && World.IsAlive()) UpdateFilter();
         }
 
         public void UpdateFilter()

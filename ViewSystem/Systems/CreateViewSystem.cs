@@ -30,7 +30,7 @@
         private readonly IContext _context;
         
         public EcsFilter _createFilter;
-        public EcsWorld _world;
+        public ProtoWorld _world;
 
         private EcsPool<CreateViewRequest> _createViewPool;
         private EcsPool<OwnerComponent> _ownerPool;
@@ -42,7 +42,7 @@
             _viewSystem = viewSystem;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _createFilter = _world.Filter<CreateViewRequest>().End();
@@ -52,7 +52,7 @@
             _parentPool = _world.GetPool<ViewParentComponent>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _createFilter)
             {

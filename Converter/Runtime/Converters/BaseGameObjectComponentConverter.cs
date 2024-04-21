@@ -5,13 +5,14 @@ namespace UniGame.LeoEcs.Converter.Runtime.Converters
     using System;
     using LeoEcsLite.LeoEcs.Shared.Components;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
     using UnityEngine;
 
     [Serializable]
     public class BaseGameObjectComponentConverter : GameObjectConverter
     {
-        protected sealed override void OnApply(GameObject target, EcsWorld world, int entity)
+        protected sealed override void OnApply(GameObject target, ProtoWorld world, int entity)
         {
             ref var transformComponent = ref world.GetOrAddComponent<TransformComponent>(entity);
             ref var gameObjectComponent = ref world.GetOrAddComponent<GameObjectComponent>(entity);

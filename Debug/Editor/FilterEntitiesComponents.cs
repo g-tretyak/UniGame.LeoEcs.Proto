@@ -10,7 +10,7 @@
 
 
     [Serializable]
-    public class FilterEntitiesComponents : IEcsWorldSearchFilter
+    public class FilterEntitiesComponents : IProtoWorldSearchFilter
     {
         public int[] entities = Array.Empty<int>();
         public Type[] componentsTypesOnEntity = Array.Empty<Type>();

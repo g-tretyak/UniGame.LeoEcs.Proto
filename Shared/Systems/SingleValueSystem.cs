@@ -1,22 +1,25 @@
 namespace UniGame.LeoEcsLite.LeoEcs.Shared.Systems
 {
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
+    using UniGame.LeoEcs.Shared.Extensions;
 
     public class SingleValueSystem<TComponent> : IEcsInitSystem,IEcsRunSystem 
         where TComponent : struct
     {
         private EcsFilter _filter;
         private EcsPool<TComponent> _pool;
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world.Filter<TComponent>().End();
             _pool = _world.GetPool<TComponent>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

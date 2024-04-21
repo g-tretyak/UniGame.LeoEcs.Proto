@@ -42,7 +42,7 @@ namespace UniGame.LeoEcs.ViewSystem.Behavriour
 
         public string Name => GetType().Name;
 
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             _lifeTime = this.GetAssetLifeTime();
             trigger ??= GetComponent<Button>();

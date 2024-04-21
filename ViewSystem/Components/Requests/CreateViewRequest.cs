@@ -16,9 +16,9 @@ namespace UniGame.LeoEcs.ViewSystem.Components
         public Transform Parent;
         public string ViewName;
         public bool StayWorld;
-        public EcsPackedEntity Owner;
+        public ProtoPackedEntity Owner;
         //target entity for view as a container
-        public EcsPackedEntity Target;
+        public ProtoPackedEntity Target;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AutoReset(ref CreateViewRequest c)

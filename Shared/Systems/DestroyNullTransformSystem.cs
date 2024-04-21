@@ -2,6 +2,8 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.Shared.Components;
 
     
@@ -18,13 +20,13 @@
     [Serializable]
     public class DestroyNullTransformSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _transformFilter;
         private EcsPool<TransformComponent> _transformPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
-            _world = systems.GetWorld();
+            _world = systems.World();
 
             _transformFilter = _world
                 .Filter<TransformComponent>()
@@ -34,7 +36,7 @@
             _transformPool = _world.GetPool<TransformComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var transformEntity in _transformFilter)
             {

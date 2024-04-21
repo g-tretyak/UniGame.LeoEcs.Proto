@@ -2,6 +2,7 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto.QoL;
 
     /// <summary>
     /// link to entity
@@ -16,7 +17,7 @@
     [Serializable]
     public struct EntityComponent
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
     
 }

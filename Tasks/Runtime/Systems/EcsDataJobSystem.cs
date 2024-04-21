@@ -8,8 +8,8 @@
     public abstract class EcsDataJobSystem<TJob> : IEcsJobDataParallelFor<TJob>,IEcsDestroySystem
         where TJob : struct, IEcsDataJobParallelFor
     {
-        public IEcsSystems ecsSystems;
-        public EcsWorld world;
+        public IProtoSystems ecsSystems;
+        public ProtoWorld world;
         
         private LifeTimeDefinition _lifeTime;
         
@@ -17,7 +17,7 @@
         private JobHandle _jobHandle;
         private TJob _job = default;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             ecsSystems = systems;
             world = systems.GetWorld();
@@ -30,12 +30,12 @@
             OnInit(systems,_lifeTime);
         }
         
-        public void Destroy(IEcsSystems systems)
+        public void Destroy()
         {
             _lifeTime.Terminate();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             var defaultHandle = default(JobHandle);
             ref var jobHandle = ref Schedule(systems,ref defaultHandle);
@@ -45,7 +45,7 @@
             UpdateJobResults(ref _job);
         }
 
-        public ref JobHandle Schedule(IEcsSystems systems,ref JobHandle dependsOn)
+        public ref JobHandle Schedule(IProtoSystems systems,ref JobHandle dependsOn)
         {
             _job = default;
             
@@ -64,7 +64,7 @@
 
         public virtual void UpdateJobResults(ref TJob job) { }
 
-        protected virtual void OnInit(IEcsSystems systems, ILifeTime lifeTime) { }
+        protected virtual void OnInit(IProtoSystems systems, ILifeTime lifeTime) { }
 
     }
     
@@ -72,7 +72,7 @@
     public interface IEcsJobDataParallelFor<TJob> : IEcsRunSystem,IEcsInitSystem
         where TJob : struct, IEcsDataJobParallelFor
     {
-        ref JobHandle Schedule(IEcsSystems systems,ref JobHandle dependsOn);
+        ref JobHandle Schedule(IProtoSystems systems,ref JobHandle dependsOn);
         int GetChunkSize();
         void UpdateJobResults(ref TJob job);
     }

@@ -5,7 +5,7 @@
 
     public interface IEntityEditorViewBuilder
     {
-        void Initialize(EcsWorld world);
+        void Initialize(ProtoWorld world);
         
         void Execute(List<EntityEditorView> views);
 

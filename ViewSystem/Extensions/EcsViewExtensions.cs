@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
     {
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EcsWorld.Mask ViewFilter<TModel>(this EcsWorld world)
+        public static ProtoWorld.Mask ViewFilter<TModel>(this ProtoWorld world)
             where TModel : IViewModel
         {
             return world
@@ -26,7 +26,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetViewModel<TModel>(this EcsWorld world, int entity, out TModel model)
+        public static bool TryGetViewModel<TModel>(this ProtoWorld world, int entity, out TModel model)
         {
             model = default;
             if (!world.HasComponent<ViewModelComponent>(entity))
@@ -40,7 +40,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TModel GetViewModel<TModel>(this EcsWorld world, int entity) 
+        public static TModel GetViewModel<TModel>(this ProtoWorld world, int entity) 
             where TModel : class
         {
             ref var viewModelComponent = ref world.GetComponent<ViewModelComponent>(entity);
@@ -48,14 +48,14 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EcsFilter CreateViewFilter<TModel>(this EcsWorld world)
+        public static EcsFilter CreateViewFilter<TModel>(this ProtoWorld world)
             where TModel : IViewModel
         {
             return world.ViewFilter<TModel>().End();
         }
         
         public static int MakeViewRequest(
-            this EcsWorld world,
+            this ProtoWorld world,
             Type viewType,
             ViewType layoutType = ViewType.None,
             Transform parent = null,
@@ -63,16 +63,16 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             string viewName = null,
             bool stayWorld = false)
         {
-            var target = new EcsPackedEntity();
+            var target = new ProtoPackedEntity();
             return MakeViewRequest(world, viewType.Name,ref target,ref target, layoutType, 
                 parent, tag, viewName, stayWorld);
         }
         
         public static int MakeViewRequest(
-            this EcsWorld world,
+            this ProtoWorld world,
             Type viewType,
-            ref  EcsPackedEntity targetEntity,
-            ref EcsPackedEntity ownerEntity,
+            ref  ProtoPackedEntity targetEntity,
+            ref ProtoPackedEntity ownerEntity,
             ViewType layoutType = ViewType.None,
             Transform parent = null,
             string tag = null,
@@ -84,9 +84,9 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         public static int MakeViewInContainerRequest<TView>(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             bool useBusyContainer = false,
-            EcsPackedEntity owner = default,
+            ProtoPackedEntity owner = default,
             string tag = null,
             string viewName = null,
             bool stayWorld = false)
@@ -95,10 +95,10 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         public static int MakeViewInContainerRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             string view,
             bool useBusyContainer = false,
-            EcsPackedEntity owner = default,
+            ProtoPackedEntity owner = default,
             string tag = null,
             string viewName = null,
             bool stayWorld = false)
@@ -119,14 +119,14 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         public static int MakeViewRequest<TView>(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             ViewType layoutType)
         {
             return MakeViewRequest(world,typeof(TView),layoutType);
         }
         
         public static int MakeViewRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             string viewId,
             ViewType layoutType)
         {
@@ -134,7 +134,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         public static int MakeViewRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             string viewId,
             string layoutType)
         {
@@ -150,7 +150,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         public static int MakeViewRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             Type viewType,
             ViewType layoutType)
         {
@@ -159,10 +159,10 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int MakeViewRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             string view,
-            ref EcsPackedEntity target,
-            ref EcsPackedEntity owner,
+            ref ProtoPackedEntity target,
+            ref ProtoPackedEntity owner,
             ViewType layoutType = ViewType.None,
             Transform parent = null,
             string tag = null,
@@ -175,10 +175,10 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int MakeViewRequest(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             string view,
-            ref EcsPackedEntity target,
-            ref EcsPackedEntity owner,
+            ref ProtoPackedEntity target,
+            ref ProtoPackedEntity owner,
             string layoutType,
             Transform parent = null,
             string tag = null,
@@ -201,7 +201,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return entity;
         }
         
-        public static int MakeViewRequest(this EcsWorld world,ref CreateViewRequest request)
+        public static int MakeViewRequest(this ProtoWorld world,ref CreateViewRequest request)
         {
             var entity = world.NewEntity();
             ref var component = ref world.GetOrAddComponent<CreateViewRequest>(entity);

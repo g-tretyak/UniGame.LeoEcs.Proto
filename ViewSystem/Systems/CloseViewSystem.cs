@@ -15,12 +15,12 @@
     [Serializable]
     public class CloseViewSystem : IEcsInitSystem,IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
         private EcsFilter _closeFilter;
         private EcsPool<ViewComponent> _viewComponent;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -32,7 +32,7 @@
             _viewComponent = _world.GetPool<ViewComponent>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _closeFilter)
             {

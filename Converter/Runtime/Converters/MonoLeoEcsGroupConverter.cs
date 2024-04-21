@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
     using Shared.Extensions;
     using UnityEngine;
@@ -32,7 +33,7 @@
         [SerializeReference]
         private List<IEcsComponentConverter> _converters = new();
 
-        public override void Apply(GameObject target, EcsWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, int entity)
         {
             ref var gameObjectComponent = ref world
                 .GetOrAddComponent<GameObjectComponent>(entity);

@@ -5,6 +5,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
     using System.Collections.Generic;
     using Leopotam.EcsLite;
     using Abstract;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
 #if ODIN_INSPECTOR
@@ -91,7 +92,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
             return false;
         }
 
-        public UniTask InitializeFeatureAsync(IEcsSystems ecsSystems)
+        public UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             if(Feature == null) return UniTask.CompletedTask;
             return Feature.InitializeFeatureAsync(ecsSystems);

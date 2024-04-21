@@ -4,10 +4,11 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime
     using System.Collections.Generic;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UnityEngine;
 
     [Serializable]
-    //[CreateAssetMenu(menuName = "UniGame/LeoEcs/" + nameof(LeoEcsSystemsFeature), fileName = nameof(LeoEcsSystemsFeature))]
     public class LeoEcsSystemsFeature : LeoEcsFeatureAsset
     {
 
@@ -19,7 +20,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime
 
         public IReadOnlyList<IEcsSystem> Systems => _systems;
 
-        protected override UniTask OnInitializeFeatureAsync(IEcsSystems ecsSystems)
+        protected override UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             foreach (var ecsSystem in _systems)
                 ecsSystems.Add(ecsSystem);

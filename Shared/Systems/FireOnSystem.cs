@@ -2,6 +2,8 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Extensions;
     using Unity.IL2CPP.CompilerServices;
 
     /// <summary>
@@ -15,18 +17,18 @@
         where TFilter : struct
         where TComponent : struct
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         private EcsPool<TComponent> _pool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world.Filter<TFilter>().End();
             _pool = _world.GetPool<TComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {
@@ -48,11 +50,11 @@
         where TFilter2 : struct
         where TComponent : struct
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         private EcsPool<TComponent> _pool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world
@@ -63,7 +65,7 @@
             _pool = _world.GetPool<TComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {
@@ -86,11 +88,11 @@
         where TFilter3 : struct
         where TComponent : struct
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         private EcsPool<TComponent> _pool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world
@@ -102,7 +104,7 @@
             _pool = _world.GetPool<TComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

@@ -26,8 +26,8 @@
         public ILifeTime LifeTime => _lifeTime;
         
         public async UniTask AddModelComponentAsync(
-            EcsWorld world,
-            EcsPackedEntity packedEntity,
+            ProtoWorld world,
+            ProtoPackedEntity packedEntity,
             IView view,
             Type viewType)
         {
@@ -41,7 +41,7 @@
                 .AttachExternalCancellation(_lifeTime.Token);
         }
 
-        public void AddViewModelData(EcsWorld world,ref EcsPackedEntity packedEntity,IViewModel model)
+        public void AddViewModelData(ProtoWorld world,ref ProtoPackedEntity packedEntity,IViewModel model)
         {
             if (!packedEntity.Unpack(world, out var entity)) return;
 

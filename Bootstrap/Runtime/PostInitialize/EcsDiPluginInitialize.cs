@@ -6,6 +6,8 @@
     using Attributes;
     using Core.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UniModules.UniCore.Runtime.ReflectionUtils;
 
     [Serializable]
@@ -24,16 +26,22 @@
             };
         }
 
-        public (IEcsSystems value, bool replace) Apply(IEcsSystems ecsSystems,IContext context)
+        public (IProtoSystems value, bool replace) Apply(IProtoSystems ecsSystems,IContext context)
         {
-            foreach (var ecsSystem in ecsSystems.GetAllSystems())
+            var systems = ecsSystems.Systems();
+            var len = systems.Len();
+            var data = systems.Data();
+            
+            for (var i = 0; i < len; i++)
             {
-                Apply(ecsSystems,ecsSystem);
+                var system = data[i];
+                Apply(ecsSystems,system);
             }
+            
             return (ecsSystems,false);
         }
         
-        public void Apply(IEcsSystems ecsSystems,IEcsSystem system)
+        public void Apply(IProtoSystems ecsSystems,IProtoSystem system)
         {
             var world = ecsSystems.GetWorld();
             if (world == null) return;

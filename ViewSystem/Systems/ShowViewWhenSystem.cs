@@ -22,7 +22,7 @@
         where TView : IView
     {
         private ViewRequestData _data;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowViewWhenSystem(EcsFilter eventFilter,ViewRequestData data)
@@ -31,12 +31,12 @@
             _data = data;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {
@@ -75,7 +75,7 @@
         where TView : IView
     {
         private ViewRequestData _data;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowViewWhenSystem(ViewRequestData data)
@@ -83,13 +83,13 @@
             _data = data;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world.Filter<TEvent>().End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {
@@ -129,7 +129,7 @@
         where TView : IView
     {
         private ViewRequestData _data;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowViewWhenSystem(ViewRequestData data)
@@ -137,7 +137,7 @@
             _data = data;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world.Filter<TEvent1>()
@@ -145,7 +145,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {

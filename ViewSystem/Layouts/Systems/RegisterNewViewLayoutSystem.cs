@@ -29,7 +29,7 @@
     public class RegisterNewViewLayoutSystem : IEcsInitSystem, IEcsRunSystem
     {
         private IGameViewSystem _viewSystem;
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
         private ViewLayoutAspect _layout;
         private EcsFilter _layoutFilter;
@@ -39,7 +39,7 @@
             _viewSystem = viewSystem;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -49,7 +49,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _layoutFilter)
             {

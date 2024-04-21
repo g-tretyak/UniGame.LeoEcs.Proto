@@ -18,10 +18,10 @@
     public class MarkViewAsInitializedSystem : IEcsRunSystem,IEcsInitSystem
     {
         private EcsFilter _filter;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsPool<ViewInitializedComponent> _viewInitialized;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -34,7 +34,7 @@
             _viewInitialized = _world.GetPool<ViewInitializedComponent>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var viewEntity in _filter)
             {

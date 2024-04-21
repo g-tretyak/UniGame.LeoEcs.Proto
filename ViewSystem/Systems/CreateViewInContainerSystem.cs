@@ -22,7 +22,7 @@
     [ECSDI]
     public class CreateViewInContainerSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _requestFilter;
         private EcsFilter _allContainersFilter;
         private EcsFilter _freeContainersFilter;
@@ -32,7 +32,7 @@
         private EcsPool<TransformComponent> _transformPool;
         private EcsPool<ViewContainerComponent> _containerPool;
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -52,7 +52,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var requestEntity in _requestFilter)
             {

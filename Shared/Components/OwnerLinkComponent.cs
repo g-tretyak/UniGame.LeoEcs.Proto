@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 
 namespace UniGame.LeoEcs.Shared.Components
 {
+    using Leopotam.EcsProto.QoL;
 
     /// <summary>
     /// link to owner entity, but don't destroy on owner destroy
@@ -10,19 +11,19 @@ namespace UniGame.LeoEcs.Shared.Components
     [Serializable]
     public struct OwnerLinkComponent
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
     
     [Serializable]
     public struct LinkComponent<T>
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
     
     [Serializable]
     public struct LinkComponent
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
     
     [Serializable]

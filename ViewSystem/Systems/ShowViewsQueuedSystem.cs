@@ -20,7 +20,7 @@
     [ECSDI]
     public class ShowViewsQueuedSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _viewFilter;
         private EcsFilter _viewQueuedFilter;
         
@@ -28,7 +28,7 @@
         private EcsPool<ViewIdComponent> _viewIdPool;
         private IEcsPool _viewRequestPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -43,7 +43,7 @@
             _viewRequestPool = _world.GetPoolByType(typeof(CreateViewRequest));
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var requestEntity in _viewQueuedFilter)
             {

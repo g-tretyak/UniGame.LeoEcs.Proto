@@ -11,8 +11,8 @@
     public static class EcsViewSystemExtensions
     {
         
-        public static IEcsSystems ShowQueuedOn<TEvent, TView1, TView2>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowQueuedOn<TEvent, TView1, TView2>(
+            this IProtoSystems systems,
             ViewType layoutType = ViewType.Window)
             where TEvent : struct
             where TView1 : IView
@@ -31,8 +31,8 @@
         /// <summary>
         /// Show view and mark entity forbidden for same view
         /// </summary>
-        public static IEcsSystems ShowSingleOn<TEvent, TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowSingleOn<TEvent, TView>(
+            this IProtoSystems systems,
             ViewType layoutType = ViewType.Window)
             where TEvent : struct
             where TView : IView
@@ -41,8 +41,8 @@
             return systems;
         } 
             
-        public static IEcsSystems ShowOn<TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TView>(
+            this IProtoSystems systems,
             EcsFilter filter,
             ViewType layoutType = ViewType.Window)
             where TView : IView
@@ -51,7 +51,7 @@
             return systems;
         }
         
-        public static IEcsSystems CloseOn<TEvent,TView>(this IEcsSystems systems)
+        public static IProtoSystems CloseOn<TEvent,TView>(this IProtoSystems systems)
             where TEvent : struct
             where TView : IViewModel
         {
@@ -60,7 +60,7 @@
             return systems;
         }
         
-        public static IEcsSystems ShowInContainerOn<TEvent,TView>(this IEcsSystems systems,bool useBusy = false,bool ownView = false)
+        public static IProtoSystems ShowInContainerOn<TEvent,TView>(this IProtoSystems systems,bool useBusy = false,bool ownView = false)
             where TEvent : struct
             where TView : IView
         {
@@ -78,8 +78,8 @@
             return systems;
         }
         
-        public static IEcsSystems ShowOn<TEvent, TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TEvent, TView>(
+            this IProtoSystems systems,
             ViewType layoutType = ViewType.Window)
             where TEvent : struct
             where TView : IView
@@ -89,8 +89,8 @@
         }
 
         
-        public static IEcsSystems ShowOn<TComponent1,TComponent2, TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TComponent1,TComponent2, TView>(
+            this IProtoSystems systems,
             ViewType layoutType = ViewType.Window)
             where TComponent1 : struct
             where TComponent2 : struct
@@ -100,8 +100,8 @@
             return systems;
         }
 
-        public static IEcsSystems ShowOn<TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TView>(
+            this IProtoSystems systems,
             EcsFilter filter,
             ViewRequestData viewData)
             where TView : IView
@@ -110,8 +110,8 @@
             return systems;
         }
         
-        public static IEcsSystems ShowOn<TEvent, TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TEvent, TView>(
+            this IProtoSystems systems,
             ViewRequestData viewData)
             where TEvent : struct
             where TView : IView
@@ -120,8 +120,8 @@
             return systems;
         }
         
-        public static IEcsSystems ShowOn<TComponent1,TComponent2, TView>(
-            this IEcsSystems systems,
+        public static IProtoSystems ShowOn<TComponent1,TComponent2, TView>(
+            this IProtoSystems systems,
             ViewRequestData viewData)
             where TComponent1 : struct
             where TComponent2 : struct

@@ -2,6 +2,8 @@
 {
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Components;
     using Shared.Extensions;
     using UnityEngine;
@@ -39,17 +41,17 @@
         public bool IsRuntime => Application.isPlaying;
         
         public string Name => converter == null ? "EMPTY" : converter.Name;
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             throw new System.NotImplementedException();
         }
 
         #endregion
 
-        public EcsPackedEntity Entity{get; private set;}
-        protected EcsWorld World{get; private set;}
+        public ProtoPackedEntity Entity{get; private set;}
+        protected ProtoWorld World{get; private set;}
         
-        public void Apply(GameObject target, EcsWorld world, int entity)
+        public void Apply(GameObject target, ProtoWorld world, int entity)
         {
             if (converter == null) return;
             
@@ -65,13 +67,13 @@
             World = world;
         }
         
-        public virtual void OnEntityDestroy(EcsWorld world, int entity)
+        public virtual void OnEntityDestroy(ProtoWorld world, int entity)
         {
             if(converter is IConverterEntityDestroyHandler destroyHandler)
                 destroyHandler.OnEntityDestroy(world, entity);
         }
 
-        protected virtual void OnApply(GameObject target, EcsWorld world, int entity)
+        protected virtual void OnApply(GameObject target, ProtoWorld world, int entity)
         {
             
         }

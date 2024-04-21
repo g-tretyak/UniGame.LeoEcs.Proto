@@ -5,12 +5,13 @@
     using Abstract;
     using Core.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Systems;
 
     [Serializable]
     public class EcsProfileInitialize : IEcsPostInitializeAction
     {
-        public (IEcsSystems value, bool replace) Apply(IEcsSystems ecsSystems,IContext context)
+        public (IProtoSystems value, bool replace) Apply(IProtoSystems ecsSystems,IContext context)
         {
 #if ENABLE_ECS_DEBUG
             

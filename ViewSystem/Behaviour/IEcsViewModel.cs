@@ -7,6 +7,6 @@
 
     public interface IEcsViewModel : IViewModel
     {
-        UniTask InitializeAsync(EcsWorld world, IContext context);
+        UniTask InitializeAsync(ProtoWorld world, IContext context);
     }
 }

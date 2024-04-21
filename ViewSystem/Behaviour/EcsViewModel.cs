@@ -10,7 +10,7 @@
     public class EcsViewModel : ViewModelBase, IEcsViewModel
     {
 
-        public virtual async UniTask InitializeAsync(EcsWorld world, IContext context)
+        public virtual async UniTask InitializeAsync(ProtoWorld world, IContext context)
         {
             
         }

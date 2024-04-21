@@ -11,7 +11,9 @@
     using Cysharp.Threading.Tasks;
     using LeoEcsLite.LeoEcs.Bootstrap.Runtime.Systems;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using PostInitialize;
+    using Shared.Extensions;
     using UniCore.Runtime.ProfilerTools;
     using UniModules.UniCore.Runtime.DataFlow;
     using Object = UnityEngine.Object;
@@ -21,11 +23,11 @@
         private ILeoEcsSystemsConfig _config;
         private IEcsExecutorFactory _ecsExecutorFactory;
         private IEnumerable<ISystemsPlugin> _plugins;
-        private Dictionary<string, IEcsSystems> _systemsMap;
+        private Dictionary<string, IProtoSystems> _systemsMap;
         private Dictionary<string, ILeoEcsExecutor> _systemsExecutors;
         private IContext _context;
 
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private bool _isInitialized;
         private bool _ownThisWorld;
         private float _featureTimeout;
@@ -43,18 +45,18 @@
             new EcsProfileInitialize(),
         };
 
-        public EcsWorld World => _world;
+        public ProtoWorld World => _world;
 
         public LeoEcsService(
             IContext context,
-            EcsWorld world, 
+            ProtoWorld world, 
             ILeoEcsSystemsConfig config,
             IEcsExecutorFactory ecsExecutorFactory, 
             IEnumerable<ISystemsPlugin> plugins,
             bool ownThisWorld,
             float featureTimeout)
         {
-            _systemsMap = new Dictionary<string,IEcsSystems>(8);
+            _systemsMap = new Dictionary<string,IProtoSystems>(8);
             _systemsExecutors = new Dictionary<string, ILeoEcsExecutor>(8);
 
             _context = context;
@@ -69,7 +71,7 @@
             LifeTime.AddCleanUpAction(CleanUp);
         }
         
-        public void SetDefaultWorld(EcsWorld world)
+        public void SetDefaultWorld(ProtoWorld world)
         {
             LeoEcsGlobalData.World = world;
         }
@@ -134,6 +136,7 @@
 
             if (_ownThisWorld)
                 _world?.Destroy();
+            
             _world = null;
         }
         
@@ -146,7 +149,7 @@
             GameLog.Log($"ECS FEATURE SOURCE: LOAD {message} TIME = {elapsed} ms");
         }
 
-        private void ApplySystemsPlugins(EcsWorld world)
+        private void ApplySystemsPlugins(ProtoWorld world)
         {
             var groupIds = new List<string>();
             
@@ -160,18 +163,26 @@
                 foreach (var plugin in _initializePlugins)
                 {
                     var systemsSource = _systemsMap[groupId];
-                    var newSystems = plugin.Apply(systemsSource,_context);
+                    var newSystems = plugin
+                        .Apply(systemsSource,_context);
+                    
                     if (!newSystems.replace) continue;
                     
-                    var systems = newSystems.value.GetAllSystems();
+                    var systems = newSystems.value.Systems();
                     var systemsGroup = CreateEcsSystems(groupId, world);
-                    foreach(var system in systems)
-                        systemsGroup.Add(system);
+                    var len = systems.Len();
+                    var data = systems.Data();
+                    
+                    for (var i = 0; i < len; i++)
+                    {
+                        var item = data[i];
+                        systemsGroup.AddSystem(item);
+                    }
                 }
             }
         }
         
-        private async UniTask InitializeEcsService(EcsWorld world)
+        private async UniTask InitializeEcsService(ProtoWorld world)
         {
             var groups = _config
                 .FeatureGroups
@@ -188,13 +199,13 @@
             return features;
         }
         
-        private async UniTask CreateEcsGroupAsync(LeoEcsConfigGroup ecsGroup, EcsWorld world)
+        private async UniTask CreateEcsGroupAsync(LeoEcsConfigGroup ecsGroup, ProtoWorld world)
         {
             var systemsGroup = CollectFeatures(ecsGroup);
             await CreateEcsGroup(ecsGroup.updateType,world,systemsGroup);
         }
 
-        private void ApplyPlugins(EcsWorld world)
+        private void ApplyPlugins(ProtoWorld world)
         {
             foreach (var systemsPlugin in _plugins)
             {
@@ -206,28 +217,25 @@
             }
         }
 
-        private IEcsSystems CreateEcsSystems(string groupId,EcsWorld world)
+        private IProtoSystems CreateEcsSystems(string groupId,ProtoWorld world)
         {
-            var systems = new EcsSystems(world,_context);
+            var systems = new ProtoSystems(world);
+            systems.AddService(_context);
+                
             _systemsMap[groupId] = systems;
             return systems;
         }
         
-        private IEcsSystems CreateEcsSystems(EcsWorld world)
-        {
-            return new EcsSystems(world,_context);
-        }
-        
         private async UniTask CreateEcsGroup(
             string updateType, 
-            EcsWorld world, 
+            ProtoWorld world, 
             IReadOnlyList<ILeoEcsFeature> runnerFeatures)
         {
             if (!_systemsMap.TryGetValue(updateType, out var ecsSystems))
                 ecsSystems = CreateEcsSystems(updateType,world);
                         
             foreach (var startupSystem in _startupSystems)
-                ecsSystems.Add(startupSystem);
+                ecsSystems.AddSystem(startupSystem);
 
             var asyncFeatures = runnerFeatures
                 .Select(x => InitializeFeatureAsync(ecsSystems, x));
@@ -235,10 +243,10 @@
             await UniTask.WhenAll(asyncFeatures);
             
             foreach (var startupSystem in _lateSystems)
-                ecsSystems.Add(startupSystem);
+                ecsSystems.AddSystem(startupSystem);
         }
 
-        public async UniTask InitializeFeatureAsync(IEcsSystems ecsSystems,ILeoEcsFeature feature)
+        public async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems,ILeoEcsFeature feature)
         {
             if (!feature.IsFeatureEnabled) return;
                 
@@ -310,6 +318,6 @@
     public struct EcsSystemsGroup
     {
         public string UpdateType;
-        public IEcsSystems Systems;
+        public IProtoSystems Systems;
     }
 }

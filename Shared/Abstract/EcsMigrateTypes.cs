@@ -14,24 +14,24 @@
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
     public interface IEcsSystems : IProtoSystems { }
+
+#if ENABLE_IL2CPP
+    [Il2CppSetOption (Option.NullChecks, false)]
+    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+    public interface IEcsRunSystem : IEcsSystem,IProtoRunSystem { }
     
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
-    public interface IEcsRunSystem : IProtoRunSystem { }
+    public interface IEcsInitSystem : IEcsSystem,IProtoInitSystem { }
     
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
-    public interface IEcsInitSystem : IProtoInitSystem { }
-    
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
-    public interface IEcsDestroySystem : IProtoDestroySystem { }
+    public interface IEcsDestroySystem : IEcsSystem,IProtoDestroySystem { }
 
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]

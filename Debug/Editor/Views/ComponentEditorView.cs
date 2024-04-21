@@ -40,7 +40,7 @@
         
         public string Label => value == null ? ComponentKey : value.GetType().GetFormattedName();
 
-        public EcsWorld World => LeoEcsGlobalData.World;
+        public ProtoWorld World => LeoEcsGlobalData.World;
 
         public bool IsAlive => World != null && World.IsAlive();
         

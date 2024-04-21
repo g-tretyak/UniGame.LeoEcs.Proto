@@ -16,7 +16,7 @@
     public class CloseAllViewsSystem : IEcsInitSystem,IEcsRunSystem
     {
         private readonly IGameViewSystem _gameViewSystem;
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
         private EcsFilter _closeAllFilter;
 
@@ -25,13 +25,13 @@
             _gameViewSystem = gameViewSystem;
         }
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _closeAllFilter = _world.Filter<CloseAllViewsRequest>().End();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _closeAllFilter)
             {

@@ -4,13 +4,14 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
     using System;
     using Converter.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface ILeoEcsService : IGameService
     {
 
-        EcsWorld World { get; }
+        ProtoWorld World { get; }
         
-        public void SetDefaultWorld(EcsWorld world);
+        public void SetDefaultWorld(ProtoWorld world);
 
     }
 }

@@ -14,7 +14,7 @@
             type = ResultType.None,
         };
 
-        public EcsWorld world;
+        public ProtoWorld world;
         public string filter = string.Empty;
         public string errorMessage;
         public string message = string.Empty;

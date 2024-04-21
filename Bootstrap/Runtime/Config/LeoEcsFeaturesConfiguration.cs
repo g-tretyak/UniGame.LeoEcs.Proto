@@ -22,7 +22,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
         [InlineProperty]
         [HideLabel]
 #endif
-        public EcsWorldConfiguration worldConfiguration = new EcsWorldConfiguration();
+        public ProtoWorldConfiguration worldConfiguration = new ProtoWorldConfiguration();
         
         [Space(8)]
         [SerializeField]

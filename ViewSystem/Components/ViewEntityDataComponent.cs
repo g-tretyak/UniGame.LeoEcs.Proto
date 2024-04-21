@@ -16,6 +16,6 @@
     [Serializable]
     public struct ViewEntityDataComponent
     {
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
 }

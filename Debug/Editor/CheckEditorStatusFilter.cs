@@ -4,7 +4,7 @@
     using UnityEngine;
 
     [Serializable]
-    public class CheckEditorStatusFilter : IEcsWorldSearchFilter
+    public class CheckEditorStatusFilter : IProtoWorldSearchFilter
     {
         public const string notInPlaymodeMessage = "Filtering work only in Play Mode";
 

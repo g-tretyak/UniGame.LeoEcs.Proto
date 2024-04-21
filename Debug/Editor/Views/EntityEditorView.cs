@@ -32,7 +32,7 @@
         public int id;
 
         [HideInInspector]
-        public EcsPackedEntity packedEntity;
+        public ProtoPackedEntity packedEntity;
         
         [HideInInspector]
         public bool isDead;
@@ -51,7 +51,7 @@
         [InlineProperty]
         public List<ComponentEditorView> components = new List<ComponentEditorView>();
 
-        public EcsWorld World => LeoEcsGlobalData.World;
+        public ProtoWorld World => LeoEcsGlobalData.World;
 
         public bool IsAlive => World != null && World.IsAlive();
         

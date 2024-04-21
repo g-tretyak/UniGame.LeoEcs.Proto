@@ -26,7 +26,7 @@
     {
         private string _viewLayoutType;
         
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowSingleLayoutViewWhen(string viewLayoutType)
@@ -34,7 +34,7 @@
             _viewLayoutType = viewLayoutType;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world.Filter<TEvent>()
@@ -42,7 +42,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {
@@ -71,7 +71,7 @@
     {
         private string _viewLayoutType;
         
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowLayoutViewWhenSystem(string viewLayoutType)
@@ -79,13 +79,13 @@
             _viewLayoutType = viewLayoutType;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world.Filter<TEvent>().End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {
@@ -111,7 +111,7 @@
         where TView : IView
     {
         private string _viewLayoutType;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowLayoutViewWhenSystem(EcsFilter eventFilter,string viewLayoutType)
@@ -120,12 +120,12 @@
             _viewLayoutType = viewLayoutType;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {
@@ -154,7 +154,7 @@
     {
         private ViewType _viewLayoutType;
         
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
         public ShowLayoutViewWhenSystem(ViewType viewLayoutType = ViewType.Window)
@@ -162,7 +162,7 @@
             _viewLayoutType = viewLayoutType;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world
@@ -171,7 +171,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {

@@ -4,10 +4,11 @@ namespace UniGame.LeoEcs.Shared.Extensions
 {
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.Shared.Systems;
+    using Ecs.Shared;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
-    using Proto.Shared;
+    using Extensions;
+    using Leopotam.EcsProto.QoL;
 
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
@@ -19,7 +20,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
     public static class LeoEcsExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEcsSystems CreateOn<TTrigger,TTarget>(this IEcsSystems systems)
+        public static IProtoSystems CreateOn<TTrigger,TTarget>(this IProtoSystems systems)
             where TTrigger : struct
             where TTarget : struct
         {
@@ -37,7 +38,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
             return -1;
         }
         
-        public static IEcsSystems FireOn<TFilter,TComponent>(this IEcsSystems systems)
+        public static IProtoSystems FireOn<TFilter,TComponent>(this IProtoSystems systems)
             where TFilter : struct
             where TComponent : struct
         {
@@ -45,7 +46,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
             return systems;
         }
         
-        public static IEcsSystems FireOn<TFilter1,TFilter2,TComponent>(this IEcsSystems systems)
+        public static IProtoSystems FireOn<TFilter1,TFilter2,TComponent>(this IProtoSystems systems)
             where TFilter1 : struct
             where TFilter2 : struct
             where TComponent : struct
@@ -54,7 +55,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
             return systems;
         }
         
-        public static void FireOn<TFilter1,TFilter2,TFilter3,TComponent>(this IEcsSystems systems)
+        public static void FireOn<TFilter1,TFilter2,TFilter3,TComponent>(this IProtoSystems systems)
             where TFilter1 : struct
             where TFilter2 : struct
             where TFilter3 : struct
@@ -64,77 +65,72 @@ namespace UniGame.LeoEcs.Shared.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EntityHasAll<T1, T2>(this EcsWorld world,int entity)
+        public static bool EntityHasAll<T1, T2>(this ProtoWorld world,int entity)
             where T1 : struct
             where T2 : struct
         {
-            var pool1 = world.GetPool<T1>();
-            var pool2 = world.GetPool<T2>();
-
-            return pool1.Has((ProtoEntity)entity) && pool2.Has((ProtoEntity)entity);
+            return EntityHasAll<T1, T2>(world, (ProtoEntity)entity);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EntityHasAll<T1, T2>(this EcsWorld world,ProtoEntity entity)
+        public static bool EntityHasAll<T1, T2>(this ProtoWorld world,ProtoEntity entity)
             where T1 : struct
             where T2 : struct
         {
-            var pool1 = world.GetPool<T1>();
-            var pool2 = world.GetPool<T2>();
-
+            var pool1 = world.Pool<T1>();
+            var pool2 = world.Pool<T2>();
             return pool1.Has(entity) && pool2.Has(entity);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EntityHasAll<T1, T2,T3>(this EcsWorld world,ProtoEntity entity)
+        public static bool EntityHasAll<T1, T2,T3>(this ProtoWorld world,ProtoEntity entity)
             where T1 : struct
             where T2 : struct
             where T3 : struct
         {
-            var pool1 = world.GetPool<T1>();
-            var pool2 = world.GetPool<T2>();
-            var pool3 = world.GetPool<T3>();
+            var pool1 = world.Pool<T1>();
+            var pool2 = world.Pool<T2>();
+            var pool3 =  world.Pool<T3>();
 
             return pool1.Has(entity) && pool2.Has(entity) && pool3.Has(entity);
         }
         
-        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EntityHasAll<T1, T2,T3,T4>(this EcsWorld world,ProtoEntity entity)
+        public static bool EntityHasAll<T1, T2,T3,T4>(this ProtoWorld world,ProtoEntity entity)
             where T1 : struct
             where T2 : struct
             where T3 : struct
             where T4 : struct
         {
-            var pool1 = world.GetPool<T1>();
-            var pool2 = world.GetPool<T2>();
-            var pool3 = world.GetPool<T3>();
-            var pool4 = world.GetPool<T4>();
+            var pool1 = world.Pool<T1>();
+            var pool2 = world.Pool<T2>();
+            var pool3 =  world.Pool<T3>();
+            var pool4 =  world.Pool<T4>();
 
             return pool1.Has(entity) && pool2.Has(entity) && pool3.Has(entity) && pool4.Has(entity);
         }
         
-        public static EcsFilter GetFilter<TComponent>(this IEcsSystems IEcsSystems)
+        public static EcsFilter GetFilter<TComponent>(this IProtoSystems ecsSystems)
             where TComponent : struct
         {
-            var world = IEcsSystems.GetWorld();
+            var world = ecsSystems.GetWorld();
             var filter = world.Filter<TComponent>().End();
 
             return filter;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ProtoPool<TComponent> GetPool<TComponent>(this IEcsSystems IEcsSystems)
+        public static ProtoPool<TComponent> GetPool<TComponent>(this IProtoSystems ecsSystems)
             where TComponent : struct
         {
-            var world = IEcsSystems.GetWorld();
-            var pool = world.GetPool<TComponent>();
+            var world = ecsSystems.GetWorld();
+            var pool = world.Pool<TComponent>();
 
-            return pool;
+            return pool as ProtoPool<TComponent>;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRemoveComponent<TComponent>(this IEcsSystems systems, ProtoEntity entity)
+        public static bool TryRemoveComponent<TComponent>(this IProtoSystems systems, ProtoEntity entity)
             where TComponent : struct
         {
             var world = systems.GetWorld();
@@ -142,7 +138,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRemoveComponent<TComponent>(this IEcsSystems systems, int entity)
+        public static bool TryRemoveComponent<TComponent>(this IProtoSystems systems, int entity)
             where TComponent : struct
         {
             var entityProto = (ProtoEntity)entity;
@@ -150,35 +146,41 @@ namespace UniGame.LeoEcs.Shared.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent GetComponent<TComponent>(this IEcsSystems systems, ProtoEntity entity)
+        public static ref TComponent GetComponent<TComponent>(this IProtoSystems systems, ProtoEntity entity)
             where TComponent : struct
         {
-            var world = systems.GetWorld();
-            var pool = world.GetPool<TComponent>();
+            var pool = systems.GetPool<TComponent>();
             return ref pool.Get(entity);
+        }
+            
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IProtoSystems Add(this IProtoSystems systems, IProtoSystem system)
+        {
+            systems.AddSystem(system);
+            return systems;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent GetComponent<TComponent>(this IEcsSystems systems, int entity)
+        public static ref TComponent GetComponent<TComponent>(this IProtoSystems systems, int entity)
             where TComponent : struct
         {
             return ref GetComponent<TComponent>(systems, (ProtoEntity)entity);
         }
         
-        public static ref TComponent AddComponent<TComponent>(this IEcsSystems systems, ProtoEntity entity)
+        public static ref TComponent AddComponent<TComponent>(this IProtoSystems systems, ProtoEntity entity)
             where TComponent : struct
         {
             var world = systems.GetWorld();
             return ref world.AddComponent<TComponent>(entity);
         }
 
-        public static ref TComponent AddComponent<TComponent>(this IEcsSystems systems, int entity)
+        public static ref TComponent AddComponent<TComponent>(this IProtoSystems systems, int entity)
             where TComponent : struct
         {
             return ref AddComponent<TComponent>(systems, (ProtoEntity)entity);
         }
         
-        public static IEcsSystems Add(this IEcsSystems ecsSystems, IEnumerable<IEcsSystem> systems)
+        public static IProtoSystems Add(this IProtoSystems ecsSystems, IEnumerable<IEcsSystem> systems)
         {
             foreach (var system in systems)
                 ecsSystems.AddSystem(system);

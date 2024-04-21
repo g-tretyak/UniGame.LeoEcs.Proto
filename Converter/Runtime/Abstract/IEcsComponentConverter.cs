@@ -1,6 +1,7 @@
 ﻿namespace UniGame.LeoEcs.Converter.Runtime.Abstract
 {
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
 #if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
@@ -15,6 +16,6 @@
     {
         public string Name { get; }
         
-        void Apply(EcsWorld world, int entity);
+        void Apply(ProtoWorld world, int entity);
     }
 }

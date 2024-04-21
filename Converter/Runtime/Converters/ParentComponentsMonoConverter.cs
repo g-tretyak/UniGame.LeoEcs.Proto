@@ -5,6 +5,8 @@
     using Abstract;
     using LeoEcsLite.LeoEcs.Shared.Components;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Components;
     using Shared.Extensions;
     using UniCore.Runtime.ProfilerTools;
@@ -53,7 +55,7 @@
 
         private int _parentEntity = -1;
         
-        public override void Apply(GameObject target, EcsWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, int entity)
         {
             if (!world.HasComponent<ParentEntityComponent>(entity)) return;
             var parentComponent = world.GetOrAddComponent<ParentEntityComponent>(entity);
@@ -70,7 +72,7 @@
                 .GetOrAddComponent<GameObjectComponent>(entity);
             gameObjectComponent.Value = target;
             
-            _parentEntity = parentEntity;
+            _parentEntity = (int)parentEntity;
             
             foreach (var converter in converters)
                 converter.Apply(world, _parentEntity);
@@ -79,7 +81,7 @@
                 converter.Apply(world, _parentEntity);
         }
 
-        public void OnEntityDestroy(EcsWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, int entity)
         {
             var packedParent = world.PackEntity(_parentEntity);
             if(!packedParent.Unpack(world,out var parentEntity)) return;
@@ -87,11 +89,11 @@
             foreach (var converter in converters)
             {
                 if (converter is IConverterEntityDestroyHandler destroyHandler)
-                    destroyHandler.OnEntityDestroy(world, parentEntity);
+                    destroyHandler.OnEntityDestroy(world, (int)parentEntity);
             }
 
             foreach (var converter in configurations)
-                converter.OnEntityDestroy(world,parentEntity);
+                converter.OnEntityDestroy(world,(int)parentEntity);
         }
     }
 }

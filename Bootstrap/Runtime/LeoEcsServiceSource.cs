@@ -3,12 +3,14 @@
     using System;
     using System.Linq;
     using Abstract;
+    using Aspects;
     using Config;
     using Converter.Runtime;
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
     using GameFlow.Runtime.Services;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
 #if ODIN_INSPECTOR
@@ -72,7 +74,8 @@ using Sirenix.OdinInspector;
                 .ToList();
 
             var worldConfig = config.worldConfiguration.Create();
-            var world = new EcsWorld(in worldConfig);
+            var protoWorld = new ProtoWorld(new WorldDefaultAspect(), worldConfig);
+            var world = (ProtoWorld)protoWorld;
             
             context.Publish(world);
             

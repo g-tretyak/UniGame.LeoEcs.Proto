@@ -26,15 +26,15 @@
         private float _chunkCoeff = 1f;
         
         private bool _isMultithreaded = true;
-        private EcsWorld _world;
-        private IEcsSystems _ecsSystems;
+        private ProtoWorld _world;
+        private IProtoSystems _ecsSystems;
 
         TTask _task;
         ThreadWorkerHandler _worker;
 
         public virtual bool IsMultithreaded => _isMultithreaded;
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _ecsSystems = systems;
             _world = systems.GetWorld();
@@ -55,7 +55,7 @@
             _task.Execute(fromIndex, beforeIndex);
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             //_task = new TTask();
             var taskCount = SetupTask(ref _task);
@@ -76,7 +76,7 @@
 
         public virtual void OnTaskComplete(ref TTask task) { }
 
-        protected virtual void OnInit(IEcsSystems ecsSystems) {}
+        protected virtual void OnInit(IProtoSystems ecsSystems) {}
 
     }
     

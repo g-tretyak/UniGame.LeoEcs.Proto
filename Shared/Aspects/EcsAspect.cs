@@ -15,6 +15,6 @@
     public abstract class EcsAspect : ProtoAspectInject, IEcsAspect
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Initialize(EcsWorld world) => Init(world);
+        public void Initialize(ProtoWorld world) => Init(world);
     }
 }

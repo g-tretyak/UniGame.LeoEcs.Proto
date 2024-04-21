@@ -2,6 +2,7 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Converter.Runtime;
     using UniGame.LeoEcs.Converter.Runtime.Abstract;
     using UnityEngine;
@@ -27,12 +28,12 @@
         
         public bool IsEnabled => converter.IsEnabled;
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             converter.Apply(world,entity);
         }
 
-        public void Apply(GameObject target, EcsWorld world, int entity)
+        public void Apply(GameObject target, ProtoWorld world, int entity)
         {
             converter.Apply(target,world,entity);
         }

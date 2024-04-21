@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class CheckEcsWorldStatusFilter : IEcsWorldSearchFilter
+    public class CheckProtoWorldStatusFilter : IProtoWorldSearchFilter
     {
         public const string worldIsEmptyMessage = 
             "World Not Found";

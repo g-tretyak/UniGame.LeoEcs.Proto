@@ -12,6 +12,8 @@ namespace UniGame.LeoEcs.Converter.Runtime
     using Converters;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniCore.Runtime.ProfilerTools;
     using UniGame.Runtime.ObjectPool;
     using UniGame.Runtime.ObjectPool.Extensions;
@@ -32,7 +34,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public static void ApplyEcsComponents(
             this GameObject target, 
-            EcsWorld world, 
+            ProtoWorld world, 
             int entityId, 
             IEnumerable<IEcsComponentConverter> converterTasks)
         {
@@ -58,7 +60,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
         
         public static void ApplyEcsComponents(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             GameObject target, 
             int entityId, 
             IEnumerable<IEcsComponentConverter> converterTasks)
@@ -67,7 +69,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
 
         public static int ApplyEcsComponents(
-            this EcsWorld world,
+            this ProtoWorld world,
             GameObject target,
             int entity,
             IEnumerable<IEcsComponentConverter> converterTasks,
@@ -77,7 +79,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
 
         public static void ApplyEcsComponents(
-            this EcsWorld world, 
+            this ProtoWorld world, 
             int entityId, 
             IEnumerable<IEcsComponentConverter> converters)
         {
@@ -135,7 +137,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public static int ConvertGameObjectToEntity(
             this GameObject gameObject,
-            EcsWorld world, 
+            ProtoWorld world, 
             int entity)
         {
 #if UNITY_EDITOR
@@ -201,18 +203,18 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
         
         public static int ConvertGameObjectToEntity(this GameObject target, 
-            EcsWorld world, 
+            ProtoWorld world, 
             IEnumerable<IEcsComponentConverter> converterTasks, 
             bool spawnInstance)
         {
             var entity = world.NewEntity();
-            return ConvertGameObjectToEntity(target, entity, world, converterTasks, spawnInstance);
+            return ConvertGameObjectToEntity(target, (int)entity, world, converterTasks, spawnInstance);
         }
         
         public static int ConvertGameObjectToEntity(
             this GameObject target, 
             int entity,
-            EcsWorld world, 
+            ProtoWorld world, 
             IEnumerable<IEcsComponentConverter> converterTasks, 
             bool spawnInstance)
         {
@@ -230,23 +232,23 @@ namespace UniGame.LeoEcs.Converter.Runtime
             DestroyEntity(entityId, world);
         }
         
-        public static async UniTask DestroyEntityAsync(EcsPackedEntity entityId, CancellationToken cancellationToken = default)
+        public static async UniTask DestroyEntityAsync(ProtoPackedEntity entityId, CancellationToken cancellationToken = default)
         {
             var world = await WaitWorldReady(cancellationToken);
             DestroyEntity(entityId, world);
         }
         
-        public static void DestroyEntity(EcsPackedEntity entityId, EcsWorld world)
+        public static void DestroyEntity(ProtoPackedEntity entityId, ProtoWorld world)
         {
-            if (world == null || world.IsAlive() == false) return;
+            if (world.IsAlive() == false) return;
 
             if (!entityId.Unpack(world, out var entity))
                 return;
             
-            DestroyEntity(entity, world);
+            DestroyEntity((int)entity, world);
         }
 
-        public static void DestroyEntity(int entityId, EcsWorld world)
+        public static void DestroyEntity(int entityId, ProtoWorld world)
         {
             if (!world.IsAlive()) return;
             
@@ -257,7 +259,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             world.DelEntity(aliveEntity);
         }
 
-        public static async UniTask DestroyEntityAsync(int entityId, EcsWorld world)
+        public static async UniTask DestroyEntityAsync(int entityId, ProtoWorld world)
         {
             await UniTask.Yield(PlayerLoopTiming.PreLateUpdate);
             
@@ -268,15 +270,14 @@ namespace UniGame.LeoEcs.Converter.Runtime
                 world.DelEntity(aliveEntity);
         }
 
-        public static async UniTask<EcsWorld> WaitWorldReady(this GameObject target,CancellationToken cancellationToken = default)
+        public static async UniTask<ProtoWorld> WaitWorldReady(this GameObject target,CancellationToken cancellationToken = default)
         {
             return await WaitWorldReady(cancellationToken);
         }
 
-        public static async UniTask<EcsWorld> WaitWorldReady(CancellationToken cancellationToken = default)
+        public static async UniTask<ProtoWorld> WaitWorldReady(CancellationToken cancellationToken = default)
         {
-            await UniTask.WaitUntil(() => LeoEcsGlobalData.World != null && 
-                                          LeoEcsGlobalData.World.IsAlive(), cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => LeoEcsGlobalData.World.IsAlive(), cancellationToken: cancellationToken);
             return LeoEcsGlobalData.World;
         }
     }

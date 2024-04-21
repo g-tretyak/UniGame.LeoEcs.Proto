@@ -4,14 +4,16 @@
     using System.Collections.Generic;
     using System.Reflection;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
 
     public class EcsDiPoolInjection : IEcsDiInjection
     {
-        private const string PoolMethodName = "GetPool";
+        private const string PoolMethodName = "Pool";
         private MethodInfo _poolMethod;
-        private Type _poolType = typeof(EcsPool<>);
+        private Type _poolType = typeof(ProtoPool<>);
         
-        public void ApplyInjection(IEcsSystems ecsSystems,
+        public void ApplyInjection(IProtoSystems ecsSystems,
             FieldInfo field,object target, 
             IReadOnlyList<IEcsDiInjection> injections)
         {

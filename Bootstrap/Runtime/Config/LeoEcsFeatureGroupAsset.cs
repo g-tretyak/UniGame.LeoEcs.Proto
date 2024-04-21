@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniCore.Runtime.ProfilerTools;
     using UnityEngine;
 
@@ -51,7 +52,7 @@
 
         #endregion
         
-        public sealed override async UniTask InitializeFeatureAsync(IEcsSystems ecsSystems)
+        public sealed override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
         {
 #if DEBUG
             var timer = Stopwatch.StartNew();   
@@ -79,12 +80,12 @@
                    groupConfiguration.IsMatch(searchString);
         }
         
-        protected virtual UniTask OnInitializeFeatureAsync(IEcsSystems ecsSystems)
+        protected virtual UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }
         
-        protected virtual UniTask OnPostInitializeFeatureAsync(IEcsSystems ecsSystems)
+        protected virtual UniTask OnPostInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }

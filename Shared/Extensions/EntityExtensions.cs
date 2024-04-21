@@ -1,26 +1,32 @@
 namespace UniGame.LeoEcs.Shared.Extensions
 {
     using System.Collections.Generic;
-    using Abstract;
-    using Core.Runtime;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using UniGame.Core.Runtime;
+    using Abstract;
     using UnityEngine;
 
     public static class EntityExtensions
     {
         private static List<IInitializeWithEntityData> InitializableComponents = new List<IInitializeWithEntityData>();
 
-        public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, int entity, EcsWorld world)
+        public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, int entity, ProtoWorld world)
         {
-            if (entity < 0 || world.IsAlive() == false) return lifeTime;
+            if (entity < 0) return lifeTime;
+            return lifeTime.DestroyEntityWith((ProtoEntity)entity, world);
+        }
+        
+        public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, ProtoEntity entity, ProtoWorld world)
+        {
+            if (world.IsAlive() == false) return lifeTime;
             
             lifeTime.AddCleanUpAction(() =>
             {
                 if (!world.IsAlive()) return;
+                
                 var packedEntity = world.PackEntity(entity);
-                if (!packedEntity.Unpack(world, out var unpacked))
-                    return;
+                if (!packedEntity.Unpack(world, out var unpacked)) return;
                 
                 world.DelEntity(entity);
             });
@@ -28,7 +34,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
             return lifeTime;
         }
 
-        public static Object InitializeWithEcsData(this Object target, EcsWorld world, int entity)
+        public static Object InitializeWithEcsData(this Object target, ProtoWorld world, int entity)
         {
             switch (target)
             {

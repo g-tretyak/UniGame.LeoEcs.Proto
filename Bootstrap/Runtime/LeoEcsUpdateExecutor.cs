@@ -4,15 +4,16 @@
     using System.Collections.Generic;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
 
     public class LeoEcsUpdateExecutor : MonoBehaviour,ILeoEcsExecutor
     {
         private bool _isActive;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         
-        private List<IEcsSystems> _systems = new List<IEcsSystems>();
+        private List<IProtoSystems> _systems = new List<IProtoSystems>();
         private IEcsSystem[] _allSystems = Array.Empty<IEcsSystem>();
 
         public bool IsActive => _isActive;
@@ -23,13 +24,13 @@
             Destroy(gameObject);
         }
 
-        public void Execute(EcsWorld world)
+        public void Execute(ProtoWorld world)
         {
             _isActive = true;
             _world = world;
         }
 
-        public void Add(IEcsSystems ecsSystems)
+        public void Add(IProtoSystems ecsSystems)
         {
             if (_systems.Contains(ecsSystems))
                 return;
@@ -58,7 +59,7 @@
 
         private void Awake()
         {
-            _systems ??= new List<IEcsSystems>();
+            _systems ??= new List<IProtoSystems>();
             _allSystems ??= Array.Empty<IEcsSystem>();
         }
     }

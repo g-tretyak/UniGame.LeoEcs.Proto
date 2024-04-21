@@ -13,7 +13,7 @@
         EcsFilter _filter;
         EcsPool<T1> _pool1;
 
-        public override void Run(IEcsSystems systems)
+        public override void Run()
         {
             if (_filter == null)
             {
@@ -39,7 +39,7 @@
 #endif
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TJob job)
+        protected virtual void SetData(IProtoSystems systems, ref TJob job)
         {
         }
     }
@@ -53,7 +53,7 @@
         EcsPool<T1> _pool1;
         EcsPool<T2> _pool2;
 
-        public override void Run(IEcsSystems systems)
+        public override void Run()
         {
             if (_filter == null)
             {
@@ -84,7 +84,7 @@
 #endif
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TJob job)
+        protected virtual void SetData(IProtoSystems systems, ref TJob job)
         {
         }
     }
@@ -100,7 +100,7 @@
         EcsPool<T2> _pool2;
         EcsPool<T3> _pool3;
 
-        public override void Run(IEcsSystems systems)
+        public override void Run()
         {
             if (_filter == null)
             {
@@ -137,7 +137,7 @@
 #endif
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TJob job)
+        protected virtual void SetData(IProtoSystems systems, ref TJob job)
         {
         }
     }
@@ -155,7 +155,7 @@
         EcsPool<T3> _pool3;
         EcsPool<T4> _pool4;
 
-        public override void Run(IEcsSystems systems)
+        public override void Run()
         {
             if (_filter == null)
             {
@@ -198,17 +198,17 @@
 #endif
         }
 
-        protected virtual void SetData(IEcsSystems systems, ref TJob job)
+        protected virtual void SetData(IProtoSystems systems, ref TJob job)
         {
         }
     }
 
     public abstract class EcsUnityJobSystemBase : IEcsRunSystem
     {
-        public abstract void Run(IEcsSystems systems);
-        protected abstract int GetChunkSize(IEcsSystems systems);
-        protected abstract EcsFilter GetFilter(EcsWorld world);
-        protected abstract EcsWorld GetWorld(IEcsSystems systems);
+        public abstract void Run();
+        protected abstract int GetChunkSize(IProtoSystems systems);
+        protected abstract EcsFilter GetFilter(ProtoWorld world);
+        protected abstract ProtoWorld GetWorld(IProtoSystems systems);
     }
 
     public interface IEcsUnityJob<T1> : IJobParallelFor

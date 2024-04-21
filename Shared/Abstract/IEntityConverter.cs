@@ -1,9 +1,10 @@
 ﻿namespace UniGame.LeoEcs.Shared.Abstract
 {
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface IEntityConverter
     {
-        void Apply(EcsWorld world, int entity);
+        void Apply(ProtoWorld world, int entity);
     }
 }

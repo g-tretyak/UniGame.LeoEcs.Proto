@@ -5,7 +5,8 @@
     using Abstract;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
-    
+    using Leopotam.EcsProto;
+
 #if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
 #endif
@@ -25,7 +26,7 @@
 #endif
         public string name = EcsEmptyFeatureName;
         
-        public UniTask InitializeFeatureAsync(IEcsSystems ecsSystems)
+        public UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }

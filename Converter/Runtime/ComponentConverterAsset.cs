@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace UniGame.LeoEcs.Converter.Runtime
 {
+    using Leopotam.EcsProto;
+
     [CreateAssetMenu(menuName = "UniGame/LeoEcs/Converter/Simple Component Converter",fileName = "Simple Component Converter")]
     public abstract class ComponentConverterAsset : ScriptableObject, IEcsComponentConverter
     {
@@ -15,7 +17,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public string Name => name;
         
-        public abstract void Apply(EcsWorld world, int entity);
+        public abstract void Apply(ProtoWorld world, int entity);
         
         public virtual bool IsMatch(string searchString)
         {

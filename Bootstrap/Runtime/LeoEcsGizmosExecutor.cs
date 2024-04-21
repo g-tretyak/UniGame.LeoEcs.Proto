@@ -3,17 +3,18 @@
     using System.Collections.Generic;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
     public class LeoEcsGizmosExecutor : MonoBehaviour,ISystemsPlugin
     {
         private bool _isActive;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private GameObject _executor;
         
-        private List<IEcsSystems> _systems = new List<IEcsSystems>();
-        private List<IEcsSystem> _allSystems = new List<IEcsSystem>();
-        private Dictionary<ILeoEcsGizmosSystem,IEcsSystems> _gizmosSystems = new Dictionary<ILeoEcsGizmosSystem,IEcsSystems>();
+        private List<IProtoSystems> _systems = new();
+        private Slice<IProtoSystem> _allSystems = new();
+        private Dictionary<ILeoEcsGizmosSystem,IProtoSystems> _gizmosSystems = new();
         
         public void Dispose()
         {
@@ -27,13 +28,13 @@
 
         public bool IsActive => _isActive;
 
-        public void Execute(EcsWorld world)
+        public void Execute(ProtoWorld world)
         {
             _isActive = true;
             _world = world;
         }
 
-        public void Add(IEcsSystems ecsSystems)
+        public void Add(IProtoSystems ecsSystems)
         {
 #if !UNITY_EDITOR
             return; 
@@ -41,10 +42,14 @@
             if (_systems.Contains(ecsSystems)) return;
             
             _systems.Add(ecsSystems);
-            _allSystems = ecsSystems.GetAllSystems();
+            _allSystems = ecsSystems.Systems();
             
-            foreach (var system in _allSystems)
+            var data = _allSystems.Data();
+            var len = _allSystems.Len();
+            
+            for (int i = 0; i < len; i++)
             {
+                var system = data[i];
                 if (system is ILeoEcsGizmosSystem gizmosSystem)
                     _gizmosSystems[gizmosSystem] = ecsSystems;
             }
@@ -59,7 +64,6 @@
         private void OnDrawGizmos()
         {
             var isActive = this != null &&
-                           _world!=null && 
                            _world.IsAlive() && 
                            Application.isPlaying && 
                            _isActive;
@@ -73,9 +77,9 @@
 
         private void Awake()
         {
-            _systems ??= new List<IEcsSystems>();
-            _allSystems ??= new List<IEcsSystem>();
-            _gizmosSystems ??= new Dictionary<ILeoEcsGizmosSystem, IEcsSystems>();
+            _systems ??= new List<IProtoSystems>();
+            _allSystems ??= new Slice<IProtoSystem>();
+            _gizmosSystems ??= new Dictionary<ILeoEcsGizmosSystem, IProtoSystems>();
         }
     }
 }

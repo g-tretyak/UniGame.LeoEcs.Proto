@@ -2,9 +2,10 @@
 {
     using Core.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface IEcsPostInitializeAction
     {
-        public (IEcsSystems value, bool replace) Apply(IEcsSystems ecsSystems,IContext context);
+        public (IProtoSystems value, bool replace) Apply(IProtoSystems ecsSystems,IContext context);
     }
 }

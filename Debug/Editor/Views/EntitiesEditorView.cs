@@ -48,13 +48,13 @@
 
         #endregion
 
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private HashSet<int> _uniqueEntities = new HashSet<int>();
         private EcsFilterData _cachedFilter = EcsFilterData.NoneFilterData;
         private EcsEditorFilter _filter = new EcsEditorFilter();
         private EditorEntityViewBuilder _viewBuilder = new EditorEntityViewBuilder();
 
-        public void Initialize(EcsWorld world)
+        public void Initialize(ProtoWorld world)
         {
             _world = world;
 

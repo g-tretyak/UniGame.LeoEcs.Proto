@@ -9,9 +9,9 @@
     public interface IEcsViewTools : ILifeTimeContext
     {
         UniTask AddModelComponentAsync(
-            EcsWorld world,EcsPackedEntity packedEntity,
+            ProtoWorld world,ProtoPackedEntity packedEntity,
             IView view,Type viewType);
 
-        void AddViewModelData(EcsWorld world,ref EcsPackedEntity packedEntity,IViewModel model);
+        void AddViewModelData(ProtoWorld world,ref ProtoPackedEntity packedEntity,IViewModel model);
     }
 }

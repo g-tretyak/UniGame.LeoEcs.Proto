@@ -9,16 +9,16 @@
     {
         private HashSet<int> _uniqueEntities = new HashSet<int>();
 
-        private List<IEcsWorldSearchFilter> _ecsResultFilter = new List<IEcsWorldSearchFilter>()
+        private List<IProtoWorldSearchFilter> _ecsResultFilter = new List<IProtoWorldSearchFilter>()
         {
             new CheckEditorStatusFilter(),
-            new CheckEcsWorldStatusFilter(),
+            new CheckProtoWorldStatusFilter(),
             new IdEntitiesFilter(),
             new EntitiesNamesFilter(),
             new FilterEntitiesComponents(),
         };
 
-        public EcsFilterData Filter(string filterValue,EcsWorld world)
+        public EcsFilterData Filter(string filterValue,ProtoWorld world)
         {
             var filterData = new EcsFilterData
             {

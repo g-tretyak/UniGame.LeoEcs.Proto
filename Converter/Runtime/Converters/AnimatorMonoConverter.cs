@@ -3,6 +3,7 @@
     using System;
     using System.Threading;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
     using Shared.Extensions;
     using UnityEngine;
@@ -12,7 +13,7 @@
         [SerializeField]
         private Animator _animator;
         
-        public override void Apply(GameObject target, EcsWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, int entity)
         {
             var animatorPool = world.GetPool<AnimatorComponent>();
 
@@ -27,7 +28,7 @@
         [SerializeField]
         public Animator animator;
         
-        public override void Apply(GameObject target, EcsWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, int entity)
         {
             var animatorPool = world.GetPool<AnimatorComponent>();
 
@@ -35,7 +36,7 @@
             animatorComponent.Value = animator;
         }
 
-        public void OnEntityDestroy(EcsWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, int entity)
         {
             world.TryRemoveComponent<AnimatorComponent>(entity);
         }

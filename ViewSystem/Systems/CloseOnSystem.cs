@@ -25,13 +25,13 @@
         where TEvent : struct
         where TViewModel : IViewModel
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _eventFilter;
         private EcsFilter _viewFilter;
 
         private EcsPool<ViewComponent> _viewPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _eventFilter = _world.Filter<TEvent>().End();
@@ -41,7 +41,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var eventEntity in _eventFilter)
             {

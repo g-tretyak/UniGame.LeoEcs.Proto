@@ -3,9 +3,10 @@
     using System.Collections.Generic;
     using System.Reflection;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface IEcsDiInjection
     {
-        void ApplyInjection(IEcsSystems ecsSystems, FieldInfo field, object target, IReadOnlyList<IEcsDiInjection> injections);
+        void ApplyInjection(IProtoSystems ecsSystems, FieldInfo field, object target, IReadOnlyList<IEcsDiInjection> injections);
     }
 }

@@ -4,20 +4,22 @@
     using System.Collections.Generic;
     using System.Reflection;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UniModules.UniCore.Runtime.ReflectionUtils;
     using UniModules.UniCore.Runtime.Utils;
 
     [Serializable]
     public class EcsDiAspectInjection : IEcsDiInjection
     {
-        private Dictionary<Type,object> _aspects = new Dictionary<Type, object>();
-        private Type _aspectType = typeof(IEcsAspect);
-        private string _initializeMethodName = nameof(IEcsAspect.Initialize);
+        private Dictionary<Type,object> _aspects = new();
+        private Type _aspectType = typeof(IProtoAspect);
+        private string _initializeMethodName = nameof(IProtoAspect.Init);
         private MethodInfo _initializeMethod;
         private object[] _parameters = new[] { (object)0 };
         
         public void ApplyInjection(
-            IEcsSystems ecsSystems, 
+            IProtoSystems ecsSystems, 
             FieldInfo field, 
             object target, 
             IReadOnlyList<IEcsDiInjection> injections)

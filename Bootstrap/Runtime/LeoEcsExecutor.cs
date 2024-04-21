@@ -2,21 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Abstract;
-    using Core.Runtime.Extension;
     using Cysharp.Threading.Tasks;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
-    using Systems;
     using UnityEngine;
-    using UnityEngine.Profiling;
 
     [Serializable]
     public class LeoEcsExecutor : ILeoEcsExecutor
     {
-        private List<IEcsSystems> _systems = new();
-        private EcsWorld _world;
+        private List<IProtoSystems> _systems = new();
+        private ProtoWorld _world;
         private LeoEcsPlayerUpdateType _loopTiming = LeoEcsPlayerUpdateType.Update;
         private PlayerLoopTiming _updateTiming = PlayerLoopTiming.Update;
 
@@ -30,7 +27,7 @@
             _loopTiming = updateType;
         }
 
-        public void Execute(EcsWorld world)
+        public void Execute(ProtoWorld world)
         {
             if (!CanExecute()) return;
 
@@ -45,7 +42,7 @@
                 .Forget();
         }
 
-        public void Add(IEcsSystems systems)
+        public void Add(IProtoSystems systems)
         {
             _systems.Add(systems);
         }

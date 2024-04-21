@@ -2,10 +2,12 @@
 
 namespace UniGame.LeoEcs.Converter.Runtime
 {
+    using Leopotam.EcsProto;
+
     public interface IConverterEntityDestroyHandler
     {
 
-        void OnEntityDestroy(EcsWorld world, int entity);
+        void OnEntityDestroy(ProtoWorld world, int entity);
 
     }
 }

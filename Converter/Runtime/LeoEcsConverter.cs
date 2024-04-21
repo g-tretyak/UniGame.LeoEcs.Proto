@@ -4,6 +4,7 @@
     using System.Threading;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
     using Shared.Extensions;
     using UnityEngine;
@@ -38,9 +39,9 @@
 
         public bool IsRuntime => Application.isPlaying;
         
-        public abstract void Apply(GameObject target, EcsWorld world, int entity);
+        public abstract void Apply(GameObject target, ProtoWorld world, int entity);
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             if (!world.HasComponent<GameObjectComponent>(entity)) return;
 

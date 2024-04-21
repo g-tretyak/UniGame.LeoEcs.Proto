@@ -16,13 +16,13 @@
     [Serializable]
     public class InitializeModelOfViewsSystem : IEcsInitSystem,IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         
         private EcsPool<ViewComponent> _viewComponentPool;
         private EcsPool<ViewInitializedComponent> _initializedPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -35,7 +35,7 @@
             _initializedPool = _world.GetPool<ViewInitializedComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

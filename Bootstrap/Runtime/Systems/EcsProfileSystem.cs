@@ -3,6 +3,8 @@
     using System;
     using System.Runtime.CompilerServices;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniModules.UniCore.Runtime.ReflectionUtils;
     using Unity.Profiling;
@@ -19,18 +21,15 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class EcsProfileSystem : IEcsInitSystem, 
+    public class EcsProfileSystem : 
+        IEcsInitSystem, 
         IEcsRunSystem,
-        IEcsDestroySystem,
-        IEcsPreInitSystem,
-        IEcsPostDestroySystem
+        IEcsDestroySystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private IEcsSystem _system;
         private IEcsRunSystem _runSystem;
         private IEcsDestroySystem _destroySystem;
-        private IEcsPostDestroySystem _postDestroySystem;
-        private IEcsPreInitSystem _preInitSystem;
         private IEcsInitSystem _initSystem;
         private string _systemName;
         private string _profileTag;
@@ -42,8 +41,6 @@
             
             _runSystem = system as IEcsRunSystem;
             _destroySystem = system as IEcsDestroySystem;
-            _postDestroySystem = system as IEcsPostDestroySystem;
-            _preInitSystem = system as IEcsPreInitSystem;
             _initSystem = system as IEcsInitSystem;
             
             _systemName = system.GetType().GetFormattedName();
@@ -51,36 +48,24 @@
             _marker = new ProfilerMarker(_profileTag);
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _initSystem?.Init(systems);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             _marker.Begin();
-            _runSystem?.Run(systems);
+            _runSystem?.Run();
             _marker.End();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Destroy(IEcsSystems systems)
+        public void Destroy()
         {
-            _destroySystem?.Destroy(systems);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PreInit(IEcsSystems systems)
-        {
-            _preInitSystem?.PreInit(systems);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PostDestroy(IEcsSystems systems)
-        {
-            _postDestroySystem?.PostDestroy(systems);
+            _destroySystem?.Destroy();
         }
     }
 }

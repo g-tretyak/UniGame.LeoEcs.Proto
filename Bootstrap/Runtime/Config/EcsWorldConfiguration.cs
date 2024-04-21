@@ -2,29 +2,24 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     [Serializable]
-    public class EcsWorldConfiguration
+    public class ProtoWorldConfiguration
     {
-        public int Entities = 512;
-        public int RecycledEntities = 512;
-        public int Pools = 512;
-        public int Filters = 512;
-        public int PoolDenseSize = 512;
-        public int PoolRecycledSize = 512;
-        public int EntityComponentsSize = 8;
+        public int Entities = 256;
+        public int RecycledEntities = 256;
+        public int Pools = 256;
+        public int Aspects = 4;
 
-        public EcsWorld.Config Create()
+        public ProtoWorld.Config Create()
         {
-            var config = new EcsWorld.Config()
+            var config = new ProtoWorld.Config()
             {
                 Entities = Entities,
                 RecycledEntities = RecycledEntities,
                 Pools = Pools,
-                Filters = Filters,
-                PoolDenseSize = PoolDenseSize,
-                PoolRecycledSize = PoolRecycledSize,
-                EntityComponentsSize = EntityComponentsSize,
+                Aspects = Aspects,
             };
 
             return config;

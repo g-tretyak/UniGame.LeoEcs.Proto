@@ -26,16 +26,16 @@
         
         #region private fields
 
-        private EcsWorld _ecsWorld;
-        private EcsPackedEntity _viewPackedEntity;
+        private ProtoWorld _ProtoWorld;
+        private ProtoPackedEntity _viewPackedEntity;
         private IView _view;
 
         #endregion
         
         #region public properties
         
-        public EcsWorld World => _ecsWorld;
-        public EcsPackedEntity PackedEntity => _viewPackedEntity;
+        public ProtoWorld World => _ProtoWorld;
+        public ProtoPackedEntity PackedEntity => _viewPackedEntity;
         public int Entity => entity;
         
         #endregion
@@ -45,14 +45,14 @@
         /// <summary>
         /// entity destroyed
         /// </summary>
-        public void OnEntityDestroy(EcsWorld world, int targetEntity)
+        public void OnEntityDestroy(ProtoWorld world, int targetEntity)
         {
-            _ecsWorld = null;
+            _ProtoWorld = null;
             
             entity = -1;
         }
         
-        public sealed override void Apply(GameObject target, EcsWorld world, int targetEntity)
+        public sealed override void Apply(GameObject target, ProtoWorld world, int targetEntity)
         {
             entity = targetEntity;
             
@@ -60,7 +60,7 @@
             
             if (!isActiveAndEnabled || _view == null) return;
 
-            _ecsWorld = world;
+            _ProtoWorld = world;
             _viewPackedEntity = world.PackEntity(entity);
             
             ref var viewComponent = ref world.GetOrAddComponent<ViewComponent>(entity);

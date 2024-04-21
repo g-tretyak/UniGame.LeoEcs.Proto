@@ -1,9 +1,9 @@
 namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
 {
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface ILeoEcsGizmosSystem
     {
-        void RunGizmosSystem(IEcsSystems systems);
+        void RunGizmosSystem(IProtoSystems systems);
     }
 }

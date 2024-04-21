@@ -8,12 +8,12 @@
     {
         public string View = string.Empty;
         public bool UseBusyContainer = false;
-        public EcsPackedEntity Owner = default;
+        public ProtoPackedEntity Owner = default;
         public bool OwnViewBySource = false;
         public bool Single = false;
         public string Tag = string.Empty;
         public string ViewName = string.Empty;
         public bool StayWorld = false;
-        public EcsWorld.Mask FilterMask = null;
+        public ProtoWorld.Mask FilterMask = null;
     }
 }

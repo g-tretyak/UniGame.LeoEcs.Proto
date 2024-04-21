@@ -2,6 +2,7 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto.QoL;
     using UnityEngine.Serialization;
 
     /// <summary>
@@ -20,6 +21,6 @@
 #if ODIN_INSPECTOR
         [FormerlySerializedAs("Entity")] [Sirenix.OdinInspector.OnInspectorGUI]
 #endif
-        public EcsPackedEntity Value;
+        public ProtoPackedEntity Value;
     }
 }

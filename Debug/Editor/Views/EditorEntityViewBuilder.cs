@@ -19,13 +19,13 @@
             new GameObjectEntityBuilder(),
         };
 
-        public void Initialize(EcsWorld world)
+        public void Initialize(ProtoWorld world)
         {
             foreach (var viewBuilder in viewBuilders)
                 viewBuilder.Initialize(world);
         }
 
-        public EntityEditorView Create(int entity,EcsWorld world)
+        public EntityEditorView Create(int entity,ProtoWorld world)
         {
             var view = ClassPool.Spawn<EntityEditorView>();
             view.id = entity;

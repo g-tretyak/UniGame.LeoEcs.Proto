@@ -21,7 +21,7 @@
     [ECSDI]
     public class UpdateViewContainerBusyStatusSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _containerFilter;
         private EcsFilter _parentingViewFilter;
 
@@ -29,7 +29,7 @@
         private EcsPool<ViewParentComponent> _parentPool;
         private EcsPool<ViewContainerBusyComponent> _busyPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
 
@@ -44,7 +44,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var containerEntity in _containerFilter)
             {

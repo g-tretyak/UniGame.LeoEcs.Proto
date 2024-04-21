@@ -15,7 +15,7 @@
     public static class EcsPoolExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryAdd<T>(this EcsPool<T> pool,ref EcsPackedEntity packedEntity) where T : struct
+        public static bool TryAdd<T>(this EcsPool<T> pool,ref ProtoPackedEntity packedEntity) where T : struct
         {
             var world = pool.World();
             if (!packedEntity.Unpack(world, out var entity) || pool.Has(entity))
@@ -25,16 +25,14 @@
             return true;
         }
         
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Unpack(this EcsPackedEntity packedEntity, ProtoWorld world, out ProtoEntity entity)
+        public static ProtoPool<T> GetPool<T>(this ProtoWorld world) where T : struct
         {
-            return packedEntity.Value.Unpack(world, out entity);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ProtoPool<T> GetPool<T>(this EcsWorld world) where T : struct
-        {
-            return world.Value.GetPool<T>();
+            return world.Pool<T>() as ProtoPool<T>;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,6 +50,14 @@
         {
             var protoEntity = (ProtoEntity)entity;
             return TryAdd(pool, protoEntity);
+        }
+        
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref T Add<T>(this ProtoPool<T> pool, int entity) where T : struct
+        {
+            var protoEntity = (ProtoEntity)entity;
+            return ref pool.Add(protoEntity);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -72,7 +78,7 @@
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRemove<T>(this EcsPool<T> pool, EcsPackedEntity packedEntity)
+        public static bool TryRemove<T>(this EcsPool<T> pool, ProtoPackedEntity packedEntity)
             where T : struct
         {
             var world = pool.World();
@@ -90,24 +96,37 @@
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryAdd<T>(this EcsPool<T> pool, EcsPackedEntity packedEntity, ref T component) where T : struct
+        public static bool TryAdd<T>(this EcsPool<T> pool, ProtoPackedEntity packedEntity, ref T component) where T : struct
         {
             var world = pool.World();
             if (!packedEntity.Unpack(world, out var entity))
                 return false;
-
             component = ref pool.Add(entity);
             return true;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref TComponent GetOrAddComponent<TComponent>(this EcsPool<TComponent> pool, ProtoEntity entity)
+        public static ref TComponent GetOrAddComponent<TComponent>(this ProtoPool<TComponent> pool, ProtoEntity entity)
             where TComponent : struct
         {
             ref var component = ref pool.Has(entity) 
                 ? ref pool.Get(entity) 
                 : ref pool.Add(entity);
             return ref component;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref TComponent GetOrAddComponent<TComponent>(this ProtoPool<TComponent> pool, int entity)
+            where TComponent : struct
+        {
+            return ref pool.GetOrAddComponent((ProtoEntity)entity);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref TComponent GetOrAddComponent<TComponent>(this EcsPool<TComponent> pool, ProtoEntity entity)
+            where TComponent : struct
+        {
+            return ref pool.pool.GetOrAddComponent(entity);
         }
     }
 }

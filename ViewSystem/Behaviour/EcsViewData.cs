@@ -10,12 +10,12 @@
     {
         public string View = string.Empty;
         public ViewType LayoutType;
-        public EcsPackedEntity Owner = default;
+        public ProtoPackedEntity Owner = default;
         public Transform Parent;
         public bool Single = false;
         public string Tag = string.Empty;
         public string ViewName = string.Empty;
         public bool StayWorld = false;
-        public EcsWorld.Mask FilterMask = null;
+        public ProtoWorld.Mask FilterMask = null;
     }
 }

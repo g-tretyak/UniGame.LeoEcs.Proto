@@ -3,6 +3,7 @@
     using System;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniModules.UniCore.Runtime.ReflectionUtils;
     using UnityEngine;
 
@@ -91,7 +92,7 @@
         
         public bool IsEnabled => Value?.IsEnabled ?? false;
         
-        public void Apply(EcsWorld world, int entity)
+        public void Apply(ProtoWorld world, int entity)
         {
             if(Value.IsEnabled == false) return;
             Value.Apply(world,entity);

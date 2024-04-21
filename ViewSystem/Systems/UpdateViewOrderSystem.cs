@@ -21,9 +21,9 @@
     {
         private ViewAspect _viewAspect;
         private EcsFilter _viewFilter;
-        private EcsWorld _world;
+        private ProtoWorld _world;
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -34,7 +34,7 @@
                 .End();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _viewFilter)
             {

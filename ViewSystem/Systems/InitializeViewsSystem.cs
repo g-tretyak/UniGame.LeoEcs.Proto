@@ -21,7 +21,7 @@
     {
         private readonly IEcsViewTools _viewTools;
         
-        private EcsWorld _world;
+        private ProtoWorld _world;
         private EcsFilter _filter;
         
         private EcsPool<ViewInitializedComponent> _viewInitializedPool;
@@ -33,7 +33,7 @@
             _viewTools = viewTools;
         }
         
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             
@@ -47,7 +47,7 @@
             _viewModelPool = _world.GetPool<ViewModelComponent>();
         }
 
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

@@ -25,7 +25,7 @@
         
         #endregion
 
-        public void Show(EcsWorld world, Transform parent = null)
+        public void Show(ProtoWorld world, Transform parent = null)
         {
             world.MakeViewRequest(view, layoutType, parent);
         }

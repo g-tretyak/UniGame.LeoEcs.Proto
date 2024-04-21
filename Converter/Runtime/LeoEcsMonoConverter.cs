@@ -8,6 +8,9 @@ namespace UniGame.LeoEcs.Converter.Runtime
     using Cysharp.Threading.Tasks;
     using Editor;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
+    using Shared.Extensions;
     using UniModules.UniCore.Runtime.DataFlow;
     using UnityEngine;
     using UnityEngine.Serialization;
@@ -93,8 +96,8 @@ namespace UniGame.LeoEcs.Converter.Runtime
 #region private data
 
         private EntityState _state = EntityState.Destroyed;
-        private EcsPackedEntity _packedEntity;
-        private EcsWorld _world;
+        private ProtoPackedEntity _packedEntity;
+        private ProtoWorld _world;
         private List<IEcsComponentConverter> _converters = new List<IEcsComponentConverter>();
         private LifeTimeDefinition _entityLifeTime = new LifeTimeDefinition();
         private int _generation;
@@ -109,9 +112,9 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public bool IsCreated => _state == EntityState.Created;
 
-        public EcsWorld World => _world;
+        public ProtoWorld World => _world;
 
-        public EcsPackedEntity PackedEntity => _packedEntity;
+        public ProtoPackedEntity PackedEntity => _packedEntity;
         
         public ILifeTime LifeTime => _entityLifeTime;
 
@@ -128,6 +131,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         public async UniTask Convert()
         {
             _generation++; 
+            
             var generation = _generation;
 
             await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
@@ -149,11 +153,12 @@ namespace UniGame.LeoEcs.Converter.Runtime
                generation != _generation) return;
             
             var targetEntity = world.NewEntity();
+            
             Convert(world, targetEntity);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void ConnectEntity(EcsWorld world,int ecsEntity)
+        public void ConnectEntity(ProtoWorld world,int ecsEntity)
         {
             entity = ecsEntity;
             
@@ -163,7 +168,13 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Convert(EcsWorld world, int ecsEntity)
+        public void Convert(ProtoWorld world, ProtoEntity ecsEntity)
+        {
+            Convert(world, (int)ecsEntity);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Convert(ProtoWorld world, int ecsEntity)
         {
             ConnectEntity(world,ecsEntity);
             gameObject.ConvertGameObjectToEntity(world,ecsEntity);
@@ -216,7 +227,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         private void DestroyEcsEntity()
         {
-            if (_world == null || _world.IsAlive() == false) return;
+            if (_world.IsAlive() == false) return;
             if (entity < 0) return;
             if (!_packedEntity.Unpack(_world, out var targetEntity)) return;
             
@@ -224,13 +235,13 @@ namespace UniGame.LeoEcs.Converter.Runtime
             foreach (var converter in _converters)
             {
                 if (converter is IConverterEntityDestroyHandler destroyHandler)
-                    destroyHandler.OnEntityDestroy(_world, targetEntity);
+                    destroyHandler.OnEntityDestroy(_world, (int)targetEntity);
             }
             //notify converters about destroy
             foreach (var converter in assetConverters)
             {
                 if (converter is not IConverterEntityDestroyHandler destroyHandler) continue;
-                destroyHandler.OnEntityDestroy(_world, targetEntity);
+                destroyHandler.OnEntityDestroy(_world, (int)targetEntity);
             }
             _world.DelEntity(targetEntity);
         }

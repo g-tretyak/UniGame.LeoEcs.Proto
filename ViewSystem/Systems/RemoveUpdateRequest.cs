@@ -18,11 +18,11 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
         private readonly IGameViewSystem _viewSystem;
         
         public EcsFilter _filter;
-        public EcsWorld _world;
+        public ProtoWorld _world;
 
         public EcsPool<UpdateViewRequest> _updatePool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _filter = _world.Filter<UpdateViewRequest>().End();
@@ -30,7 +30,7 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
             _updatePool = _world.GetPool<UpdateViewRequest>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _filter)
             {

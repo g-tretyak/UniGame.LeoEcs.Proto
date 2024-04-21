@@ -15,12 +15,12 @@
     public class CreateLayoutViewSystem : IEcsRunSystem,IEcsInitSystem
     {
         private EcsFilter _createFilter;
-        private EcsWorld _world;
+        private ProtoWorld _world;
 
         private EcsPool<CreateLayoutViewRequest> _requestLayoutPool;
         private EcsPool<CreateViewRequest> _requestPool;
 
-        public void Init(IEcsSystems systems)
+        public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
             _createFilter = _world.Filter<CreateLayoutViewRequest>().End();
@@ -29,7 +29,7 @@
             _requestPool = _world.GetPool<CreateViewRequest>();
         }
         
-        public void Run(IEcsSystems systems)
+        public void Run()
         {
             foreach (var entity in _createFilter)
             {
