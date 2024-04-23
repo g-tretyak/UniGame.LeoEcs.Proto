@@ -13,7 +13,7 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class RemoveUpdateRequest : IEcsRunSystem,IEcsInitSystem
+    public class RemoveUpdateRequest : IProtoRunSystem,IProtoInitSystem
     {
         private readonly IGameViewSystem _viewSystem;
         

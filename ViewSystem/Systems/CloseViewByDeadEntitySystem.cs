@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class CloseViewByDeadEntitySystem : IEcsInitSystem, IEcsRunSystem
+    public class CloseViewByDeadEntitySystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

@@ -85,7 +85,7 @@
         void Execute(int fromIndex, int beforeIndex);
     }
     
-    public interface IEcsThreadSystem<TTask> : IEcsInitSystem, IEcsRunSystem 
+    public interface IEcsThreadSystem<TTask> : IProtoInitSystem, IProtoRunSystem 
         where TTask : IEcsDataTask<TTask> , new()
     {
         bool IsMultithreaded { get; }

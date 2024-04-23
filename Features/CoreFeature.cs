@@ -1,26 +1,29 @@
 ﻿namespace Game.Ecs.Core
 {
+    using System;
     using Systems;
     using Components;
     using Cysharp.Threading.Tasks;
     using Death.Components;
     using Death.Systems;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using Time;
     using Timer;
     using UniGame.LeoEcs.Bootstrap.Runtime;
     using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.Shared.Components;
-    using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Game/Feature/Core/Core Feature", fileName = "Core Feature")]
-    public class CoreFeature : BaseLeoEcsFeature
+    [Serializable]
+    public class CoreFeature : EcsFeature
     {
-        public TimerFeature timerFeature = new TimerFeature();
+        public TimerFeature timerFeature = new();
+        public GameTimeFeature gameTimeFeature = new();
         
-        public override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        protected override async UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
+            await gameTimeFeature.InitializeFeatureAsync(ecsSystems);
+            
             ecsSystems.Add(new KillMeNextTimeHandleSystem());
             ecsSystems.Add(new ProcessDestroySilentSystem());
             
@@ -36,7 +39,6 @@
             
             ecsSystems.Add(new CheckInvalidChildEntitiesSystem());
             ecsSystems.Add(new ProcessDespawnSystem());
-            
             
             ecsSystems.DelHere<DeadEvent>();
             ecsSystems.DelHere<DisabledEvent>();

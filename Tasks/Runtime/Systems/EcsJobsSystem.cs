@@ -22,7 +22,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class EcsJobsSystem : IEcsInitSystem, IEcsRunSystem
+    public class EcsJobsSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         

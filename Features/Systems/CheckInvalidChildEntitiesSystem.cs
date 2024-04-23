@@ -17,7 +17,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class CheckInvalidChildEntitiesSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class CheckInvalidChildEntitiesSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

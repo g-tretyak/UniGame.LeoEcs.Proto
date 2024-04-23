@@ -1,11 +1,10 @@
-﻿namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
+﻿namespace UniGame.Ecs.Bootstrap.Runtime.Config
 {
     using System;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
 
     [Serializable]
-    public class ProtoWorldConfiguration
+    public class WorldConfiguration
     {
         public int Entities = 256;
         public int RecycledEntities = 256;

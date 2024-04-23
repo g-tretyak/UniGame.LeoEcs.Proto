@@ -21,7 +21,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class ProcessDestroySilentSystem : IEcsRunSystem, IEcsInitSystem
+    public sealed class ProcessDestroySilentSystem : IProtoRunSystem, IProtoInitSystem
     {
         private ProtoWorld _world;
         private EcsFilter _requestFilter;

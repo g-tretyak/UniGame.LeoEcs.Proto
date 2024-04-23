@@ -14,7 +14,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class InstantDestroySystem : IEcsInitSystem, IEcsRunSystem
+    public class InstantDestroySystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

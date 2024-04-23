@@ -2,6 +2,6 @@
 {
     public interface IEcsExecutorFactory
     {
-        ILeoEcsExecutor Create(string updateId);
+        IEcsExecutor Create(string updateId);
     }
 }

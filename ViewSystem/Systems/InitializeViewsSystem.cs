@@ -17,7 +17,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class InitializeViewsSystem : IEcsInitSystem,IEcsRunSystem
+    public class InitializeViewsSystem : IProtoInitSystem,IProtoRunSystem
     {
         private readonly IEcsViewTools _viewTools;
         

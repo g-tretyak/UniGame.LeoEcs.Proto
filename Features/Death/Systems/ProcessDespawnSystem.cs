@@ -20,7 +20,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class ProcessDespawnSystem : IEcsRunSystem, IEcsInitSystem
+    public sealed class ProcessDespawnSystem : IProtoRunSystem, IProtoInitSystem
     {
         private ProtoWorld _world;
         

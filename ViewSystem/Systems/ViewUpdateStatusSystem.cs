@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
 #endif
     [Serializable]
     [ECSDI]
-    public class ViewUpdateStatusSystem : IEcsInitSystem,IEcsRunSystem
+    public class ViewUpdateStatusSystem : IProtoInitSystem,IProtoRunSystem
     {
         private ViewAspect _viewAspect;
         private EcsFilter _viewFilter;

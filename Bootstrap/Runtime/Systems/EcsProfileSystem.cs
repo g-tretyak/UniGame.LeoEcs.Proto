@@ -8,7 +8,7 @@
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniModules.UniCore.Runtime.ReflectionUtils;
     using Unity.Profiling;
-    using UnityEngine.Profiling;
+
     /// <summary>
     /// ecs proxy profile system
     /// </summary>
@@ -22,15 +22,15 @@
     [Serializable]
     [ECSDI]
     public class EcsProfileSystem : 
-        IEcsInitSystem, 
-        IEcsRunSystem,
+        IProtoInitSystem, 
+        IProtoRunSystem,
         IEcsDestroySystem
     {
         private ProtoWorld _world;
         private IEcsSystem _system;
-        private IEcsRunSystem _runSystem;
+        private IProtoRunSystem _runSystem;
         private IEcsDestroySystem _destroySystem;
-        private IEcsInitSystem _initSystem;
+        private IProtoInitSystem _initSystem;
         private string _systemName;
         private string _profileTag;
         private ProfilerMarker _marker;
@@ -39,9 +39,9 @@
         {
             _system = system;
             
-            _runSystem = system as IEcsRunSystem;
+            _runSystem = system as IProtoRunSystem;
             _destroySystem = system as IEcsDestroySystem;
-            _initSystem = system as IEcsInitSystem;
+            _initSystem = system as IProtoInitSystem;
             
             _systemName = system.GetType().GetFormattedName();
             _profileTag = $"ECS.RUN.{_systemName}";

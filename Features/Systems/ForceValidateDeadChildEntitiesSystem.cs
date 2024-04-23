@@ -19,7 +19,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class ForceValidateDeadChildEntitiesSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class ForceValidateDeadChildEntitiesSystem : IProtoRunSystem,IProtoInitSystem
     {
         private ProtoWorld _world;
         

@@ -19,7 +19,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class KillMeNextTimeHandleSystem : IEcsInitSystem, IEcsRunSystem
+    public class KillMeNextTimeHandleSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

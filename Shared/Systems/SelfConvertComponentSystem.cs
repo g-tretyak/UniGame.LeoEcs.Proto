@@ -16,7 +16,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class SelfConvertComponentSystem<TTrigger,TTarget> : IEcsInitSystem, IEcsRunSystem
+    public class SelfConvertComponentSystem<TTrigger,TTarget> : IProtoInitSystem, IProtoRunSystem
         where TTrigger : struct
         where TTarget : struct
     {

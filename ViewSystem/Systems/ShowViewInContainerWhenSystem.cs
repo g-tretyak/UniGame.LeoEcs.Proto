@@ -23,7 +23,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class ShowViewInContainerWhenSystem<TEvent,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowViewInContainerWhenSystem<TEvent,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent : struct
         where TView : IView
     {

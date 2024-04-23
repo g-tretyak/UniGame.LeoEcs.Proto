@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Shared.Extensions;
     using UniModules.UniCore.Runtime.ReflectionUtils;

@@ -26,7 +26,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class RegisterNewViewLayoutSystem : IEcsInitSystem, IEcsRunSystem
+    public class RegisterNewViewLayoutSystem : IProtoInitSystem, IProtoRunSystem
     {
         private IGameViewSystem _viewSystem;
         private ProtoWorld _world;

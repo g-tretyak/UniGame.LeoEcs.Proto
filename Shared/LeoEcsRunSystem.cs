@@ -4,13 +4,14 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime
     using System.Runtime.CompilerServices;
     using Abstract;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UnityEngine;
 
     /// <summary>
     /// Leo Ecs Run System With runtime Toggle.
     /// </summary>
     [Serializable]
-    public abstract class LeoEcsRunSystem : ILeoEcsSystem, IEcsRunSystem
+    public abstract class LeoEcsRunSystem : ILeoEcsSystem, IProtoRunSystem
     {
         /// <summary>
         /// Is ecs system active.

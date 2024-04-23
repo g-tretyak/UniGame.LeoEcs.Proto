@@ -24,7 +24,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class CreateViewSystem : IEcsRunSystem,IEcsInitSystem
+    public class CreateViewSystem : IProtoRunSystem,IProtoInitSystem
     {
         private readonly IGameViewSystem _viewSystem;
         private readonly IContext _context;

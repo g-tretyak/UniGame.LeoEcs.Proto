@@ -20,7 +20,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class CreateViewInContainerSystem : IEcsInitSystem, IEcsRunSystem
+    public class CreateViewInContainerSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _requestFilter;

@@ -1,9 +1,9 @@
-﻿namespace UniGame.LeoEcs.Bootstrap.Runtime.Config
+﻿namespace UniGame.Ecs.Bootstrap.Runtime.Config
 {
     using System;
     using System.Collections.Generic;
-    using Abstract;
     using Cysharp.Threading.Tasks;
+    using LeoEcs.Bootstrap.Runtime.Abstract;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
 
@@ -16,7 +16,7 @@
 #endif
 
     [Serializable]
-    public class EmptyFeature : ILeoEcsSystemsGroup
+    public class EmptyFeature : IEcsSystemsGroup
     {
         public static readonly List<IEcsSystem> EmptySystems = new();
         public const string EcsEmptyFeatureName = "Empty Feature";

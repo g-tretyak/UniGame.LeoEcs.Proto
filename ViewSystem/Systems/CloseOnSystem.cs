@@ -21,7 +21,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class CloseOnSystem<TEvent,TViewModel> : IEcsInitSystem, IEcsRunSystem
+    public class CloseOnSystem<TEvent,TViewModel> : IProtoInitSystem, IProtoRunSystem
         where TEvent : struct
         where TViewModel : IViewModel
     {

@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class ProcessKillRequestSystem : IEcsRunSystem, IEcsInitSystem
+    public sealed class ProcessKillRequestSystem : IProtoRunSystem, IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

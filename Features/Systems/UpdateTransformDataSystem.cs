@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class UpdateTransformDataSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class UpdateTransformDataSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

@@ -5,7 +5,7 @@ namespace UniGame.LeoEcsLite.LeoEcs.Shared.Systems
     using Leopotam.EcsProto.QoL;
     using UniGame.LeoEcs.Shared.Extensions;
 
-    public class SingleValueSystem<TComponent> : IEcsInitSystem,IEcsRunSystem 
+    public class SingleValueSystem<TComponent> : IProtoInitSystem,IProtoRunSystem 
         where TComponent : struct
     {
         private EcsFilter _filter;

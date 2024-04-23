@@ -6,6 +6,10 @@
     using Timer.Components.Requests;
     using Leopotam.EcsLite;
 
+#if ENABLE_IL2CPP
+    [Il2CppSetOption (Option.NullChecks, false)]
+    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
     [Serializable]
     public class TimerAspect : EcsAspect
     {

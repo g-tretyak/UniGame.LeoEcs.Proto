@@ -15,7 +15,7 @@
     using Sirenix.OdinInspector;
 #endif
     
-    [CreateAssetMenu(menuName = "UniGame/LeoEcs/Converter/GameObject Converter",fileName = "GameObject Converter")]
+    [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Converter/GameObject Converter",fileName = "GameObject Converter")]
     public class GameObjectAssetConverter : ScriptableObject,IEcsComponentConverter
     {
 #if  ODIN_INSPECTOR || TRI_INSPECTOR

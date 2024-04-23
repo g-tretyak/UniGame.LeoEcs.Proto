@@ -5,7 +5,6 @@
     using Abstract;
     using Attributes;
     using Core.Runtime;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Shared.Extensions;
     using UniModules.UniCore.Runtime.ReflectionUtils;

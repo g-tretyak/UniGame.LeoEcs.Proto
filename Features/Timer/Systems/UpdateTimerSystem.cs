@@ -22,7 +22,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class UpdateTimerSystem : IEcsInitSystem, IEcsRunSystem
+    public class UpdateTimerSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

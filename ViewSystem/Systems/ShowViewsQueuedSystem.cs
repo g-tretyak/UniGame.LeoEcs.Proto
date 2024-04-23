@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class ShowViewsQueuedSystem : IEcsInitSystem, IEcsRunSystem
+    public class ShowViewsQueuedSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _viewFilter;

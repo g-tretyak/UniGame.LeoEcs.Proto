@@ -1,7 +1,6 @@
 ﻿namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
 {
     using System;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
 
     public interface ISystemsPlugin : IDisposable

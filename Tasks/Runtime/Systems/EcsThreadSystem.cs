@@ -2,7 +2,7 @@
 {
     using Leopotam.EcsLite;
 
-    public abstract class EcsThreadSystem<TThread, T1> : EcsThreadSystemBase, IEcsRunSystem
+    public abstract class EcsThreadSystem<TThread, T1> : EcsThreadSystemBase, IProtoRunSystem
         where TThread : struct, IEcsThread<T1>
         where T1 : struct
     {
@@ -39,7 +39,7 @@
         }
     }
 
-    public abstract class EcsThreadSystem<TThread, T1, T2> : EcsThreadSystemBase, IEcsRunSystem
+    public abstract class EcsThreadSystem<TThread, T1, T2> : EcsThreadSystemBase, IProtoRunSystem
         where TThread : struct, IEcsThread<T1, T2>
         where T1 : struct
         where T2 : struct
@@ -80,7 +80,7 @@
         }
     }
 
-    public abstract class EcsThreadSystem<TThread, T1, T2, T3> : EcsThreadSystemBase, IEcsRunSystem
+    public abstract class EcsThreadSystem<TThread, T1, T2, T3> : EcsThreadSystemBase, IProtoRunSystem
         where TThread : struct, IEcsThread<T1, T2, T3>
         where T1 : struct
         where T2 : struct
@@ -125,7 +125,7 @@
         }
     }
 
-    public abstract class EcsThreadSystem<TThread, T1, T2, T3, T4> : EcsThreadSystemBase, IEcsRunSystem
+    public abstract class EcsThreadSystem<TThread, T1, T2, T3, T4> : EcsThreadSystemBase, IProtoRunSystem
         where TThread : struct, IEcsThread<T1, T2, T3, T4>
         where T1 : struct
         where T2 : struct

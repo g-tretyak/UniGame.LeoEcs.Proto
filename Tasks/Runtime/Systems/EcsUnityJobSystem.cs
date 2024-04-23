@@ -203,7 +203,7 @@
         }
     }
 
-    public abstract class EcsUnityJobSystemBase : IEcsRunSystem
+    public abstract class EcsUnityJobSystemBase : IProtoRunSystem
     {
         public abstract void Run();
         protected abstract int GetChunkSize(IProtoSystems systems);

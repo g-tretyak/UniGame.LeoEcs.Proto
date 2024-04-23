@@ -20,7 +20,7 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ViewServiceInitSystem : IEcsInitSystem
+    public class ViewServiceInitSystem : IProtoInitSystem
     {
         private readonly IGameViewSystem _gameViewSystem;
         private ProtoWorld _world;

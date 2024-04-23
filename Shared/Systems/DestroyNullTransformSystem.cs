@@ -18,7 +18,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class DestroyNullTransformSystem : IEcsInitSystem, IEcsRunSystem
+    public class DestroyNullTransformSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _transformFilter;

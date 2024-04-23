@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class InitializeViewIdComponentSystem : IEcsInitSystem, IEcsRunSystem
+    public class InitializeViewIdComponentSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

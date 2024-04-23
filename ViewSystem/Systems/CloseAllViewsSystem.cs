@@ -13,7 +13,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class CloseAllViewsSystem : IEcsInitSystem,IEcsRunSystem
+    public class CloseAllViewsSystem : IProtoInitSystem,IProtoRunSystem
     {
         private readonly IGameViewSystem _gameViewSystem;
         private ProtoWorld _world;

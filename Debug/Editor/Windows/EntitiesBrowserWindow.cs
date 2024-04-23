@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.Debug.Editor
 
         private static Color buttonColor = new Color(0.2f, 1, 0.6f);
 
-        [MenuItem("UniGame/LeoEcs/Entities Browser")]
+        [MenuItem("UniGame/Ecs Proto/Entities Browser")]
         [MenuItem("Game/Editors/Entities Browser")]
         public static EntitiesBrowserWindow OpenWindow()
         {

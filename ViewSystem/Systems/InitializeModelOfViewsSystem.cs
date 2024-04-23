@@ -14,7 +14,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class InitializeModelOfViewsSystem : IEcsInitSystem,IEcsRunSystem
+    public class InitializeModelOfViewsSystem : IProtoInitSystem,IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

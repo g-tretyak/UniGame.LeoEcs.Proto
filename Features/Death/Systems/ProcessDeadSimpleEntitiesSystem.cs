@@ -6,7 +6,7 @@
     using UniGame.LeoEcs.Shared.Components;
     using UniGame.LeoEcs.Shared.Extensions;
 
-    public sealed class ProcessDeadSimpleEntitiesSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class ProcessDeadSimpleEntitiesSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

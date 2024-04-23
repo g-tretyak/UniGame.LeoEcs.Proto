@@ -16,7 +16,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class UpdateRenderStatusSystem : IEcsInitSystem, IEcsRunSystem
+    public class UpdateRenderStatusSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

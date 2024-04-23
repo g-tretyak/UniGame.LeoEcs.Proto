@@ -18,7 +18,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class ShowQueuedViewOnSystem<TEvent,TView1,TView2> : IEcsInitSystem, IEcsRunSystem where TEvent : struct
+    public class ShowQueuedViewOnSystem<TEvent,TView1,TView2> : IProtoInitSystem, IProtoRunSystem where TEvent : struct
     {
         private readonly EcsViewData _viewData;
         private ProtoWorld _world;

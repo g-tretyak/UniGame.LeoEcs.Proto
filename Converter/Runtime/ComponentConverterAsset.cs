@@ -8,7 +8,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 {
     using Leopotam.EcsProto;
 
-    [CreateAssetMenu(menuName = "UniGame/LeoEcs/Converter/Simple Component Converter",fileName = "Simple Component Converter")]
+    [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Converter/Simple Component Converter",fileName = "Simple Component Converter")]
     public abstract class ComponentConverterAsset : ScriptableObject, IEcsComponentConverter
     {
         public bool enabled = true;

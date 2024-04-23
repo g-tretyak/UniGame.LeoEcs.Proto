@@ -15,7 +15,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class MarkViewAsInitializedSystem : IEcsRunSystem,IEcsInitSystem
+    public class MarkViewAsInitializedSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

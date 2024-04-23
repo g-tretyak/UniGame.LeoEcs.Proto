@@ -7,7 +7,7 @@
     using UniGame.LeoEcs.Shared.Extensions;
     using Object = UnityEngine.Object;
     
-    public sealed class ProcessDeadTransformEntitiesSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class ProcessDeadTransformEntitiesSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

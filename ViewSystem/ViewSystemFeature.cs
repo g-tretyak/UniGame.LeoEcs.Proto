@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.ViewSystem
     using UniGame.LeoEcs.Bootstrap.Runtime.Config;
     using UnityEngine;
     
-    [CreateAssetMenu(menuName = "UniGame/LeoEcs/Features/Views Feature", fileName = "ECS Views Feature")]
+    [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Features/Views Feature", fileName = "ECS Views Feature")]
     public class ViewSystemFeature : LeoEcsFeatureGroupAsset
     {
         private EcsViewTools _ecsViewTools;

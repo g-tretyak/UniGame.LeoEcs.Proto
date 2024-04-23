@@ -21,7 +21,7 @@
 #endif
     
     [Serializable]
-    [CreateAssetMenu(menuName = "UniGame/LeoEcs/Converter/Entity Converter",fileName = "Entity Converter")]
+    [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Converter/Entity Converter",fileName = "Entity Converter")]
     public class EcsEntityConverter : LifetimeScriptableObject
     {
         #region inspector

@@ -20,7 +20,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowSingleLayoutViewWhen<TEvent,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowSingleLayoutViewWhen<TEvent,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent : struct
         where TView : IView
     {
@@ -65,7 +65,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowLayoutViewWhenSystem<TEvent,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowLayoutViewWhenSystem<TEvent,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent : struct
         where TView : IView
     {
@@ -107,7 +107,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowLayoutViewWhenSystem<TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowLayoutViewWhenSystem<TView> : IProtoInitSystem, IProtoRunSystem
         where TView : IView
     {
         private string _viewLayoutType;
@@ -147,7 +147,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowLayoutViewWhenSystem<TEvent1,TEvent2,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowLayoutViewWhenSystem<TEvent1,TEvent2,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent1 : struct
         where TEvent2 : struct
         where TView : IView

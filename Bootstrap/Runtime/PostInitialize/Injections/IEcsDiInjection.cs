@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
 
     public interface IEcsDiInjection

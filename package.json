@@ -1,5 +1,5 @@
 {
-  "name": "com.unigame.leoecs.proto.tool",
+  "name": "com.unigame.ecs.proto.tool",
   "author": "UniGame LeoEcs Proto Tool",
   "displayName": "UniGame LeoEcs Proto Tool",
   "description": "Tooling for LeoEcs Proto",

@@ -69,7 +69,7 @@
     }
     
     
-    public interface IEcsJobDataParallelFor<TJob> : IEcsRunSystem,IEcsInitSystem
+    public interface IEcsJobDataParallelFor<TJob> : IProtoRunSystem,IProtoInitSystem
         where TJob : struct, IEcsDataJobParallelFor
     {
         ref JobHandle Schedule(IProtoSystems systems,ref JobHandle dependsOn);

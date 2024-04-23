@@ -7,7 +7,7 @@ namespace Game.Ecs.Time.Systems
     using UniGame.LeoEcs.Shared.Extensions;
     using UnityEngine;
 
-    public class UpdateEntityTimeSystem : IEcsRunSystem,IEcsInitSystem
+    public class UpdateEntityTimeSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

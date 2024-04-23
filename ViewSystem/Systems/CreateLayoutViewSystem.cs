@@ -12,7 +12,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class CreateLayoutViewSystem : IEcsRunSystem,IEcsInitSystem
+    public class CreateLayoutViewSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _createFilter;
         private ProtoWorld _world;

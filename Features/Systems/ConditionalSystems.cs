@@ -20,15 +20,15 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class ConditionalSystems : IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem
+    public class ConditionalSystems : IProtoInitSystem, IProtoRunSystem, IEcsDestroySystem
     {
         private ProtoWorld _world;
         private bool _takeOnce;
         private bool _valueUpdated;
         private bool _value;
         
-        private List<IEcsRunSystem> _runSystems = new();
-        private List<IEcsInitSystem> _initSystems = new();
+        private List<IProtoRunSystem> _runSystems = new();
+        private List<IProtoInitSystem> _initSystems = new();
         private List<IEcsDestroySystem> _destroySystems = new();
 
         public ConditionalSystems(IEnumerable<IEcsSystem> systems,IProtoSystems group,bool takeOnce = false)
@@ -37,9 +37,9 @@
             foreach (var ecsSystem in systems)
             {
                 group.Add(ecsSystem);
-                if (ecsSystem is IEcsRunSystem runSystem)
+                if (ecsSystem is IProtoRunSystem runSystem)
                     _runSystems.Add(runSystem);
-                if (ecsSystem is IEcsInitSystem initSystem)
+                if (ecsSystem is IProtoInitSystem initSystem)
                     _initSystems.Add(initSystem);
                 if (ecsSystem is IEcsDestroySystem destroySystem)
                     _destroySystems.Add(destroySystem);

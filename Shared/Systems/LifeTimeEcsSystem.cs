@@ -6,7 +6,7 @@ namespace UniGame.LeoEcs.Shared.Systems
 {
     using Leopotam.EcsProto;
 
-    public class LifeTimeEcsSystem : IEcsInitSystem,IEcsDestroySystem,ILifeTimeContext
+    public class LifeTimeEcsSystem : IProtoInitSystem,IEcsDestroySystem,ILifeTimeContext
     {
         private LifeTimeDefinition _lifeTime = new LifeTimeDefinition();
 

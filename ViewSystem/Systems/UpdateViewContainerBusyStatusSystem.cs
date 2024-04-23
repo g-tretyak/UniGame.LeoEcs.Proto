@@ -19,7 +19,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class UpdateViewContainerBusyStatusSystem : IEcsInitSystem, IEcsRunSystem
+    public class UpdateViewContainerBusyStatusSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _containerFilter;

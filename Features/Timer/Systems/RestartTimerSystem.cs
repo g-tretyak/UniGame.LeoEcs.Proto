@@ -22,7 +22,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class RestartTimerSystem : IEcsInitSystem, IEcsRunSystem
+    public class RestartTimerSystem : IProtoInitSystem, IProtoRunSystem
     {
         private ProtoWorld _world;
         private EcsFilter _filter;

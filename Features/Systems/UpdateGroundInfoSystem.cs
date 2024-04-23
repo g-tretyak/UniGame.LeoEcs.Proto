@@ -9,7 +9,7 @@
     using UniGame.LeoEcs.Shared.Extensions;
     using UnityEngine;
 
-    public sealed class UpdateGroundInfoSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class UpdateGroundInfoSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

@@ -17,7 +17,7 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class UpdateViewOrderSystem : IEcsInitSystem,IEcsRunSystem
+    public class UpdateViewOrderSystem : IProtoInitSystem,IProtoRunSystem
     {
         private ViewAspect _viewAspect;
         private EcsFilter _viewFilter;

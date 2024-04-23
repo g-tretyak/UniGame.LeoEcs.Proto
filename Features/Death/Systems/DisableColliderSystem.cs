@@ -6,7 +6,7 @@
     using UniGame.LeoEcs.Shared.Components;
     using UniGame.LeoEcs.Shared.Extensions;
 
-    public sealed class DisableColliderSystem : IEcsRunSystem,IEcsInitSystem
+    public sealed class DisableColliderSystem : IProtoRunSystem,IProtoInitSystem
     {
         private EcsFilter _filter;
         private ProtoWorld _world;

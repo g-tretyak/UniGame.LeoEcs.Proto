@@ -13,7 +13,7 @@
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     [Serializable]
-    public class FireOnSystem<TFilter,TComponent> : IEcsInitSystem, IEcsRunSystem
+    public class FireOnSystem<TFilter,TComponent> : IProtoInitSystem, IProtoRunSystem
         where TFilter : struct
         where TComponent : struct
     {
@@ -45,7 +45,7 @@
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     [Serializable]
-    public class FireOnSystem<TFilter1,TFilter2,TComponent> : IEcsInitSystem, IEcsRunSystem
+    public class FireOnSystem<TFilter1,TFilter2,TComponent> : IProtoInitSystem, IProtoRunSystem
         where TFilter1 : struct
         where TFilter2 : struct
         where TComponent : struct
@@ -82,7 +82,7 @@
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     [Serializable]
-    public class FireOnSystem<TFilter1,TFilter2,TFilter3,TComponent> : IEcsInitSystem, IEcsRunSystem
+    public class FireOnSystem<TFilter1,TFilter2,TFilter3,TComponent> : IProtoInitSystem, IProtoRunSystem
         where TFilter1 : struct
         where TFilter2 : struct
         where TFilter3 : struct

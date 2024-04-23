@@ -1,12 +1,9 @@
 ﻿namespace UniGame.LeoEcs.Bootstrap.Runtime.PostInitialize
 {
     using System;
-    using System.Collections.Generic;
     using Abstract;
     using Core.Runtime;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
-    using Systems;
 
     [Serializable]
     public class EcsProfileInitialize : IEcsPostInitializeAction

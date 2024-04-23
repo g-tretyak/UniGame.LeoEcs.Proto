@@ -1,17 +1,16 @@
 namespace Game.Ecs.Time
 {
+    using System;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Systems;
     using UniGame.LeoEcs.Bootstrap.Runtime;
     using UniGame.LeoEcs.Shared.Extensions;
-    using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Game/Feature/Game Time Feature", fileName = "Game Time Feature")]
-    public class GameTimeFeature : BaseLeoEcsFeature
+    [Serializable]
+    public class GameTimeFeature : EcsFeature
     {
-        public override UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        protected override UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             ecsSystems.Add(new UpdateEntityTimeSystem());
             return UniTask.CompletedTask;

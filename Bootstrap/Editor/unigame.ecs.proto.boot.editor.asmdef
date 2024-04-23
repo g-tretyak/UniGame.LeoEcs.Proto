@@ -1,0 +1,21 @@
+{
+    "name": "unigame.ecs.proto.boot.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:538ce37c1f5ea7440bb616e95507d01a",
+        "GUID:2796129a6c23eb84a8181f62bf7332f1",
+        "GUID:9f8e6b2872ac2ca4683e584b9ba21f29",
+        "GUID:8e4577c9194c10845984cf27eb974fd1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "LEO_ECS_PROTO_ENABLED"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

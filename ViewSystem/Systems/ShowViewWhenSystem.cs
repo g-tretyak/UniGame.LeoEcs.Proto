@@ -18,7 +18,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowViewWhenSystem<TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowViewWhenSystem<TView> : IProtoInitSystem, IProtoRunSystem
         where TView : IView
     {
         private ViewRequestData _data;
@@ -70,7 +70,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowViewWhenSystem<TEvent,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowViewWhenSystem<TEvent,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent : struct
         where TView : IView
     {
@@ -123,7 +123,7 @@
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
     [Serializable]
-    public class ShowViewWhenSystem<TEvent1,TEvent2,TView> : IEcsInitSystem, IEcsRunSystem
+    public class ShowViewWhenSystem<TEvent1,TEvent2,TView> : IProtoInitSystem, IProtoRunSystem
         where TEvent1 : struct
         where TEvent2 : struct
         where TView : IView
