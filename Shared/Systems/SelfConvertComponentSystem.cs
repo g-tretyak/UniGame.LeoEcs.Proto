@@ -22,7 +22,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _filter;
-        private EcsPool<TTarget> _targetPool;
+        private ProtoPool<TTarget> _targetPool;
 
         public void Init(IProtoSystems systems)
         {

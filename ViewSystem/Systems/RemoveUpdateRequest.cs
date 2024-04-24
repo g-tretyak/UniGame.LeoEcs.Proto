@@ -20,7 +20,7 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
         public EcsFilter _filter;
         public ProtoWorld _world;
 
-        public EcsPool<UpdateViewRequest> _updatePool;
+        public ProtoPool<UpdateViewRequest> _updatePool;
 
         public void Init(IProtoSystems systems)
         {

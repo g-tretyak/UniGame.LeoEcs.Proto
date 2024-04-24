@@ -1,22 +1,24 @@
 ﻿namespace UniGame.LeoEcs.Bootstrap.Runtime
 {
+    using System;
     using UniGame.Core.Runtime;
     using UniGame.UniNodes.GameFlow.Runtime;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using Abstract;
+    using Aspects;
     using Ecs.Bootstrap.Runtime.Config;
     using Converter.Runtime;
     using Core.Runtime.Extension;
     using Cysharp.Threading.Tasks;
-    using Game.Ecs.Core;
-    using LeoEcsLite.LeoEcs.Bootstrap.Runtime.Systems;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
-    using PostInitialize;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using UniCore.Runtime.ProfilerTools;
     using UniModules.UniCore.Runtime.DataFlow;
+    using UniModules.UniCore.Runtime.Utils;
     using Object = UnityEngine.Object;
 
     public class EcsService : GameService,IEcsService
@@ -24,52 +26,56 @@
         private IEcsSystemsConfig _config;
         private IEcsExecutorFactory _ecsExecutorFactory;
         private IEnumerable<ISystemsPlugin> _plugins;
-        private Dictionary<string, IProtoSystems> _systemsMap;
+        private Dictionary<string, EcsFeatureSystems> _systemsMap;
         private Dictionary<string, IEcsExecutor> _systemsExecutors;
         private IContext _context;
-
         private ProtoWorld _world;
+        
         private bool _isInitialized;
-        private bool _ownThisWorld;
         private float _featureTimeout;
 
-        private List<EcsFeature> _coreFeatures = new()
-        {
-            new CoreFeature()
-        };
-        
         private List<IEcsSystem> _lateSystems = new() {};
-
-        private List<IEcsPostInitializeAction> _initializePlugins = new() 
-        {
-            new EcsDiPostInitialize(),
-            new EcsProfileInitialize(),
-        };
 
         public ProtoWorld World => _world;
 
-        public EcsService(
-            IContext context,
-            ProtoWorld world, 
+        public EcsService(IContext context, 
             IEcsSystemsConfig config,
             IEcsExecutorFactory ecsExecutorFactory, 
             IEnumerable<ISystemsPlugin> plugins,
-            bool ownThisWorld,
             float featureTimeout)
         {
-            _systemsMap = new Dictionary<string,IProtoSystems>(8);
+            _systemsMap = new Dictionary<string,EcsFeatureSystems>(8);
             _systemsExecutors = new Dictionary<string, IEcsExecutor>(8);
 
             _context = context;
-            _world = world;
             _config = config;
             
             _ecsExecutorFactory = ecsExecutorFactory;
             _plugins = plugins;
-            _ownThisWorld = ownThisWorld;
             _featureTimeout = featureTimeout;
             
+            _world = CreateWorld(_config);
+            
             LifeTime.AddCleanUpAction(CleanUp);
+        }
+
+        public ProtoWorld CreateWorld(IEcsSystemsConfig config)
+        {
+            var worldConfig = config.WorldConfiguration.Create();
+            var aspectsData = config.AspectsData;
+            var worldAspect = new WorldAspect();
+
+            foreach (var aspect in aspectsData.aspects)   
+            {
+                if(!aspect.enabled)continue;
+                var aspectType = (Type)aspect.aspectType;
+                if(aspectType == null) continue;
+                var aspectInstance = aspectType.CreateWithDefaultConstructor() as IProtoAspect;
+                worldAspect.AddAspect(aspectInstance);
+            }
+            
+            var protoWorld = new ProtoWorld(worldAspect, worldConfig);
+            return protoWorld;
         }
         
         public void SetDefaultWorld(ProtoWorld world)
@@ -86,14 +92,34 @@
             await InitializeEcsService(_world);
 
             _isInitialized = true;
-
-            ApplySystemsPlugins(_world);
+            
+            var plugins = _config.Plugins
+                .Where(x => x.enabled && x.plugin!=null)
+                .Select(x => x.plugin)
+                .ToList();
+            
+            foreach (var plugin in plugins)
+            {
+                plugin.PreInit(_context);
+            }
+            
+            foreach (var systems in _systemsMap.Values)
+            {
+                foreach (var plugin in plugins)
+                {
+                    plugin.Init(systems);
+                }
+            }
             
             foreach (var systems in _systemsMap.Values)
             {
                 systems.Init();
             }
             
+            foreach (var plugin in plugins)
+            {
+                plugin.PostInit();
+            }
 #if DEBUG
             LogServiceTime("InitializeAsync",stopwatch);
 #endif
@@ -135,9 +161,7 @@
             _systemsMap.Clear();
             _systemsExecutors.Clear();
 
-            if (_ownThisWorld)
-                _world?.Destroy();
-            
+            _world?.Destroy();
             _world = null;
         }
         
@@ -150,39 +174,6 @@
             GameLog.Log($"ECS FEATURE SOURCE: LOAD {message} TIME = {elapsed} ms");
         }
 
-        private void ApplySystemsPlugins(ProtoWorld world)
-        {
-            var groupIds = new List<string>();
-            
-            foreach (var systems in _systemsMap)
-            {
-                groupIds.Add(systems.Key);
-            }
-            
-            foreach (var groupId in groupIds)
-            {
-                foreach (var plugin in _initializePlugins)
-                {
-                    var systemsSource = _systemsMap[groupId];
-                    var newSystems = plugin
-                        .Apply(systemsSource,_context);
-                    
-                    if (!newSystems.replace) continue;
-                    
-                    var systems = newSystems.value.Systems();
-                    var systemsGroup = CreateEcsSystems(groupId, world);
-                    var len = systems.Len();
-                    var data = systems.Data();
-                    
-                    for (var i = 0; i < len; i++)
-                    {
-                        var item = data[i];
-                        systemsGroup.AddSystem(item);
-                    }
-                }
-            }
-        }
-        
         private async UniTask InitializeEcsService(ProtoWorld world)
         {
             var groups = _config
@@ -214,13 +205,14 @@
                 
                 foreach (var map in _systemsMap)
                     systemsPlugin.Add(map.Value);
+                
                 systemsPlugin.Execute(world);
             }
         }
 
-        private IProtoSystems CreateEcsSystems(string groupId,ProtoWorld world)
+        private EcsFeatureSystems CreateEcsSystems(string groupId,ProtoWorld world)
         {
-            var systems = new ProtoSystems(world);
+            var systems = new EcsFeatureSystems(world);
             systems.AddService(_context);
                 
             _systemsMap[groupId] = systems;
@@ -233,12 +225,11 @@
             IReadOnlyList<ILeoEcsFeature> runnerFeatures)
         {
             if (!_systemsMap.TryGetValue(updateType, out var ecsSystems))
+            {
                 ecsSystems = CreateEcsSystems(updateType,world);
-
-            //initialize core features
-            foreach (var feature in _coreFeatures)
-                await feature.InitializeFeatureAsync(ecsSystems);
-
+                ecsSystems.AddModule(new AutoInjectModule());
+            }
+            
             var asyncFeatures = runnerFeatures
                 .Select(x => InitializeFeatureAsync(ecsSystems, x));
 
@@ -317,9 +308,4 @@
         }
     }
     
-    public struct EcsSystemsGroup
-    {
-        public string UpdateType;
-        public IProtoSystems Systems;
-    }
 }

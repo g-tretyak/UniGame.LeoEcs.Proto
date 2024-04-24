@@ -29,6 +29,7 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
                     updateType = EcsPlayerUpdateType.Update
                 }
             },
+            
             new EcsUpdateQueue()
             {
                 OrderId = "Fixed_Update",
@@ -37,6 +38,7 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
                     updateType = EcsPlayerUpdateType.FixedUpdate
                 }
             },
+            
             new EcsUpdateQueue()
             {
                 OrderId = "Late_Update",

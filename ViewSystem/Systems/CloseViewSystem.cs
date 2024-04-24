@@ -18,7 +18,7 @@
         private ProtoWorld _world;
 
         private EcsFilter _closeFilter;
-        private EcsPool<ViewComponent> _viewComponent;
+        private ProtoPool<ViewComponent> _viewComponent;
 
         public void Init(IProtoSystems systems)
         {

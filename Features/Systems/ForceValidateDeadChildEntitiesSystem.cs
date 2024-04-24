@@ -26,9 +26,9 @@
         private EcsFilter _requestFilter;
         private EcsFilter _filter;
 
-        private EcsPool<ValidateDeadChildEntitiesRequest> _validatePool;
-        private EcsPool<DestroySelfRequest> _destroyPool;
-        private EcsPool<OwnerComponent> _ownerPool;
+        private ProtoPool<ValidateDeadChildEntitiesRequest> _validatePool;
+        private ProtoPool<DestroySelfRequest> _destroyPool;
+        private ProtoPool<OwnerComponent> _ownerPool;
         
         private HashSet<ProtoEntity> _destroyedEntities = new();
         private HashSet<ProtoEntity> _bufferDestroyedEntities = new();

@@ -6,26 +6,42 @@
     using Attributes;
     using Core.Runtime;
     using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using UniModules.UniCore.Runtime.ReflectionUtils;
 
     [Serializable]
-    public class EcsDiPostInitialize : IEcsPostInitializeAction
+    public class EcsDiPlugin : IEcsServicePlugin
     {
         private Type _diAttributeType = typeof(ECSDIAttribute);
+        private Type _protoDiAttribute = typeof(DIAttribute);
         private List<IEcsDiInjection> _injections = null;
 
-        public EcsDiPostInitialize()
+        public EcsDiPlugin()
         {
             _injections = new List<IEcsDiInjection>()
             {
                 new EcsDiWorldInjection(),
                 new EcsDiPoolInjection(),
                 new EcsDiAspectInjection(),
+                new EcsDiItInjection(),
+                new EcsDiServicesInjection(),
             };
         }
 
-        public (IProtoSystems value, bool replace) Apply(IProtoSystems ecsSystems,IContext context)
+        public void PreInit(IContext context)
+        {
+            foreach (var injection in _injections)
+                injection.Initialize();
+        }
+
+        public void PostInit()
+        {
+            foreach (var injection in _injections)
+                injection.PostInject();
+        }
+
+        public void Init(EcsFeatureSystems ecsSystems)
         {
             var systems = ecsSystems.Systems();
             var len = systems.Len();
@@ -36,8 +52,6 @@
                 var system = data[i];
                 Apply(ecsSystems,system);
             }
-            
-            return (ecsSystems,false);
         }
         
         public void Apply(IProtoSystems ecsSystems,IProtoSystem system)

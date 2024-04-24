@@ -22,7 +22,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _transformFilter;
-        private EcsPool<TransformComponent> _transformPool;
+        private ProtoPool<TransformComponent> _transformPool;
 
         public void Init(IProtoSystems systems)
         {

@@ -32,9 +32,9 @@
         public EcsFilter _createFilter;
         public ProtoWorld _world;
 
-        private EcsPool<CreateViewRequest> _createViewPool;
-        private EcsPool<OwnerComponent> _ownerPool;
-        private EcsPool<ViewParentComponent> _parentPool;
+        private ProtoPool<CreateViewRequest> _createViewPool;
+        private ProtoPool<OwnerComponent> _ownerPool;
+        private ProtoPool<ViewParentComponent> _parentPool;
 
         public CreateViewSystem(IContext context,IGameViewSystem viewSystem)
         {

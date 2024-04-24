@@ -43,7 +43,7 @@
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsFilterEnumerator (EcsFilter it) {
             _it = it;
-            _it.Begin ();
+            _it.it.Begin ();
         }
 
         public ProtoEntity Current {
@@ -52,9 +52,9 @@
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public bool MoveNext () => _it.Next ();
+        public bool MoveNext () => _it.it.Next ();
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public void Dispose () => _it.End ();
+        public void Dispose () => _it.it.End ();
     }
 }

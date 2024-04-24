@@ -7,5 +7,9 @@
     public interface IEcsDiInjection
     {
         void ApplyInjection(IProtoSystems ecsSystems, FieldInfo field, object target, IReadOnlyList<IEcsDiInjection> injections);
+
+        void Initialize();
+
+        void PostInject();
     }
 }

@@ -1,14 +1,17 @@
 ﻿namespace UniGame.Ecs.Bootstrap.Runtime.Config
 {
+    using System;
     using Cysharp.Threading.Tasks;
     using System.Collections.Generic;
     using System.Diagnostics;
     using LeoEcs.Bootstrap.Runtime;
     using LeoEcs.Bootstrap.Runtime.Abstract;
+    using LeoEcs.Bootstrap.Runtime.PostInitialize;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using UniCore.Runtime.ProfilerTools;
     using UnityEngine;
+    using UnityEngine.Serialization;
 
 #if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
@@ -29,24 +32,25 @@
         [InlineProperty]
         [HideLabel]
 #endif
-        public EcsSystemsGroupConfiguration groupConfiguration = new EcsSystemsGroupConfiguration();
-
+        public EcsSystemsGroupConfiguration features = new EcsSystemsGroupConfiguration();
+           
+        
         #endregion
 
         #region public properties
 
-        public IReadOnlyList<IEcsSystem> EcsSystems => groupConfiguration.EcsSystems;
+        public IReadOnlyList<IEcsSystem> EcsSystems => features.EcsSystems;
         
         public void RegisterSystems(List<IEcsSystem> systems)
         {
             systems.AddRange(EcsSystems);
         }
 
-        public override string FeatureName => string.IsNullOrEmpty(groupConfiguration.FeatureName)
+        public override string FeatureName => string.IsNullOrEmpty(features.FeatureName)
             ? name
-            : groupConfiguration.FeatureName;
+            : features.FeatureName;
         
-        public override bool IsFeatureEnabled => groupConfiguration.IsFeatureEnabled;
+        public override bool IsFeatureEnabled => features.IsFeatureEnabled;
 
         public override bool ShowFeatureInfo => false;
 
@@ -65,7 +69,7 @@
             timer.Stop();
             GameLog.LogRuntime($"\tECS FEATURE SOURCE: SELF LOAD TIME {FeatureName} | {GetType().Name} = {elapsed} ms");
 #endif
-            await groupConfiguration.InitializeFeatureAsync(ecsSystems);
+            await features.InitializeFeatureAsync(ecsSystems);
             await OnPostInitializeFeatureAsync(ecsSystems);
             
 #if DEBUG
@@ -77,8 +81,8 @@
         {
             if (base.IsMatch(searchString)) return true;
 
-            return groupConfiguration != null && 
-                   groupConfiguration.IsMatch(searchString);
+            return features != null && 
+                   features.IsMatch(searchString);
         }
         
         protected virtual UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
@@ -96,9 +100,19 @@
 #endif
         private void OnInspectorInitialize()
         {
-            if (groupConfiguration != null && 
-                string.IsNullOrEmpty(groupConfiguration.FeatureName))
-                groupConfiguration.name = name;
+            if (features != null && 
+                string.IsNullOrEmpty(features.FeatureName))
+                features.name = name;
         }
+    }
+
+    [Serializable]
+    public class EcsPlugin
+    {
+        [FormerlySerializedAs("pluginName")]
+        public string name;
+        public bool enabled;
+        [SerializeReference]
+        public IEcsServicePlugin plugin;
     }
 }

@@ -23,11 +23,11 @@
         private EcsFilter _filter;
         private ProtoWorld _world;
 
-        private EcsPool<DestroyComponent> _deadPool;
-        private EcsPool<PoolingComponent> _poolingPool;
-        private EcsPool<DeadEvent> _deadEventPool;
-        private EcsPool<KillRequest> _killRequestPool;
-        private EcsPool<KillEvent> _killEventPool;
+        private ProtoPool<DestroyComponent> _deadPool;
+        private ProtoPool<PoolingComponent> _poolingPool;
+        private ProtoPool<DeadEvent> _deadEventPool;
+        private ProtoPool<KillRequest> _killRequestPool;
+        private ProtoPool<KillEvent> _killEventPool;
 
         public void Init(IProtoSystems systems)
         {

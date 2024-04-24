@@ -5,6 +5,7 @@
     using Timer.Components.Events;
     using Timer.Components.Requests;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
@@ -13,17 +14,17 @@
     [Serializable]
     public class TimerAspect : EcsAspect
     {
-        public EcsPool<CooldownComponent> Cooldown;
-        public EcsPool<CooldownStateComponent> State;
-        public EcsPool<CooldownActiveComponent> Active;
-        public EcsPool<CooldownCompleteComponent> Completed;
-        public EcsPool<CooldownRemainsTimeComponent> Remains;
-        public EcsPool<CooldownAutoRestartComponent> AutoRestart;
+        public ProtoPool<CooldownComponent> Cooldown;
+        public ProtoPool<CooldownStateComponent> State;
+        public ProtoPool<CooldownActiveComponent> Active;
+        public ProtoPool<CooldownCompleteComponent> Completed;
+        public ProtoPool<CooldownRemainsTimeComponent> Remains;
+        public ProtoPool<CooldownAutoRestartComponent> AutoRestart;
         
         //requests
-        public EcsPool<RestartCooldownSelfRequest> Restart;
+        public ProtoPool<RestartCooldownSelfRequest> Restart;
         
         //events
-        public EcsPool<CooldownFinishedSelfEvent> Finished;
+        public ProtoPool<CooldownFinishedSelfEvent> Finished;
     }
 }

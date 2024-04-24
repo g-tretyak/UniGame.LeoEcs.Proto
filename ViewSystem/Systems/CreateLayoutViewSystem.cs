@@ -17,8 +17,8 @@
         private EcsFilter _createFilter;
         private ProtoWorld _world;
 
-        private EcsPool<CreateLayoutViewRequest> _requestLayoutPool;
-        private EcsPool<CreateViewRequest> _requestPool;
+        private ProtoPool<CreateLayoutViewRequest> _requestLayoutPool;
+        private ProtoPool<CreateViewRequest> _requestPool;
 
         public void Init(IProtoSystems systems)
         {

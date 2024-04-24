@@ -24,8 +24,8 @@
         private EcsFilter _viewFilter;
         private EcsFilter _viewQueuedFilter;
         
-        private EcsPool<ShowQueuedRequest> _queuedPool;
-        private EcsPool<ViewIdComponent> _viewIdPool;
+        private ProtoPool<ShowQueuedRequest> _queuedPool;
+        private ProtoPool<ViewIdComponent> _viewIdPool;
         private IEcsPool _viewRequestPool;
 
         public void Init(IProtoSystems systems)

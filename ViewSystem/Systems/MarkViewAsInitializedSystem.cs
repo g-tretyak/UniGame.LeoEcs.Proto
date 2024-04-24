@@ -19,7 +19,7 @@
     {
         private EcsFilter _filter;
         private ProtoWorld _world;
-        private EcsPool<ViewInitializedComponent> _viewInitialized;
+        private ProtoPool<ViewInitializedComponent> _viewInitialized;
 
         public void Init(IProtoSystems systems)
         {

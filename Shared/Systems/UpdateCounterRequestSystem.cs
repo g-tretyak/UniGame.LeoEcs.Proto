@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.Shared.Systems
     {
         private EcsFilter _filter;
         private ProtoWorld _world;
-        private EcsPool<Component<TRequestType>> _pool;
+        private ProtoPool<CounterComponent<TRequestType>> _pool;
         private int _counterLimit;
         
         public UpdateCounterRequestSystem(int counterLimit = 1)
@@ -27,8 +27,8 @@ namespace UniGame.LeoEcs.Shared.Systems
         public void Init(IProtoSystems systems)
         {
             _world = systems.GetWorld();
-            _filter = _world.Filter<Component<TRequestType>>().End();
-            _pool = _world.GetPool<Component<TRequestType>>();
+            _filter = _world.Filter<CounterComponent<TRequestType>>().End();
+            _pool = _world.GetPool<CounterComponent<TRequestType>>();
         }
         
         public void Run()

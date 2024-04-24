@@ -10,7 +10,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _gameObjectFilter;
-        private EcsPool<GameObjectComponent> _gameObjectPool;
+        private ProtoPool<GameObjectComponent> _gameObjectPool;
 
         public void Initialize(ProtoWorld world)
         {

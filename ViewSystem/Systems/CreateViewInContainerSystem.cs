@@ -27,10 +27,10 @@
         private EcsFilter _allContainersFilter;
         private EcsFilter _freeContainersFilter;
         
-        private EcsPool<CreateViewInContainerRequest> _createViewInContainerRequestPool;
-        private EcsPool<ViewContainerBusyComponent> _busyContainerPool;
-        private EcsPool<TransformComponent> _transformPool;
-        private EcsPool<ViewContainerComponent> _containerPool;
+        private ProtoPool<CreateViewInContainerRequest> _createViewInContainerRequestPool;
+        private ProtoPool<ViewContainerBusyComponent> _busyContainerPool;
+        private ProtoPool<TransformComponent> _transformPool;
+        private ProtoPool<ViewContainerComponent> _containerPool;
         
         public void Init(IProtoSystems systems)
         {

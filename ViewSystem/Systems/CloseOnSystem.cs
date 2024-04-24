@@ -29,7 +29,7 @@
         private EcsFilter _eventFilter;
         private EcsFilter _viewFilter;
 
-        private EcsPool<ViewComponent> _viewPool;
+        private ProtoPool<ViewComponent> _viewPool;
 
         public void Init(IProtoSystems systems)
         {

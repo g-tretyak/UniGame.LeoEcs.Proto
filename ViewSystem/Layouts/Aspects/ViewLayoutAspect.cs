@@ -7,11 +7,11 @@
 
     public class ViewLayoutAspect : EcsAspect
     {
-        public EcsPool<ViewLayoutComponent> Layout;
-        public EcsPool<ViewParentComponent> Parent;
+        public ProtoPool<ViewLayoutComponent> Layout;
+        public ProtoPool<ViewParentComponent> Parent;
         
         //operations
-        public EcsPool<RegisterViewLayoutSelfRequest> Register;
-        public EcsPool<RemoveViewLayoutSelfRequest> Remove;
+        public ProtoPool<RegisterViewLayoutSelfRequest> Register;
+        public ProtoPool<RemoveViewLayoutSelfRequest> Remove;
     }
 }

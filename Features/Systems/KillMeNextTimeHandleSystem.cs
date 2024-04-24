@@ -24,7 +24,7 @@
         private ProtoWorld _world;
         private EcsFilter _filter;
 
-        private EcsPool<KillMeNextTimeComponent> _pool;
+        private ProtoPool<KillMeNextTimeComponent> _pool;
 
         public void Init(IProtoSystems systems)
         {

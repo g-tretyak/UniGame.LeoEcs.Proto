@@ -31,7 +31,7 @@
         private ProtoWorld _world;
         private EcsFilter _eventFilter;
 
-        private EcsPool<ContainerViewMarker<TView>> _markerPool;
+        private ProtoPool<ContainerViewMarker<TView>> _markerPool;
 
         public ShowViewInContainerWhenSystem(ViewContainerSystemData data)
         {

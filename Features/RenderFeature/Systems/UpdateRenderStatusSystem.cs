@@ -20,9 +20,9 @@
     {
         private ProtoWorld _world;
         private EcsFilter _filter;
-        private EcsPool<RendererComponent> _renderPool;
-        private EcsPool<RendererEnabledComponent> _renderEnabledPool;
-        private EcsPool<RendererVisibleComponent> _renderVisiblePool;
+        private ProtoPool<RendererComponent> _renderPool;
+        private ProtoPool<RendererEnabledComponent> _renderEnabledPool;
+        private ProtoPool<RendererVisibleComponent> _renderVisiblePool;
 
         public void Init(IProtoSystems systems)
         {

@@ -3,12 +3,13 @@
     using System;
     using Leopotam.EcsLite;
     using Bootstrap.Runtime.Abstract;
+    using Leopotam.EcsProto;
 
     [Serializable]
     public class RendererAspect : EcsAspect
     {
-        public EcsPool<RendererComponent> Render;
-        public EcsPool<RendererEnabledComponent> Enabled;
-        public EcsPool<RendererVisibleComponent> Visible;
+        public ProtoPool<RendererComponent> Render;
+        public ProtoPool<RendererEnabledComponent> Enabled;
+        public ProtoPool<RendererVisibleComponent> Visible;
     }
 }

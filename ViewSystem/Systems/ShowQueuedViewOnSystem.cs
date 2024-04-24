@@ -23,7 +23,7 @@
         private readonly EcsViewData _viewData;
         private ProtoWorld _world;
         
-        private EcsPool<ShowQueuedRequest> _showRequestPool;
+        private ProtoPool<ShowQueuedRequest> _showRequestPool;
         private EcsFilter _filter;
 
         public ShowQueuedViewOnSystem(EcsViewData viewData)

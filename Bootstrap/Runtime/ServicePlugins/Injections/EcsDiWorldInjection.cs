@@ -12,6 +12,16 @@
         private Type _worldType = typeof(ProtoWorld);
         private Type _ecsSystems = typeof(IProtoSystems);
         
+        public void Initialize()
+        {
+            
+        }
+
+        public void PostInject()
+        {
+            
+        }
+        
         public void ApplyInjection(
             IProtoSystems ecsSystems, 
             FieldInfo field, 

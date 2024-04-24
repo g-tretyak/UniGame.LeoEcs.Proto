@@ -22,8 +22,8 @@
         private EcsFilter _filter;
         private ProtoWorld _world;
         
-        private EcsPool<OwnerComponent> _ownerPool;
-        private EcsPool<OwnerDestroyedEvent> _ownerDestroyedPool;
+        private ProtoPool<OwnerComponent> _ownerPool;
+        private ProtoPool<OwnerDestroyedEvent> _ownerDestroyedPool;
 
         public void Init(IProtoSystems systems)
         {

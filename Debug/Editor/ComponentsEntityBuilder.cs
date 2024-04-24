@@ -12,7 +12,7 @@
     public class ComponentsEntityBuilder : IEntityEditorViewBuilder
     {
         private ProtoWorld _world;
-        private EcsPool<NameComponent> _namePool;
+        private ProtoPool<NameComponent> _namePool;
 
         public void Initialize(ProtoWorld world)
         {

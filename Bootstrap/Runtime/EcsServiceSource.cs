@@ -71,18 +71,15 @@ using Sirenix.OdinInspector;
                 .systemsPlugins
                 .Select(x => x.Create())
                 .ToList();
-
-            var worldConfig = config.worldConfiguration.Create();
-            var protoWorld = new ProtoWorld(new WorldDefaultAspect(), worldConfig);
-            var world = (ProtoWorld)protoWorld;
             
-            context.Publish(world);
-            
-            var ecsService = new EcsService(context,world, 
+            var ecsService = new EcsService(context,
                 config,
                 this, 
                 plugins,
-                true,featureTimeout);
+                featureTimeout);
+
+            var world = ecsService.World;
+            context.Publish(ecsService.World);
             
             //start ecs service update
             await ecsService.InitializeAsync();

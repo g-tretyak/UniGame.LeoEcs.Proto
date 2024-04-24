@@ -23,7 +23,7 @@
         private ProtoWorld _world;
         private EcsFilter _filter;
 
-        private EcsPool<ViewEntityLifeTimeComponent> _lifeTimePool;
+        private ProtoPool<ViewEntityLifeTimeComponent> _lifeTimePool;
 
         public void Init(IProtoSystems systems)
         {

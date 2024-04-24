@@ -26,10 +26,10 @@
         private ProtoWorld _world;
         private EcsFilter _requestFilter;
         
-        private EcsPool<TransformComponent> _transformPool;
-        private EcsPool<GameObjectComponent> _gameObjectPool;
-        private EcsPool<DestroySelfRequest> _destroyRequestPool;
-        private EcsPool<PoolingComponent> _pooledPool;
+        private ProtoPool<TransformComponent> _transformPool;
+        private ProtoPool<GameObjectComponent> _gameObjectPool;
+        private ProtoPool<DestroySelfRequest> _destroyRequestPool;
+        private ProtoPool<PoolingComponent> _pooledPool;
 
         public void Init(IProtoSystems systems)
         {

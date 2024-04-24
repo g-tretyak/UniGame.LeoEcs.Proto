@@ -5,6 +5,10 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
 
     public interface IEcsSystemsConfig
     {
+        IReadOnlyList<EcsPlugin> Plugins { get; }
         IReadOnlyList<EcsConfigGroup> FeatureGroups { get; }
+        
+        public WorldConfiguration WorldConfiguration { get; }
+        public AspectsData AspectsData { get; }
     }
 }

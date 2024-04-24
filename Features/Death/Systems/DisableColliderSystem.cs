@@ -10,7 +10,7 @@
     {
         private EcsFilter _filter;
         private ProtoWorld _world;
-        private EcsPool<ColliderComponent> _colliderPool;
+        private ProtoPool<ColliderComponent> _colliderPool;
 
         public void Init(IProtoSystems systems)
         {

@@ -25,9 +25,9 @@
         private EcsFilter _containerFilter;
         private EcsFilter _parentingViewFilter;
 
-        private EcsPool<TransformComponent> _transformPool;
-        private EcsPool<ViewParentComponent> _parentPool;
-        private EcsPool<ViewContainerBusyComponent> _busyPool;
+        private ProtoPool<TransformComponent> _transformPool;
+        private ProtoPool<ViewParentComponent> _parentPool;
+        private ProtoPool<ViewContainerBusyComponent> _busyPool;
 
         public void Init(IProtoSystems systems)
         {

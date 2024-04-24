@@ -28,11 +28,11 @@
         private EcsFilter _eventFilter;
         
 
-        private EcsPool<DeadEvent> _deadEventPool;
-        private EcsPool<TransformComponent> _transformPool;
-        private EcsPool<PoolingComponent> _pooledPool;
-        private EcsPool<DontKillComponent> _dontKillPool;
-        private EcsPool<GameObjectComponent> _gameObjectPool;
+        private ProtoPool<DeadEvent> _deadEventPool;
+        private ProtoPool<TransformComponent> _transformPool;
+        private ProtoPool<PoolingComponent> _pooledPool;
+        private ProtoPool<DontKillComponent> _dontKillPool;
+        private ProtoPool<GameObjectComponent> _gameObjectPool;
 
         public void Init(IProtoSystems systems)
         {

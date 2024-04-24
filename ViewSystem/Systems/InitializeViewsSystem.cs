@@ -24,9 +24,9 @@
         private ProtoWorld _world;
         private EcsFilter _filter;
         
-        private EcsPool<ViewInitializedComponent> _viewInitializedPool;
-        private EcsPool<ViewComponent> _viewComponentPool;
-        private EcsPool<ViewModelComponent> _viewModelPool;
+        private ProtoPool<ViewInitializedComponent> _viewInitializedPool;
+        private ProtoPool<ViewComponent> _viewComponentPool;
+        private ProtoPool<ViewModelComponent> _viewModelPool;
 
         public InitializeViewsSystem(IEcsViewTools viewTools)
         {

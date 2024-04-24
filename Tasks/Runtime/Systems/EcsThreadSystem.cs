@@ -7,7 +7,7 @@
         where T1 : struct
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
+        ProtoPool<T1> _pool1;
         TThread _thread;
         ThreadWorkerHandler _worker;
 
@@ -45,8 +45,8 @@
         where T2 : struct
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
         TThread _thread;
         ThreadWorkerHandler _worker;
 
@@ -87,9 +87,9 @@
         where T3 : struct
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
-        EcsPool<T3> _pool3;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
+        ProtoPool<T3> _pool3;
         TThread _thread;
         ThreadWorkerHandler _worker;
 
@@ -133,10 +133,10 @@
         where T4 : struct
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
-        EcsPool<T3> _pool3;
-        EcsPool<T4> _pool4;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
+        ProtoPool<T3> _pool3;
+        ProtoPool<T4> _pool4;
         TThread _thread;
         ThreadWorkerHandler _worker;
 

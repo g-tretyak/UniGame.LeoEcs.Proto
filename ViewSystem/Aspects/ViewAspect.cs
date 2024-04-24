@@ -12,19 +12,19 @@
     [Serializable]
     public class ViewAspect : EcsAspect
     {
-        public EcsPool<ViewComponent> View;
-        public EcsPool<ViewModelComponent> Model;
+        public ProtoPool<ViewComponent> View;
+        public ProtoPool<ViewModelComponent> Model;
         
-        public EcsPool<ViewStatusComponent> Status;
-        public EcsPool<ViewOrderComponent> Order;
+        public ProtoPool<ViewStatusComponent> Status;
+        public ProtoPool<ViewOrderComponent> Order;
         
-        public EcsPool<TransformComponent> Transform;
+        public ProtoPool<TransformComponent> Transform;
         
         //events
-        public EcsPool<ViewStatusSelfEvent> StatusChanged;
+        public ProtoPool<ViewStatusSelfEvent> StatusChanged;
         
         //requests
-        public EcsPool<CreateLayoutViewRequest> CreateLayoutView;
-        public EcsPool<CloseViewSelfRequest> CloseView;
+        public ProtoPool<CreateLayoutViewRequest> CreateLayoutView;
+        public ProtoPool<CloseViewSelfRequest> CloseView;
     }
 }

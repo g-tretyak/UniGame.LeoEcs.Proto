@@ -21,7 +21,7 @@
     {
         private EcsFilter _filter;
         private ProtoWorld _world;
-        private EcsPool<KillRequest> _killPool;
+        private ProtoPool<KillRequest> _killPool;
 
         public void Init(IProtoSystems systems)
         {

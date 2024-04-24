@@ -19,7 +19,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _filter;
-        private EcsPool<TComponent> _pool;
+        private ProtoPool<TComponent> _pool;
 
         public void Init(IProtoSystems systems)
         {
@@ -52,7 +52,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _filter;
-        private EcsPool<TComponent> _pool;
+        private ProtoPool<TComponent> _pool;
 
         public void Init(IProtoSystems systems)
         {
@@ -90,7 +90,7 @@
     {
         private ProtoWorld _world;
         private EcsFilter _filter;
-        private EcsPool<TComponent> _pool;
+        private ProtoPool<TComponent> _pool;
 
         public void Init(IProtoSystems systems)
         {

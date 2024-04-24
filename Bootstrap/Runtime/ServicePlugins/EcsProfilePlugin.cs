@@ -3,15 +3,13 @@
     using System;
     using Abstract;
     using Core.Runtime;
-    using Leopotam.EcsProto;
 
     [Serializable]
-    public class EcsProfileInitialize : IEcsPostInitializeAction
+    public class EcsProfilePlugin : IEcsServicePlugin
     {
-        public (IProtoSystems value, bool replace) Apply(IProtoSystems ecsSystems,IContext context)
+        public void Init(EcsFeatureSystems ecsSystems)
         {
 #if ENABLE_ECS_DEBUG
-            
             var profileSystems = new List<EcsProfileSystem>();
             var systems = ecsSystems.GetAllSystems();
             
@@ -24,10 +22,15 @@
             
             systems.Clear();
             systems.AddRange(profileSystems);
-            
-            return (ecsSystems, true);
 #endif
-            return (ecsSystems, false);
+        }
+        
+        public void PreInit(IContext context)
+        {
+        }
+
+        public void PostInit()
+        {
         }
     }
 }

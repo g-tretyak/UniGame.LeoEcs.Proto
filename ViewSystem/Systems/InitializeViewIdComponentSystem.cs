@@ -23,8 +23,8 @@
         private ProtoWorld _world;
         private EcsFilter _filter;
         
-        private EcsPool<ViewComponent> _viewComponentPool;
-        private EcsPool<ViewIdComponent> _viewIdPool;
+        private ProtoPool<ViewComponent> _viewComponentPool;
+        private ProtoPool<ViewIdComponent> _viewIdPool;
 
         public void Init(IProtoSystems systems)
         {

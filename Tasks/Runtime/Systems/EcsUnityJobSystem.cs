@@ -11,7 +11,7 @@
         where T1 : unmanaged
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
+        ProtoPool<T1> _pool1;
 
         public override void Run()
         {
@@ -50,8 +50,8 @@
         where T2 : unmanaged
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
 
         public override void Run()
         {
@@ -96,9 +96,9 @@
         where T3 : unmanaged
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
-        EcsPool<T3> _pool3;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
+        ProtoPool<T3> _pool3;
 
         public override void Run()
         {
@@ -150,10 +150,10 @@
         where T4 : unmanaged
     {
         EcsFilter _filter;
-        EcsPool<T1> _pool1;
-        EcsPool<T2> _pool2;
-        EcsPool<T3> _pool3;
-        EcsPool<T4> _pool4;
+        ProtoPool<T1> _pool1;
+        ProtoPool<T2> _pool2;
+        ProtoPool<T3> _pool3;
+        ProtoPool<T4> _pool4;
 
         public override void Run()
         {
