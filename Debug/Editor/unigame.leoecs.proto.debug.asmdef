@@ -23,7 +23,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "LEO_ECS_PROTO_ENABLED1",
+        "LEO_ECS_PROTO_ENABLED",
         "ODIN_INSPECTOR"
     ],
     "versionDefines": [
