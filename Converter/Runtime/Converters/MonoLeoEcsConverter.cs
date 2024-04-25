@@ -63,7 +63,7 @@
 
             OnApply(gameObject, world, entity);
 
-            Entity = world.PackEntity(entity);
+            Entity = world.PackedEntity(entity);
             World = world;
         }
         

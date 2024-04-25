@@ -18,7 +18,7 @@
             if(parentEntity<0) return;
             
             ref var parentEntityComponent = ref world.GetOrAddComponent<ParentEntityComponent>(entity);
-            parentEntityComponent.Value = world.PackEntity(parentEntity);
+            parentEntityComponent.Value = world.PackedEntity(parentEntity);
         }
     }
 }

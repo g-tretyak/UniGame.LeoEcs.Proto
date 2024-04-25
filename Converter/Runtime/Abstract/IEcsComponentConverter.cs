@@ -16,6 +16,6 @@
     {
         public string Name { get; }
         
-        void Apply(ProtoWorld world, int entity);
+        void Apply(ProtoWorld world, ProtoEntity entity);
     }
 }

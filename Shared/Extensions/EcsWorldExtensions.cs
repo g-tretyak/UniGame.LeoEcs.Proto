@@ -134,6 +134,17 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void PackAll(this ProtoWorld world,List<ProtoPackedEntity> container, IEnumerable<ProtoEntity> entities)
+        {
+            foreach (var entity in entities)
+                container.Add(world.PackEntity(entity));
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PackAll(this ProtoWorld world,List<ProtoPackedEntity> container, IEnumerable<int> entities)
         {
             foreach (var entity in entities)

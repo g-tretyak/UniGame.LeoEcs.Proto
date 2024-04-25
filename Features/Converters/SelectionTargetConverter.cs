@@ -1,6 +1,5 @@
 using System;
 using Game.Ecs.Core.Components;
-using Leopotam.EcsLite;
 using UniGame.LeoEcs.Converter.Runtime;
 
 namespace Game.Ecs.Core.Converters

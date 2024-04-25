@@ -163,7 +163,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             entity = ecsEntity;
             
             _world = world;
-            _packedEntity = world.PackEntity(ecsEntity);
+            _packedEntity = world.PackedEntity(ecsEntity);
             _state = EntityState.Created;
         }
 

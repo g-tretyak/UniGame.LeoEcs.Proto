@@ -141,7 +141,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             int entity)
         {
 #if UNITY_EDITOR
-            var packedEntity = world.PackEntity(entity);
+            var packedEntity = world.PackedEntity(entity);
             if (packedEntity.Unpack(world,out var _) == false)
             {
                 GameLog.LogError($"ENTITY {entity} IS DEAD: TRY TO CONVERT {gameObject} TO ENT {entity}",gameObject);
@@ -252,7 +252,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         {
             if (!world.IsAlive()) return;
             
-            var packed = world.PackEntity(entityId);
+            var packed = world.PackedEntity(entityId);
             if (!packed.Unpack(world, out var aliveEntity)) return;
 
             //world.AddComponent<InstantDestroyComponent>(aliveEntity);
@@ -265,7 +265,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             
             if (!world.IsAlive()) return;
             
-            var packed = world.PackEntity(entityId);
+            var packed = world.PackedEntity(entityId);
             if(packed.Unpack(world,out var aliveEntity))
                 world.DelEntity(aliveEntity);
         }

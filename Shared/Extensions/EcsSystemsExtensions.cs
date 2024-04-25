@@ -19,6 +19,22 @@ namespace UniGame.LeoEcs.Shared.Extensions
 #endif
     public static class LeoEcsExtensions
     {
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TService GetService<TService>(this IProtoSystems systems) where TService : class
+        {
+            var services = systems.Services();
+            if(services.TryGetValue(typeof(TService),out var service))
+                return service as TService;
+            return default;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TService GetShared<TService>(this IProtoSystems systems) where TService : class
+        {
+            return GetService<TService>(systems);
+        }
+            
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IProtoSystems CreateOn<TTrigger,TTarget>(this IProtoSystems systems)
             where TTrigger : struct
@@ -26,16 +42,6 @@ namespace UniGame.LeoEcs.Shared.Extensions
         {
             systems.AddSystem(new SelfConvertComponentSystem<TTrigger,TTarget>());
             return systems;
-        }
-
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int First(this EcsFilter filter)
-        {
-            foreach (var entity in filter)
-                return (int)entity;
-
-            return -1;
         }
         
         public static IProtoSystems FireOn<TFilter,TComponent>(this IProtoSystems systems)

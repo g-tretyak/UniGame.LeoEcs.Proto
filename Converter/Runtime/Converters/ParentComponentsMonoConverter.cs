@@ -83,7 +83,7 @@
 
         public void OnEntityDestroy(ProtoWorld world, int entity)
         {
-            var packedParent = world.PackEntity(_parentEntity);
+            var packedParent = world.PackedEntity(_parentEntity);
             if(!packedParent.Unpack(world,out var parentEntity)) return;
             
             foreach (var converter in converters)
