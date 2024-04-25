@@ -2,7 +2,7 @@
 {
     using System;
     using global::UniGame.ViewSystem.Runtime;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto.QoL;
 
     /// <summary>
     /// link view with entity and follow it's lifetime

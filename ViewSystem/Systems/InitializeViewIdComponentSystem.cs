@@ -4,6 +4,8 @@
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.ViewSystem.Components;
 
     /// <summary>

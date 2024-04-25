@@ -1,8 +1,8 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Converters
 {
     using Converter.Runtime;
-    using Core.Runtime;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
 
     public interface IEcsViewConverter :
         IConverterEntityDestroyHandler
@@ -10,6 +10,6 @@
         bool IsEnabled { get; }
         ProtoWorld World { get; }
         ProtoPackedEntity PackedEntity { get; }
-        int Entity { get; }
+        ProtoEntity Entity { get; }
     }
 }

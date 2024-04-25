@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     [Serializable]
     public class EcsEditorFilter

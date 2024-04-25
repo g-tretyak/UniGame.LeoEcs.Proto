@@ -1,11 +1,10 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Converters
 {
     using System;
-    using System.Threading;
     using Components;
     using Converter.Runtime;
     using Converter.Runtime.Components;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
     using UnityEngine;
 

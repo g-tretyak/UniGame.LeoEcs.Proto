@@ -81,7 +81,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return converter;
         }
         
-        public void OnEntityDestroy(ProtoWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity entity)
         {
             foreach (var converter in converters)
             {

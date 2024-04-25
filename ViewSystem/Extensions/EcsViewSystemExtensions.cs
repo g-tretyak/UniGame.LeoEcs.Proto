@@ -4,6 +4,8 @@
     using Game.Ecs.UI.EndGameScreens.Systems;
     using LeoEcsLite.LeoEcs.ViewSystem.Systems;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UniGame.ViewSystem.Runtime;
     using UniModules.UniCore.Runtime.Utils;
     using UniModules.UniGame.UiSystem.Runtime;

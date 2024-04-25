@@ -3,7 +3,8 @@ using UnityEditor;
 namespace UniGame.LeoEcs.Debug.Editor
 {
     using Converter.Runtime;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool;
     using Sirenix.OdinInspector;
     using Sirenix.OdinInspector.Editor;
@@ -56,10 +57,6 @@ namespace UniGame.LeoEcs.Debug.Editor
         [ReadOnly]
         [LabelText("entities :")]
         public int totalEntities;
-        
-        // [HideInInspector]
-        // [InlineButton(nameof(Fill),nameof(Fill),Icon = SdfIconType.TerminalFill)]
-        // public int count = 10;
 
         [HideLabel]
         [BoxGroup("entities")]
@@ -72,6 +69,8 @@ namespace UniGame.LeoEcs.Debug.Editor
         public EntitiesEditorView view;
 
         #endregion
+        
+        private Slice<int> Entities = new();
 
         public bool HasProtoWorld => World != null;
 
@@ -102,7 +101,9 @@ namespace UniGame.LeoEcs.Debug.Editor
 
             gridEditorView.items.AddRange(view.entities);
             
-            totalEntities = World.GetEntitiesCount();
+            World.GetAliveEntities(Entities);
+
+            totalEntities = Entities.Len();
         }
 
 

@@ -3,7 +3,10 @@
     using System;
     using System.Collections.Generic;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Components;
+    using Shared.Extensions;
 
     [Serializable]
     public class GameObjectEntityBuilder : IEntityEditorViewBuilder
@@ -25,7 +28,7 @@
             {
                 foreach (var entity in _gameObjectFilter)
                 {
-                    if (view.id != entity) continue;
+                    if ((ProtoEntity)view.id != entity) continue;
                     ref var gameObjectComponent = ref _gameObjectPool.Get(entity);
                     var gameObject = gameObjectComponent.Value;
                     if(gameObject == null) continue;
@@ -38,7 +41,7 @@
 
         public void Execute(EntityEditorView view)
         {
-            ref var entityId = ref view.id;
+            var entityId =  (ProtoEntity)view.id;
             var packed = _world.PackEntity(entityId);
             if(packed.Unpack(_world, out var entity) == false) return;
             

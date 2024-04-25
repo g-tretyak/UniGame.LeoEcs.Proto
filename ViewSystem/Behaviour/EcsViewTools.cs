@@ -4,7 +4,8 @@
     using Components;
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using UniGame.ViewSystem.Runtime;
 

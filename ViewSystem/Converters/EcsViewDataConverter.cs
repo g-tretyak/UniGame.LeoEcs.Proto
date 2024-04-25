@@ -1,12 +1,11 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Converters
 {
     using System;
-    using System.Threading;
     using Components;
     using Converter.Runtime;
-    using Converter.Runtime.Abstract;
     using Converter.Runtime.Components;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UiSystem.Runtime;
@@ -45,7 +44,7 @@
             settings = overrideSettings;
         }
         
-        protected override void OnApply(GameObject target, ProtoWorld world, int targetEntity)
+        protected override void OnApply(GameObject target, ProtoWorld world, ProtoEntity targetEntity)
         {
             //reset lifetime
             _entityLifeTime ??= new LifeTimeDefinition();
@@ -54,7 +53,7 @@
             _view = target.GetComponent<IUiView<TData>>();
             if (_view == null) return;
 
-            entity = targetEntity;
+            entity = (int)targetEntity;
             
             _world = world;
             _viewPackedEntity = world.PackEntity(entity);
@@ -106,7 +105,7 @@
             modelComponent.Model = model;
         }
 
-        public void OnEntityDestroy(ProtoWorld world, int viewEntity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity viewEntity)
         {
             entity = -1;
             

@@ -1,11 +1,12 @@
 ﻿namespace Game.Ecs.EcsThreads.Systems
 {
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.Core.Runtime;
+    using UniGame.LeoEcs.Shared.Extensions;
     using UniModules.UniCore.Runtime.DataFlow;
     using Unity.Jobs;
 
-    public abstract class EcsDataJobSystem<TJob> : IEcsJobDataParallelFor<TJob>,IEcsDestroySystem
+    public abstract class EcsDataJobSystem<TJob> : IEcsJobDataParallelFor<TJob>,IProtoDestroySystem
         where TJob : struct, IEcsDataJobParallelFor
     {
         public IProtoSystems ecsSystems;
@@ -38,7 +39,7 @@
         public void Run()
         {
             var defaultHandle = default(JobHandle);
-            ref var jobHandle = ref Schedule(systems,ref defaultHandle);
+            ref var jobHandle = ref Schedule(ecsSystems,ref defaultHandle);
             
             jobHandle.Complete();
             

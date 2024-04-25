@@ -4,7 +4,7 @@
     using System.Buffers;
     using Converter.Runtime;
     using Core.Runtime.ObjectPool;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Runtime.ObjectPool.Extensions;
     using UniModules.Editor;
     using UniModules.UniCore.Runtime.ReflectionUtils;
@@ -26,7 +26,7 @@
         #region inspector
         
         [HideInInspector]
-        public int entity;
+        public ProtoEntity entity;
         
         [HorizontalGroup(ComponentKey, 0.75f)]
         [BoxGroup(ComponentGroupValue,LabelText = BoxGroupLabel)]
@@ -59,18 +59,23 @@
             if (value == null || !IsAlive) return;
 
             var world = World;
-            var count = world.GetPoolsCount();
-            var pools = ArrayPool<IEcsPool>.Shared.Rent(count);
-            world.GetAllPools(ref pools);
-            foreach (var pool in pools)
+            
+            var pools = world.Pools();
+            var count = pools.Len();
+            var data = pools.Data();
+
+            for (var i = 0; i < count; i++)
             {
+                var pool = data[i];
+                
                 if(pool == null)continue;
-                if(pool.GetComponentType()!= value.GetType()) continue;
+                if(pool.ItemType() != value.GetType()) continue;
+                
                 pool.Del(entity);
-                pool.AddRaw(entity,value);
+                pool.SetRaw(entity,value);
+                
                 break;
             }
-            pools.Despawn();
         }
         
         [BoxGroup(ComponentGroupActions)]
@@ -80,16 +85,18 @@
             if (value == null || !IsAlive) return;
 
             var world = World;
-            var count = world.GetPoolsCount();
-            var pools = ArrayPool<IEcsPool>.Shared.Rent(count);
-            world.GetAllPools(ref pools);
-            foreach (var pool in pools)
+            var pools = world.Pools();
+            var count = pools.Len();
+            var data = pools.Data();
+
+            for (int i = 0; i < count; i++)
             {
+                var pool = data[i];
                 if(pool == null)continue;
-                if(pool.GetComponentType()!= value.GetType()) continue;
+                if(pool.ItemType() != value.GetType()) continue;
                 pool.Del(entity);
             }
-            pools.Despawn();
+                
         }
         
         public void Release()

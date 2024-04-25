@@ -6,8 +6,9 @@
     using Components;
     using Converter.Runtime.Components;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
-    using UnityEngine;
+    using Shared.Extensions;
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
 

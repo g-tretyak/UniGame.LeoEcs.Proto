@@ -2,13 +2,14 @@ using System;
 using Leopotam.EcsLite;
 using UniGame.LeoEcs.Shared.Extensions;
 using UniGame.LeoEcs.ViewSystem.Components;
-using UniGame.LeoEcs.ViewSystem.Converters;
 using UniModules.UniGame.UiSystem.Runtime;
 using UnityEngine;
 
 namespace UniGame.LeoEcs.ViewSystem.Extensions
 {
     using System.Runtime.CompilerServices;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniGame.ViewSystem.Runtime;
     using UniModules.UniCore.Runtime.Utils;
 
@@ -16,7 +17,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
     {
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ProtoWorld.Mask ViewFilter<TModel>(this ProtoWorld world)
+        public static EcsFilter ViewFilter<TModel>(this ProtoWorld world)
             where TModel : IViewModel
         {
             return world
@@ -54,7 +55,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return world.ViewFilter<TModel>().End();
         }
         
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world,
             Type viewType,
             ViewType layoutType = ViewType.None,
@@ -68,7 +69,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
                 parent, tag, viewName, stayWorld);
         }
         
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world,
             Type viewType,
             ref  ProtoPackedEntity targetEntity,
@@ -83,7 +84,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
                 parent, tag, viewName, stayWorld);
         }
         
-        public static int MakeViewInContainerRequest<TView>(
+        public static ProtoEntity MakeViewInContainerRequest<TView>(
             this ProtoWorld world, 
             bool useBusyContainer = false,
             ProtoPackedEntity owner = default,
@@ -94,7 +95,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return world.MakeViewInContainerRequest(typeof(TView).Name, useBusyContainer, owner, tag, viewName, stayWorld);
         }
         
-        public static int MakeViewInContainerRequest(
+        public static ProtoEntity MakeViewInContainerRequest(
             this ProtoWorld world, 
             string view,
             bool useBusyContainer = false,
@@ -118,14 +119,14 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return entity;
         }
         
-        public static int MakeViewRequest<TView>(
+        public static ProtoEntity MakeViewRequest<TView>(
             this ProtoWorld world, 
             ViewType layoutType)
         {
             return MakeViewRequest(world,typeof(TView),layoutType);
         }
         
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world, 
             string viewId,
             ViewType layoutType)
@@ -133,7 +134,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return MakeViewRequest(world, viewId, layoutType.ToStringFromCache());
         }
         
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world, 
             string viewId,
             string layoutType)
@@ -149,7 +150,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return entity;
         }
         
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world, 
             Type viewType,
             ViewType layoutType)
@@ -158,7 +159,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world, 
             string view,
             ref ProtoPackedEntity target,
@@ -174,7 +175,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int MakeViewRequest(
+        public static ProtoEntity MakeViewRequest(
             this ProtoWorld world, 
             string view,
             ref ProtoPackedEntity target,
@@ -201,7 +202,7 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
             return entity;
         }
         
-        public static int MakeViewRequest(this ProtoWorld world,ref CreateViewRequest request)
+        public static ProtoEntity MakeViewRequest(this ProtoWorld world,ref CreateViewRequest request)
         {
             var entity = world.NewEntity();
             ref var component = ref world.GetOrAddComponent<CreateViewRequest>(entity);

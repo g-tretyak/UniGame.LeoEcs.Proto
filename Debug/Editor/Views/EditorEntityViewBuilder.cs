@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool;
+    using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UniModules.UniCore.Runtime.Utils;
     using UnityEngine;

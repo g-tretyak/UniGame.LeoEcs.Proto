@@ -5,7 +5,7 @@
     using Core.Runtime.SerializableType;
     using Core.Runtime.SerializableType.Attributes;
     using Extensions;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Sirenix.OdinInspector;
     using UniModules.UniGame.UiSystem.Runtime;
     using UnityEngine;

@@ -6,7 +6,9 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
     using Aspects;
     using Bootstrap.Runtime.Attributes;
     using Leopotam.EcsLite;
-    
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
+
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Leopotam.EcsLite;
 
 namespace UniGame.LeoEcs.ViewSystem.Components
 {

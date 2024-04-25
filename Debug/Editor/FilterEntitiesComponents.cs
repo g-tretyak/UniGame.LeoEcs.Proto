@@ -2,28 +2,30 @@
 {
     using System;
     using System.Buffers;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool.Extensions;
 
 
     [Serializable]
     public class FilterEntitiesComponents : IProtoWorldSearchFilter
     {
-        public int[] entities = Array.Empty<int>();
-        public Type[] componentsTypesOnEntity = Array.Empty<Type>();
+        public Slice<int> entities = new();
+        public Slice<object> components = new();
 
         public EcsFilterData Execute(EcsFilterData filterData)
         {
             var world = filterData.world;
-            entities = Array.Empty<int>();
+            entities.Clear();
             
-            world.GetAllEntities(ref entities);
-            foreach (var entity in entities)
+            world.GetAliveEntities(entities);
+            var len = entities.Len();
+            var data = entities.Data();
+
+            for (var i = 0; i < len; i++)
             {
-                if(!IsContainFilteredComponent(entity,filterData))
+                var entity = data[i];
+                if(!IsContainFilteredComponent((ProtoEntity)entity,filterData))
                     continue;
                 filterData.entities.Add(entity);
             }
@@ -32,29 +34,35 @@
         }
 
         public bool IsContainFilteredComponent(
-            int entity,
+            ProtoEntity entity,
             EcsFilterData filterData)
         {
             var filter = filterData.filter;
             if (filter == null) return false;
             
             var world = filterData.world;
-            var count = world.GetComponentsCount(entity);
+            var count = world.ComponentsCount(entity);
             var found = false;
             
-            componentsTypesOnEntity = ArrayPool<Type>.Shared.Rent(count);
-            world.GetComponentTypes(entity,ref componentsTypesOnEntity);
-
-            foreach (var type in componentsTypesOnEntity)
+            components.Clear();
+            
+            world.GetComponents(entity,components);
+            var len = components.Len();
+            var data = components.Data();
+            
+            for (var i = 0; i < len; i++)
             {
+                var item = data[i];
+                var type = item?.GetType();
+                
                 if(type == null) continue;
                 if(!type.Name.Contains(filter,StringComparison.OrdinalIgnoreCase))
                     continue;
+                
                 found = true;
                 break;
             }
 
-            componentsTypesOnEntity.Despawn();
             return found;
         }
     }

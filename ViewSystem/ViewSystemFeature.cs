@@ -1,27 +1,28 @@
 namespace UniGame.LeoEcs.ViewSystem
 {
     using Behavriour;
+    using Bootstrap.Runtime;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
-    using Leopotam.EcsLite.ExtendedSystems;
-    using UniGame.Context.Runtime.Extension;
     using UniGame.Core.Runtime;
     using Components;
+    using Context.Runtime.Extension;
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components.Events;
     using Layouts.Components;
     using Layouts.Systems;
     using LeoEcsLite.LeoEcs.ViewSystem.Systems;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
+    using Shared.Extensions;
     using Systems;
     using UniGame.ViewSystem.Runtime;
-    using UniGame.LeoEcs.Bootstrap.Runtime.Config;
     using UnityEngine;
     
     [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Features/Views Feature", fileName = "ECS Views Feature")]
-    public class ViewSystemFeature : LeoEcsFeatureGroupAsset
+    public class ViewSystemFeature : BaseLeoEcsFeature
     {
         private EcsViewTools _ecsViewTools;
         
-        protected override async UniTask OnPostInitializeFeatureAsync(IProtoSystems ecsSystems)
+        public override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
         {
             var context = ecsSystems.GetShared<IContext>();
             var viewSystem = await context.ReceiveFirstAsync<IGameViewSystem>();

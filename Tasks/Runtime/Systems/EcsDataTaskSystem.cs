@@ -3,7 +3,9 @@
     using System;
     using System.Runtime.CompilerServices;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
+    using UniGame.LeoEcs.Shared.Extensions;
     using Unity.Collections;
     using Unity.Mathematics;
     using UnityEngine.Profiling;

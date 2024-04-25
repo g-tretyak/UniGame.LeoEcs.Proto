@@ -1,11 +1,9 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Layouts.Converters
 {
     using System;
-    using System.Threading;
     using Components;
-    using Game.Ecs.Core.Components;
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UniGame.LeoEcs.Converter.Runtime;
@@ -28,7 +26,7 @@
         protected override void OnApply(
             GameObject target,
             ProtoWorld world, 
-            int entity)
+            ProtoEntity entity)
         {
             var layoutId = layoutAsset.layoutId;
             var layoutFactory = layoutAsset.layout;

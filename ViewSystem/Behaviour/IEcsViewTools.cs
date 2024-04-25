@@ -3,7 +3,8 @@
     using System;
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniGame.ViewSystem.Runtime;
 
     public interface IEcsViewTools : ILifeTimeContext

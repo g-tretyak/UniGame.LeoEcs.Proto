@@ -1,5 +1,4 @@
 ﻿using System;
-using Leopotam.EcsLite;
 using UniGame.UiSystem.Runtime;
 using UniGame.ViewSystem.Runtime;
 using UniGame.ViewSystem.Runtime.ViewModels;

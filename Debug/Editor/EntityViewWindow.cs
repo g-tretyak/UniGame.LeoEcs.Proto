@@ -4,8 +4,7 @@
     using Sirenix.OdinInspector;
     using Sirenix.OdinInspector.Editor;
 #endif
-    
-    using UnityEditor;
+
     using UnityEngine;
 
     public class EntityViewWindow

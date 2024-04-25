@@ -5,6 +5,8 @@
     using global::UniGame.LeoEcs.ViewSystem.Components;
     using global::UniGame.LeoEcs.ViewSystem.Extensions;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using UniGame.LeoEcs.Shared.Extensions;
 
     /// <summary>
     /// make request to shown view queued

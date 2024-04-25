@@ -235,14 +235,16 @@ namespace UniGame.LeoEcs.Converter.Runtime
             foreach (var converter in _converters)
             {
                 if (converter is IConverterEntityDestroyHandler destroyHandler)
-                    destroyHandler.OnEntityDestroy(_world, (int)targetEntity);
+                    destroyHandler.OnEntityDestroy(_world, targetEntity);
             }
+            
             //notify converters about destroy
             foreach (var converter in assetConverters)
             {
                 if (converter is not IConverterEntityDestroyHandler destroyHandler) continue;
-                destroyHandler.OnEntityDestroy(_world, (int)targetEntity);
+                destroyHandler.OnEntityDestroy(_world, targetEntity);
             }
+            
             _world.DelEntity(targetEntity);
         }
 

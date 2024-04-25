@@ -1,7 +1,6 @@
 ﻿namespace UniGame.LeoEcs.Debug.Editor
 {
     using System.Collections;
-    using System.Collections.Generic;
     using Converter.Runtime;
     using Unity.EditorCoroutines.Editor;
     using UnityEngine;

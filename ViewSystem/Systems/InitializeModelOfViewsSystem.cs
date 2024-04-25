@@ -1,9 +1,9 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Systems
 {
     using System;
-    using Behavriour;
     using Components;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
 
 #if ENABLE_IL2CPP

@@ -2,8 +2,9 @@
 {
     using System;
     using Components;
-    using Extensions;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
 
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;

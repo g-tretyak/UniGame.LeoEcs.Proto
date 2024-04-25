@@ -6,9 +6,8 @@
     using Core.Runtime;
     using Core.Runtime.ReflectionUtils;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.ViewSystem.Runtime;
-    using UniModules.UniGame.ViewSystem.Runtime.Abstract;
     using UnityEngine;
 
     [Serializable]

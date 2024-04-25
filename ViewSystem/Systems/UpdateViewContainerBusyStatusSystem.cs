@@ -5,7 +5,9 @@
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
     using global::UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
+    using Shared.Extensions;
 
     /// <summary>
     /// check is container state is changed to free

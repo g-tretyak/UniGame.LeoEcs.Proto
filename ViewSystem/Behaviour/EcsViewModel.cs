@@ -3,7 +3,7 @@
     using System;
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UiSystem.Runtime;
 
     [Serializable]

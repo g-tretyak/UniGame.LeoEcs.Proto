@@ -1,8 +1,7 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Components
 {
     using System;
-    using Leopotam.EcsLite;
-    using UnityEngine.Serialization;
+    using Leopotam.EcsProto.QoL;
 
     /// <summary>
     /// ask to create view in container

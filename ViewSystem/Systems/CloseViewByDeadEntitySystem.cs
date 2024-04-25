@@ -5,6 +5,9 @@
     using global::UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using global::UniModules.UniGame.UISystem.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
+    using Shared.Extensions;
 
     /// <summary>
     /// close View if entity is dead

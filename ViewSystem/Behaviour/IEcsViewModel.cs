@@ -2,7 +2,7 @@
 {
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.ViewSystem.Runtime;
 
     public interface IEcsViewModel : IViewModel

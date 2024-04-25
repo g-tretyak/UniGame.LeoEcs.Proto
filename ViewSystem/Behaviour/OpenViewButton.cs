@@ -3,9 +3,9 @@ namespace UniGame.LeoEcs.ViewSystem.Behavriour
     using Converter.Runtime;
     using Converter.Runtime.Abstract;
     using Core.Runtime;
-    using Leopotam.EcsLite;
     using Sirenix.OdinInspector;
     using Extensions;
+    using Leopotam.EcsProto;
     using UiSystem.Runtime.Settings;
     using UniGame.Rx.Runtime.Extensions;
     using UniModules.UniGame.Core.Runtime.DataFlow.Extensions;
@@ -42,7 +42,7 @@ namespace UniGame.LeoEcs.ViewSystem.Behavriour
 
         public string Name => GetType().Name;
 
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             _lifeTime = this.GetAssetLifeTime();
             trigger ??= GetComponent<Button>();

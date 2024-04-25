@@ -2,8 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Leopotam.EcsLite;
-    using Object = UnityEngine.Object;
+    using Leopotam.EcsProto;
 
     [Serializable]
     public class EcsFilterData

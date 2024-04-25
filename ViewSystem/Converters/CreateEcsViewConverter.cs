@@ -1,18 +1,16 @@
 using System;
-using System.Threading;
-using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using UniGame.Core.Runtime.SerializableType;
 using UniGame.Core.Runtime.SerializableType.Attributes;
 using UniGame.LeoEcs.Converter.Runtime;
-using UniGame.LeoEcs.Shared.Extensions;
-using UniGame.LeoEcs.ViewSystem.Components;
 using UniGame.LeoEcs.ViewSystem.Extensions;
 using UniModules.UniGame.UiSystem.Runtime;
 using UnityEngine;
 
 namespace UniGame.LeoEcs.ViewSystem.Converters
 {
+    using Leopotam.EcsProto;
+
     [Serializable]
     public class CreateEcsViewConverter : LeoEcsConverter
     {

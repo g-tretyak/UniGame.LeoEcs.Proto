@@ -2,7 +2,7 @@
 {
     using System;
     using Leopotam.EcsLite;
-    using Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.ViewSystem.Components;

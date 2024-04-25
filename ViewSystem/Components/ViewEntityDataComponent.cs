@@ -1,7 +1,7 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Components
 {
     using System;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto.QoL;
 
     /// <summary>
     /// link to view entity

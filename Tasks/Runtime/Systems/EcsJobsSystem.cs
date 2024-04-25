@@ -3,11 +3,13 @@
     using System;
     using System.Linq;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.Core.Runtime.Extension;
     using UniGame.Runtime.ObjectPool.Extensions;
     using UnityEngine;
     using UnityEngine.Pool;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
+    using UniGame.LeoEcs.Shared.Extensions;
     using Unity.Jobs;
 
     /// <summary>

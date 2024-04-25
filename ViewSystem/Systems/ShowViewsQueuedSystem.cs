@@ -4,6 +4,8 @@
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.ViewSystem.Components;
 
     /// <summary>
@@ -26,7 +28,7 @@
         
         private ProtoPool<ShowQueuedRequest> _queuedPool;
         private ProtoPool<ViewIdComponent> _viewIdPool;
-        private IEcsPool _viewRequestPool;
+        private ProtoPool<CreateViewRequest> _viewRequestPool;
 
         public void Init(IProtoSystems systems)
         {
@@ -39,8 +41,6 @@
             _viewQueuedFilter = _world
                 .Filter<ShowQueuedRequest>()
                 .End();
-
-            _viewRequestPool = _world.GetPoolByType(typeof(CreateViewRequest));
         }
 
         public void Run()
@@ -69,7 +69,16 @@
                 var viewRequestEntity = _world.NewEntity();
                 var nextRequest = queuedRequest.Value.Dequeue();
                 queuedRequest.AwaitId = nextRequest.ViewId.GetHashCode();
-                _viewRequestPool.AddRaw(viewRequestEntity, nextRequest);
+                
+                ref var viewRequest = ref _viewRequestPool.Add(viewRequestEntity);
+                viewRequest.ViewId = nextRequest.ViewId;
+                viewRequest.ViewName = nextRequest.ViewName;
+                viewRequest.Owner = nextRequest.Owner;
+                viewRequest.Parent = nextRequest.Parent;
+                viewRequest.Tag = nextRequest.Tag;
+                viewRequest.Target = nextRequest.Target;
+                viewRequest.LayoutType = nextRequest.LayoutType;
+                viewRequest.StayWorld = nextRequest.StayWorld;
             }
             
         }

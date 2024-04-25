@@ -11,6 +11,8 @@
     using Core.Runtime;
     using Game.Ecs.Core.Components;
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using UiSystem.Runtime;
     using Debug = UnityEngine.Debug;
@@ -93,7 +95,7 @@
             };
 
             var entity = await UpdateViewEntity(view,request);  
-            if(entity<0) return;
+            if((int)entity<0) return;
             
             var packedEntity = _world.PackEntity(entity);
             if(!packedEntity.Unpack(_world,out var viewEntity)) return;
@@ -101,9 +103,9 @@
             UpdateViewEntityComponent(entity, model, request);
         }
 
-        private async UniTask<int> UpdateViewEntity(IView view,CreateViewRequest request)
+        private async UniTask<ProtoEntity> UpdateViewEntity(IView view,CreateViewRequest request)
         {
-            var viewEntity = -1; 
+            var viewEntity = ProtoEntity.FromIdx(-1); 
             var viewObject = view.GameObject;
             if (viewObject == null) return viewEntity;
 
@@ -111,17 +113,17 @@
                 viewEntity = targetEntity;
             
             var converter = viewObject.GetComponent<ILeoEcsMonoConverter>();
-            if (converter != null && viewEntity < 0)
+            if (converter != null && (int)viewEntity < 0)
             {
-                if (converter.Entity > 0) return converter.Entity;
+                if ((int)converter.Entity > 0) return converter.Entity;
                 if (!converter.AutoCreate) return viewEntity;
                 
-                await UniTask.WaitWhile(() => converter.Entity < 0);
+                await UniTask.WaitWhile(() => (int)converter.Entity < 0);
                 viewEntity = converter.Entity;
             }
             else
             {
-                viewEntity = viewEntity < 0 ? _world.NewEntity() : viewEntity;
+                viewEntity = (int)viewEntity < 0 ? _world.NewEntity() : viewEntity;
                 viewObject.ConvertGameObjectToEntity(_world,viewEntity);
             }
             
@@ -132,7 +134,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void UpdateViewEntityComponent(int viewEntity,IViewModel model,CreateViewRequest request)
+        private void UpdateViewEntityComponent(ProtoEntity viewEntity,IViewModel model,CreateViewRequest request)
         {
             ref var modelComponent = ref _world.GetOrAddComponent<ViewModelComponent>(viewEntity);
             modelComponent.Model = model;

@@ -5,6 +5,7 @@ namespace UniGame.LeoEcs.ViewSystem.Components
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Leopotam.EcsProto.QoL;
     using Shared.Abstract;
 
     [Serializable]

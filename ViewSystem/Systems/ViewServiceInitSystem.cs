@@ -2,12 +2,8 @@ namespace UniGame.LeoEcs.ViewSystem.Systems
 {
     using System;
     using Components;
-    using Context.Runtime.Extension;
-    using Core.Runtime;
-    using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Extensions;
-    using Shared.Systems;
     using UniCore.Runtime.ProfilerTools;
     using UniGame.ViewSystem.Runtime;
     using UnityEngine;

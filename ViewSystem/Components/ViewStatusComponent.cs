@@ -1,6 +1,5 @@
 using System;
 using UniModules.UniGame.UISystem.Runtime;
-using UnityEngine;
 
 namespace UniGame.LeoEcs.ViewSystem.Components
 {

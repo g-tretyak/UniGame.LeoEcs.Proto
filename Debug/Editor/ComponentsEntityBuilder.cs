@@ -1,18 +1,19 @@
 ﻿namespace UniGame.LeoEcs.Debug.Editor
 {
     using System;
-    using System.Buffers;
     using System.Collections.Generic;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool;
-    using Runtime.ObjectPool.Extensions;
     using Shared.Components;
+    using Shared.Extensions;
 
     [Serializable]
     public class ComponentsEntityBuilder : IEntityEditorViewBuilder
     {
         private ProtoWorld _world;
         private ProtoPool<NameComponent> _namePool;
+        private Slice<object> _components;
 
         public void Initialize(ProtoWorld world)
         {
@@ -35,23 +36,23 @@
                 view.name = nameComponent.Value;
             }
             
-            var componentsCount = _world.GetComponentsCount(entity);
-            var components = ArrayPool<object>.Shared.Rent(componentsCount);
-            
-            _world.GetComponents(view.id, ref components);
+            _components ??= new Slice<object>();
+            _world.GetComponents((ProtoEntity)view.id, _components);
 
-            foreach (var component in components)
+            var len = _components.Len();
+            var data = _components.Data();
+
+            for (var i = 0; i < len; i++)
             {
+                var component = data[i];
                 if(component == null) continue;
                     
                 var componentView = ClassPool.Spawn<ComponentEditorView>();
-                componentView.entity = view.id;
+                componentView.entity = (ProtoEntity)view.id;
                 componentView.value = component;
                     
                 view.components.Add(componentView);
             }
-                
-            components.Despawn();
         }
         
         public void Execute(List<EntityEditorView> views)

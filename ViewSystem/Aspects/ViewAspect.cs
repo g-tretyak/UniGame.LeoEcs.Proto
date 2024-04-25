@@ -5,9 +5,8 @@
     using Converter.Runtime.Components;
     using Bootstrap.Runtime.Abstract;
     using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components.Events;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
-    using UnityEngine;
 
     [Serializable]
     public class ViewAspect : EcsAspect

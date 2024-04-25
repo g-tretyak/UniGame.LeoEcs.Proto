@@ -1,16 +1,11 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Layouts.Systems
 {
     using System;
-    using System.Linq;
     using Aspects;
     using Components;
-    using Game.Modules.UnioModules.UniGame.LeoEcsLite.LeoEcs.ViewSystem.Components;
     using Leopotam.EcsLite;
-    using UniGame.Core.Runtime.Extension;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Shared.Extensions;
-    using UniGame.Runtime.ObjectPool.Extensions;
-    using UnityEngine;
-    using UnityEngine.Pool;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.ViewSystem.Runtime;
 

@@ -3,9 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.Runtime.ObjectPool;
-    using Runtime.ObjectPool.Extensions;
     using Sirenix.OdinInspector;
-    using UnityEngine;
 
     [Serializable]
     public class EntityGridEditorView

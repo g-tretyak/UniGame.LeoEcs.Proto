@@ -2,7 +2,7 @@
 {
     using Converter.Runtime;
     using Converter.Runtime.Abstract;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Sirenix.OdinInspector;
     using UiSystem.Runtime;
     using UniGame.ViewSystem.Runtime;
@@ -29,7 +29,7 @@
 
         public virtual string Name => GetType().Name;
 
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             _dataConverter.SetUp(settings);
             _dataConverter.Apply(world,entity);
@@ -37,16 +37,16 @@
             OnApply(world,entity);
         }
         
-        public void OnEntityDestroy(ProtoWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity entity)
         {
             _dataConverter.OnEntityDestroy(world, entity);
 
             EntityDestroy(world, entity);
         }
 
-        protected virtual void EntityDestroy(ProtoWorld world, int entity){}
+        protected virtual void EntityDestroy(ProtoWorld world, ProtoEntity entity){}
         
-        protected virtual void OnApply(ProtoWorld world, int entity){}
+        protected virtual void OnApply(ProtoWorld world, ProtoEntity entity){}
         
         public bool IsMatch(string searchString)
         {

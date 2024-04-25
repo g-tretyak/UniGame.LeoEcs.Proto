@@ -3,6 +3,8 @@
     using System;
     using Components;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
     using UniGame.ViewSystem.Runtime;
 
 #if ENABLE_IL2CPP

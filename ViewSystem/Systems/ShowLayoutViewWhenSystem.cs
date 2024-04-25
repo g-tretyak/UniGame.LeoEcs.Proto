@@ -2,11 +2,11 @@
 {
     using System;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.ViewSystem.Components;
     using UniGame.ViewSystem.Runtime;
     using UniModules.UniCore.Runtime.Utils;
-    using UniModules.UniGame.UISystem.Runtime.WindowStackControllers.Abstract;
     using ViewType = UniModules.UniGame.UiSystem.Runtime.ViewType;
     
     /// <summary>

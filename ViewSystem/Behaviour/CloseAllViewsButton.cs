@@ -4,7 +4,8 @@
     using Converter.Runtime;
     using Converter.Runtime.Abstract;
     using Core.Runtime;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Rx.Runtime.Extensions;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
@@ -33,7 +34,7 @@
 
         public string Name => GetType().Name;
 
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             _lifeTime = this.GetAssetLifeTime();
             _world = world;

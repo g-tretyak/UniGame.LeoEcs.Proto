@@ -3,7 +3,8 @@
     using Components;
     using Converter.Runtime;
     using Converter.Runtime.Components;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UniGame.ViewSystem.Runtime;
@@ -17,7 +18,7 @@
         #region inspector
 
         [ReadOnly]
-        public int entity;
+        public ProtoEntity entity;
 
         public bool followEntityLifeTime = false;
         public bool addChildOrderComponent = false;
@@ -36,7 +37,7 @@
         
         public ProtoWorld World => _ProtoWorld;
         public ProtoPackedEntity PackedEntity => _viewPackedEntity;
-        public int Entity => entity;
+        public ProtoEntity Entity => entity;
         
         #endregion
         
@@ -45,14 +46,14 @@
         /// <summary>
         /// entity destroyed
         /// </summary>
-        public void OnEntityDestroy(ProtoWorld world, int targetEntity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity targetEntity)
         {
             _ProtoWorld = null;
             
-            entity = -1;
+            entity = ProtoEntity.FromIdx(-1);
         }
         
-        public sealed override void Apply(GameObject target, ProtoWorld world, int targetEntity)
+        public sealed override void Apply(GameObject target, ProtoWorld world, ProtoEntity targetEntity)
         {
             entity = targetEntity;
             

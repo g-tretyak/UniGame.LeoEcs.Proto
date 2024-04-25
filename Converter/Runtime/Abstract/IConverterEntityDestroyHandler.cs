@@ -7,7 +7,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
     public interface IConverterEntityDestroyHandler
     {
 
-        void OnEntityDestroy(ProtoWorld world, int entity);
+        void OnEntityDestroy(ProtoWorld world, ProtoEntity entity);
 
     }
 }

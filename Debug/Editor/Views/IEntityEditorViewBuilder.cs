@@ -1,7 +1,7 @@
 ﻿namespace UniGame.LeoEcs.Debug.Editor
 {
     using System.Collections.Generic;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
 
     public interface IEntityEditorViewBuilder
     {

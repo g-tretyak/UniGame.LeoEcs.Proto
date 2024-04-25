@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using Converter.Runtime;
     using Core.Runtime.ObjectPool;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool.Extensions;
+    using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UniModules.UniCore.Runtime.Utils;
     using UnityEngine;

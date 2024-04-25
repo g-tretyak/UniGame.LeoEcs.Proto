@@ -5,6 +5,8 @@ using UniGame.ViewSystem.Runtime;
 
 namespace UniGame.LeoEcs.ViewSystem.Systems
 {
+    using Leopotam.EcsProto;
+    using Shared.Extensions;
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
 

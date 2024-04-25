@@ -4,9 +4,9 @@
     using Components;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Shared.Components;
     using Shared.Extensions;
-    using UniModules.UniGame.UiSystem.Runtime;
 
     /// <summary>
     /// listen request to create view in container and find container by id
@@ -82,7 +82,7 @@
                     createViewRequest.StayWorld = request.StayWorld;
                     createViewRequest.Parent = transformComponent.Value;
                     createViewRequest.LayoutType =string.Empty;
-                    createViewRequest.Target = requestEntity.PackedEntity(_world);
+                    createViewRequest.Target = requestEntity.PackEntity(_world);
               
                     //mark container as busy
                     _busyContainerPool.GetOrAddComponent(containerEntity);

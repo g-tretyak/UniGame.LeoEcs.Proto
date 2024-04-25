@@ -2,47 +2,55 @@
 {
     using System;
     using System.Buffers;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Runtime.ObjectPool.Extensions;
     using Shared.Components;
 
     [Serializable]
     public class EntitiesNamesFilter : IProtoWorldSearchFilter
     {
-        public int[] entities = Array.Empty<int>();
-        public object[] componentsTypesOnEntity = Array.Empty<object>();
+        public Slice<int> entities = new();
+        public Slice<object> components = new();
 
         public EcsFilterData Execute(EcsFilterData filterData)
         {
-            var world = filterData.world;
-            entities = Array.Empty<int>();
+            entities.Clear();
             
-            world.GetAllEntities(ref entities);
-            foreach (var entity in entities)
+            var world = filterData.world;
+            world.GetAliveEntities(entities);
+            
+            var len = entities.Len();
+            var data = entities.Data();
+
+            for (var i = 0; i < len; i++)
             {
-                if(!IsContainFilteredComponent(entity,filterData))
+                var entity = data[i];
+                if(!IsContainFilteredComponent((ProtoEntity)entity,filterData))
                     continue;
                 filterData.entities.Add(entity);
             }
-
+            
             return filterData;
         }
 
         public bool IsContainFilteredComponent(
-            int entity,
+            ProtoEntity entity,
             EcsFilterData filterData)
         {
             var filter = filterData.filter;
             if (string.IsNullOrEmpty(filter)) return true;
             
             var world = filterData.world;
-            var count = world.GetComponentsCount(entity);
+            world.GetComponents(entity,components);
             var found = false;
             
-            componentsTypesOnEntity = ArrayPool<object>.Shared.Rent(count);
-            world.GetComponents(entity,ref componentsTypesOnEntity);
+            var len = components.Len();
+            var data = components.Data();
 
-            foreach (var component in componentsTypesOnEntity)
+            for (var i = 0; i < len; i++)
             {
+                var component = data[i];
                 if(component == null)continue;
                 
                 var name = component.GetType().Name;
@@ -65,19 +73,18 @@
                         }
                     }
                 }
-                
-                if (component is NameComponent nameComponent)
-                {
-                    name = nameComponent.Value;
-                    if (name.Contains(filter, StringComparison.OrdinalIgnoreCase))
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-            }
 
-            componentsTypesOnEntity.Despawn();
+                if (component is not NameComponent nameComponent) continue;
+                
+                name = nameComponent.Value;
+                
+                if (!name.Contains(filter, StringComparison.OrdinalIgnoreCase)) continue;
+                
+                found = true;
+                
+                break;
+            }
+            
             return found;
         }
     }

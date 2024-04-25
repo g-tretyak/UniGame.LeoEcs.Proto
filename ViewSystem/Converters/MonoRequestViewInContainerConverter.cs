@@ -1,9 +1,9 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Converters
 {
     using System;
-    using System.Threading;
     using Components;
-    using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UiSystem.Runtime.Settings;
