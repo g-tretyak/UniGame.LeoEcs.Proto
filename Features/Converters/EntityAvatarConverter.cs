@@ -27,7 +27,7 @@
         [SerializeField]
         public Transform _weaponRoot;
 
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var avatarPool = world.GetPool<EntityAvatarComponent>();
             ref var avatar = ref avatarPool.GetOrAddComponent(entity);

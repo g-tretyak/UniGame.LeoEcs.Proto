@@ -27,7 +27,7 @@ namespace UniGame.LeoEcs.ViewSystem.Converters
 
         public SkinId skinTag;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             world.MakeViewRequest(viewType, layoutType,null,skinTag);
         }

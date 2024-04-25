@@ -12,7 +12,7 @@ namespace UniGame.LeoEcs.Converter.Runtime.Converters
     [Serializable]
     public class BaseGameObjectComponentConverter : GameObjectConverter
     {
-        protected sealed override void OnApply(GameObject target, ProtoWorld world, int entity)
+        protected sealed override void OnApply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var transformComponent = ref world.GetOrAddComponent<TransformComponent>(entity);
             ref var gameObjectComponent = ref world.GetOrAddComponent<GameObjectComponent>(entity);

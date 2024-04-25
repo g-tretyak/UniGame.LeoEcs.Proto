@@ -89,7 +89,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         [ReadOnly]
         [ShowIf(nameof(IsRuntime))] 
 #endif
-        public int entity = -1;
+        public ProtoEntity entity = ProtoEntity.FromIdx(-1);
 
 #endregion
 
@@ -108,7 +108,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public bool IsAutoGenerating => createEntityOnEnabled || createEntityOnStart;
 
-        public bool IsPlayingAndReady => IsRuntime && entity >= 0;
+        public bool IsPlayingAndReady => IsRuntime && (int)entity >= 0;
 
         public bool IsCreated => _state == EntityState.Created;
 
@@ -118,7 +118,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         
         public ILifeTime LifeTime => _entityLifeTime;
 
-        public int Entity => entity;
+        public ProtoEntity Entity => entity;
 
         public bool AutoCreate => createEntityOnEnabled || createEntityOnStart;
         
@@ -158,26 +158,26 @@ namespace UniGame.LeoEcs.Converter.Runtime
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void ConnectEntity(ProtoWorld world,int ecsEntity)
+        public void ConnectEntity(ProtoWorld world,ProtoEntity ecsEntity)
         {
             entity = ecsEntity;
             
             _world = world;
-            _packedEntity = world.PackedEntity(ecsEntity);
+            _packedEntity = ecsEntity.PackEntity(world);
             _state = EntityState.Created;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Convert(ProtoWorld world, ProtoEntity ecsEntity)
         {
-            Convert(world, (int)ecsEntity);
+            ConnectEntity(world,ecsEntity);
+            gameObject.ConvertGameObjectToEntity(world,ecsEntity);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Convert(ProtoWorld world, int ecsEntity)
         {
-            ConnectEntity(world,ecsEntity);
-            gameObject.ConvertGameObjectToEntity(world,ecsEntity);
+            Convert(world, (ProtoEntity)ecsEntity);
         }
         
 #endregion
@@ -228,7 +228,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         private void DestroyEcsEntity()
         {
             if (_world.IsAlive() == false) return;
-            if (entity < 0) return;
+            if ((int)entity < 0) return;
             if (!_packedEntity.Unpack(_world, out var targetEntity)) return;
             
             //notify converters about destroy
@@ -248,7 +248,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         private void SetDestroyedState()
         {
-            entity = -1;
+            entity = ProtoEntity.FromIdx(-1);
             _state = EntityState.Destroyed;
             _packedEntity = default;
             _entityLifeTime.Release();
@@ -336,7 +336,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 #endif
         public void ShowComponents()
         {
-            EntityEditorCommands.OpenEntityInfo(entity);
+            EntityEditorCommands.OpenEntityInfo((int)entity);
         }
 
 #endif

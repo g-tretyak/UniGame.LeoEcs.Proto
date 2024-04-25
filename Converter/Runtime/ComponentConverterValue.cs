@@ -92,7 +92,7 @@
         
         public bool IsEnabled => Value?.IsEnabled ?? false;
         
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             if(Value.IsEnabled == false) return;
             Value.Apply(world,entity);

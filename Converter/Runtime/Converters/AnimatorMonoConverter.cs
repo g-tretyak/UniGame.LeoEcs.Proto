@@ -13,7 +13,7 @@
         [SerializeField]
         private Animator _animator;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var animatorPool = world.GetPool<AnimatorComponent>();
 
@@ -28,7 +28,7 @@
         [SerializeField]
         public Animator animator;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var animatorPool = world.GetPool<AnimatorComponent>();
 

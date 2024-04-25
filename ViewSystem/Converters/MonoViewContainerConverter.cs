@@ -20,7 +20,7 @@
     {
         public ViewId TargetView;
         
-        public sealed override void Apply(GameObject target, ProtoWorld world, int entity)
+        public sealed override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var viewContainer = ref world.GetOrAddComponent<ViewContainerComponent>(entity);
             viewContainer.ViewId = TargetView;

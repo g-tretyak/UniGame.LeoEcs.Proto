@@ -19,7 +19,8 @@
     public struct OwnerComponent
     {
 #if ODIN_INSPECTOR
-        [FormerlySerializedAs("Entity")] [Sirenix.OdinInspector.OnInspectorGUI]
+        [FormerlySerializedAs("Entity")] 
+        [Sirenix.OdinInspector.OnInspectorGUI]
 #endif
         public ProtoPackedEntity Value;
     }

@@ -19,7 +19,7 @@
         protected override void OnApply(
             GameObject target,
             ProtoWorld world,
-            int entity)
+            ProtoEntity entity)
         {
             ref var transformComponent = ref world.GetOrAddComponent<TransformComponent>(entity);
             

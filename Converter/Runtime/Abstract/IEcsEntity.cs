@@ -2,11 +2,12 @@
 {
     using Core.Runtime;
     using Leopotam.EcsLite;
+    using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
 
     public interface IEcsEntity
     {
-        public int Entity { get; }
+        public ProtoEntity Entity { get; }
         
         public ProtoPackedEntity PackedEntity { get; }
         

@@ -53,9 +53,9 @@
         [SerializeReference]
         public List<IEcsComponentConverter> converters = new List<IEcsComponentConverter>();
 
-        private int _parentEntity = -1;
+        private ProtoEntity _parentEntity = ProtoEntity.FromIdx(-1);
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             if (!world.HasComponent<ParentEntityComponent>(entity)) return;
             var parentComponent = world.GetOrAddComponent<ParentEntityComponent>(entity);
@@ -72,7 +72,7 @@
                 .GetOrAddComponent<GameObjectComponent>(entity);
             gameObjectComponent.Value = target;
             
-            _parentEntity = (int)parentEntity;
+            _parentEntity = parentEntity;
             
             foreach (var converter in converters)
                 converter.Apply(world, _parentEntity);
@@ -83,7 +83,7 @@
 
         public void OnEntityDestroy(ProtoWorld world, int entity)
         {
-            var packedParent = world.PackedEntity(_parentEntity);
+            var packedParent = _parentEntity.PackEntity(world);
             if(!packedParent.Unpack(world,out var parentEntity)) return;
             
             foreach (var converter in converters)

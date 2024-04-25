@@ -15,7 +15,7 @@
 
         public string Name => GetType().Name;
         
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             Apply(gameObject, world, entity);
         }
@@ -24,7 +24,7 @@
         
         public virtual bool IsEnabled => _isEnabled;
         
-        public abstract void Apply(GameObject target, ProtoWorld world, int entity);
+        public abstract void Apply(GameObject target, ProtoWorld world, ProtoEntity entity);
         
         public virtual bool IsMatch(string searchString)
         {

@@ -54,7 +54,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public IEnumerable<IEcsComponentConverter> Converters => converters;
         
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             if (IsEnabled == false) return;
             
@@ -168,7 +168,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return result;
         }
         
-        protected virtual void OnApply(ProtoWorld world, int entity, CancellationToken cancellationToken = default)
+        protected virtual void OnApply(ProtoWorld world, ProtoEntity entity, CancellationToken cancellationToken = default)
         {
             
         }

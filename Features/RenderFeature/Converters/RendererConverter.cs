@@ -19,7 +19,7 @@
     {
         public Renderer renderer;
         
-        protected override void OnApply(GameObject target, ProtoWorld world, int entity)
+        protected override void OnApply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var render = renderer != null ? renderer : target.GetComponent<Renderer>();
             if(render == null) return;

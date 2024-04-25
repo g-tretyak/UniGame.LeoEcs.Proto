@@ -14,7 +14,7 @@
         [SerializeField]
         public AssetReferenceT<Sprite> _icon;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var icon = ref world.AddComponent<IconComponent>(entity);
             icon.Value = _icon;
@@ -27,18 +27,18 @@
         [SerializeField]
         public AssetReferenceT<Sprite> icon;
         
-        public override void Apply(GameObject source,ProtoWorld world, int entity)
+        public override void Apply(GameObject source,ProtoWorld world, ProtoEntity entity)
         {
             Convert(source,world,entity).Forget();
         }
 
-        private UniTask Convert(GameObject source,ProtoWorld world, int entity)
+        private UniTask Convert(GameObject source,ProtoWorld world, ProtoEntity entity)
         {
             CreateComponent(icon, world, entity);
             return UniTask.CompletedTask;
         }
 
-        private void CreateComponent(AssetReferenceT<Sprite> sprite,ProtoWorld world, int entity)
+        private void CreateComponent(AssetReferenceT<Sprite> sprite,ProtoWorld world, ProtoEntity entity)
         {
             ref var iconComponent = ref world.AddComponent<IconComponent>(entity);
             iconComponent.Value = sprite;

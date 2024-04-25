@@ -88,7 +88,7 @@ namespace UniGame.LeoEcs.Shared.Extensions
         [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ProtoPackedEntity PackedEntity(this ProtoEntity entity, ProtoWorld world)
+        public static ProtoPackedEntity PackEntity(this ProtoEntity entity, ProtoWorld world)
         {
             var packedEntity = world.PackEntity(entity);
             return packedEntity;

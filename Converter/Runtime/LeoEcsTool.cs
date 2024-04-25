@@ -35,7 +35,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         public static void ApplyEcsComponents(
             this GameObject target, 
             ProtoWorld world, 
-            int entityId, 
+            ProtoEntity entityId, 
             IEnumerable<IEcsComponentConverter> converterTasks)
         {
 #if UNITY_EDITOR
@@ -53,6 +53,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
                 
                 ref var gameObjectComponent = ref world
                     .GetOrAddComponent<GameObjectComponent>(entityId);
+                
                 gameObjectComponent.Value = target;
                 
                 converter?.Apply(world, entityId);
@@ -62,16 +63,16 @@ namespace UniGame.LeoEcs.Converter.Runtime
         public static void ApplyEcsComponents(
             this ProtoWorld world, 
             GameObject target, 
-            int entityId, 
+            ProtoEntity entityId, 
             IEnumerable<IEcsComponentConverter> converterTasks)
         {
             ApplyEcsComponents(target,world, entityId, converterTasks);
         }
 
-        public static int ApplyEcsComponents(
+        public static ProtoEntity ApplyEcsComponents(
             this ProtoWorld world,
             GameObject target,
-            int entity,
+            ProtoEntity entity,
             IEnumerable<IEcsComponentConverter> converterTasks,
             bool spawnInstance)
         {
@@ -80,7 +81,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public static void ApplyEcsComponents(
             this ProtoWorld world, 
-            int entityId, 
+            ProtoEntity entityId, 
             IEnumerable<IEcsComponentConverter> converters)
         {
 #if UNITY_EDITOR
@@ -111,7 +112,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             }
         }
 
-        public static async UniTask<int> ConvertGameObjectToEntity(
+        public static async UniTask<ProtoEntity> ConvertGameObjectToEntity(
             this GameObject target, 
             IEnumerable<IEcsComponentConverter> converters, 
             bool spawnInstance,
@@ -122,26 +123,26 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return entity;
         }
         
-        public static int GetParentEntity(this GameObject source)
+        public static ProtoEntity GetParentEntity(this GameObject source)
         {
             var transform = source.transform;
             var parent = transform.parent;
             
-            if (parent == null) return -1;
+            if (parent == null) return ProtoEntity.FromIdx(-1);
 
             var ecsParent = parent.GetComponentInParent<IEcsEntity>();
-            if(ecsParent == null) return -1;
+            if(ecsParent == null) return ProtoEntity.FromIdx(-1);
 
             return ecsParent.Entity;
         }
 
-        public static int ConvertGameObjectToEntity(
+        public static ProtoEntity ConvertGameObjectToEntity(
             this GameObject gameObject,
             ProtoWorld world, 
-            int entity)
+            ProtoEntity entity)
         {
 #if UNITY_EDITOR
-            var packedEntity = world.PackedEntity(entity);
+            var packedEntity = entity.PackEntity(world);
             if (packedEntity.Unpack(world,out var _) == false)
             {
                 GameLog.LogError($"ENTITY {entity} IS DEAD: TRY TO CONVERT {gameObject} TO ENT {entity}",gameObject);
@@ -202,18 +203,18 @@ namespace UniGame.LeoEcs.Converter.Runtime
             converters.AddRange(container.assetConverters);
         }
         
-        public static int ConvertGameObjectToEntity(this GameObject target, 
+        public static ProtoEntity ConvertGameObjectToEntity(this GameObject target, 
             ProtoWorld world, 
             IEnumerable<IEcsComponentConverter> converterTasks, 
             bool spawnInstance)
         {
             var entity = world.NewEntity();
-            return ConvertGameObjectToEntity(target, (int)entity, world, converterTasks, spawnInstance);
+            return ConvertGameObjectToEntity(target, entity, world, converterTasks, spawnInstance);
         }
         
-        public static int ConvertGameObjectToEntity(
+        public static ProtoEntity ConvertGameObjectToEntity(
             this GameObject target, 
-            int entity,
+            ProtoEntity entity,
             ProtoWorld world, 
             IEnumerable<IEcsComponentConverter> converterTasks, 
             bool spawnInstance)
@@ -226,7 +227,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
             return entity;
         }
 
-        public static async UniTask DestroyEntity(int entityId, CancellationToken cancellationToken = default)
+        public static async UniTask DestroyEntity(ProtoEntity entityId, CancellationToken cancellationToken = default)
         {
             var world = await WaitWorldReady(cancellationToken);
             DestroyEntity(entityId, world);
@@ -245,27 +246,27 @@ namespace UniGame.LeoEcs.Converter.Runtime
             if (!entityId.Unpack(world, out var entity))
                 return;
             
-            DestroyEntity((int)entity, world);
+            DestroyEntity(entity, world);
         }
 
-        public static void DestroyEntity(int entityId, ProtoWorld world)
+        public static void DestroyEntity(ProtoEntity entityId, ProtoWorld world)
         {
             if (!world.IsAlive()) return;
             
-            var packed = world.PackedEntity(entityId);
+            var packed = entityId.PackEntity(world);
             if (!packed.Unpack(world, out var aliveEntity)) return;
 
             //world.AddComponent<InstantDestroyComponent>(aliveEntity);
             world.DelEntity(aliveEntity);
         }
 
-        public static async UniTask DestroyEntityAsync(int entityId, ProtoWorld world)
+        public static async UniTask DestroyEntityAsync(ProtoEntity entityId, ProtoWorld world)
         {
             await UniTask.Yield(PlayerLoopTiming.PreLateUpdate);
             
             if (!world.IsAlive()) return;
             
-            var packed = world.PackedEntity(entityId);
+            var packed = entityId.PackEntity(world);
             if(packed.Unpack(world,out var aliveEntity))
                 world.DelEntity(aliveEntity);
         }

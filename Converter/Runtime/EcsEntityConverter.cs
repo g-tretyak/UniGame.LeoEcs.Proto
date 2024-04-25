@@ -51,7 +51,7 @@
             {
                 var entity = world.NewEntity();
                 lifeTime.DestroyEntityWith(entity, world);
-                Convert((int)entity,world,converter).Forget();
+                Convert(entity,world,converter).Forget();
             }
         }
 
@@ -64,11 +64,11 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public async UniTask Create(int entity, ProtoWorld world)
         {
-            await UniTask.WhenAll(converters.Select(x => Convert(entity, world, x)));
+            await UniTask.WhenAll(converters.Select(x => Convert((ProtoEntity)entity, world, x)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private UniTask Convert(int entity, ProtoWorld world, IEcsComponentConverter converter)
+        private UniTask Convert(ProtoEntity entity, ProtoWorld world, IEcsComponentConverter converter)
         {
             if (!converter.IsEnabled)
                 return UniTask.CompletedTask;

@@ -19,7 +19,7 @@
 
     public interface IConnectableToEntity
     {
-        void ConnectEntity(ProtoWorld world, int ecsEntity);
+        void ConnectEntity(ProtoWorld world, ProtoEntity ecsEntity);
     }
 
     public interface IComponentConverterProvider

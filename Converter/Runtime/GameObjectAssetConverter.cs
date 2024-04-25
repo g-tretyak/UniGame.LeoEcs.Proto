@@ -28,12 +28,12 @@
         
         public bool IsEnabled => converter.IsEnabled;
         
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             converter.Apply(world,entity);
         }
 
-        public void Apply(GameObject target, ProtoWorld world, int entity)
+        public void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             converter.Apply(target,world,entity);
         }

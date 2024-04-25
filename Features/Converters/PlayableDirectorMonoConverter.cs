@@ -15,7 +15,7 @@
         [SerializeField]
         private PlayableDirector _playableDirector;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var playableDirectorPool = world.GetPool<PlayableDirectorComponent>();
             ref var playableDirectorComponent = ref playableDirectorPool.GetOrAddComponent(entity);
@@ -30,7 +30,7 @@
         [SerializeField]
         public PlayableDirector playableDirector;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var playableDirectorPool = world.GetPool<PlayableDirectorComponent>();
             ref var playableDirectorComponent = ref playableDirectorPool.GetOrAddComponent(entity);

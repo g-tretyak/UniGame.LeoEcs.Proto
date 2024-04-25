@@ -12,13 +12,13 @@
     [Serializable]
     public class ParentEntityComponentConverter : LeoEcsConverter
     {
-        public sealed override void Apply(GameObject target, ProtoWorld world, int entity)
+        public sealed override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             var parentEntity = target.GetParentEntity();
-            if(parentEntity<0) return;
+            if((int)parentEntity<0) return;
             
             ref var parentEntityComponent = ref world.GetOrAddComponent<ParentEntityComponent>(entity);
-            parentEntityComponent.Value = world.PackedEntity(parentEntity);
+            parentEntityComponent.Value = parentEntity.PackEntity(world);
         }
     }
 }

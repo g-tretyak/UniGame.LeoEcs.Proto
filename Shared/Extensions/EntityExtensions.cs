@@ -1,6 +1,7 @@
 namespace UniGame.LeoEcs.Shared.Extensions
 {
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
     using UniGame.Core.Runtime;
@@ -9,14 +10,36 @@ namespace UniGame.LeoEcs.Shared.Extensions
 
     public static class EntityExtensions
     {
+        public readonly static ProtoEntity InvalidEntity = ProtoEntity.FromIdx(-1);
+        
         private static List<IInitializeWithEntityData> InitializableComponents = new List<IInitializeWithEntityData>();
 
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoEntity GetInvalidEntity(this ProtoEntity entity)
+        {
+            return InvalidEntity;
+        }
+        
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, int entity, ProtoWorld world)
         {
             if (entity < 0) return lifeTime;
             return lifeTime.DestroyEntityWith((ProtoEntity)entity, world);
         }
         
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ILifeTime DestroyEntityWith(this ILifeTime lifeTime, ProtoEntity entity, ProtoWorld world)
         {
             if (world.IsAlive() == false) return lifeTime;
@@ -34,6 +57,11 @@ namespace UniGame.LeoEcs.Shared.Extensions
             return lifeTime;
         }
 
+#if ENABLE_IL2CPP
+        [Il2CppSetOption (Option.NullChecks, false)]
+        [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Object InitializeWithEcsData(this Object target, ProtoWorld world, int entity)
         {
             switch (target)

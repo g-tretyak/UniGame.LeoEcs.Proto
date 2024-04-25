@@ -5,6 +5,6 @@
 
     public interface IEntityConverter
     {
-        void Apply(ProtoWorld world, int entity);
+        void Apply(ProtoWorld world, ProtoEntity entity);
     }
 }

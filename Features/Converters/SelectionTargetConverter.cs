@@ -10,7 +10,7 @@ namespace Game.Ecs.Core.Converters
     [Serializable]
     public class SelectionTargetConverter : EcsComponentConverter
     {
-        public override void Apply(ProtoWorld world, int entity)
+        public override void Apply(ProtoWorld world, ProtoEntity entity)
         {
             world.GetOrAddComponent<SelectionTargetComponent>(entity);
         }

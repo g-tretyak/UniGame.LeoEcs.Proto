@@ -16,7 +16,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public virtual string Name => GetType().Name;
         
-        public abstract void Apply(ProtoWorld world, int entity);
+        public abstract void Apply(ProtoWorld world, ProtoEntity entity);
         
         protected bool IsSubstring(string value, string search)
         {

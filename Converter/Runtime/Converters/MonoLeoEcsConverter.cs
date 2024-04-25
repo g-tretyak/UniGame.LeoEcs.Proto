@@ -41,7 +41,7 @@
         public bool IsRuntime => Application.isPlaying;
         
         public string Name => converter == null ? "EMPTY" : converter.Name;
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             throw new System.NotImplementedException();
         }
@@ -51,19 +51,21 @@
         public ProtoPackedEntity Entity{get; private set;}
         protected ProtoWorld World{get; private set;}
         
-        public void Apply(GameObject target, ProtoWorld world, int entity)
+        public void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             if (converter == null) return;
+            
+            var targetEntity = (ProtoEntity)entity;
             
             ref var gameObjectComponent = ref world
                 .GetOrAddComponent<GameObjectComponent>(entity);
             gameObjectComponent.Value = target;
             
-            converter.Apply(world, entity);
+            converter.Apply(world, targetEntity);
 
             OnApply(gameObject, world, entity);
 
-            Entity = world.PackedEntity(entity);
+            Entity = targetEntity.PackEntity(world);
             World = world;
         }
         
@@ -73,7 +75,7 @@
                 destroyHandler.OnEntityDestroy(world, entity);
         }
 
-        protected virtual void OnApply(GameObject target, ProtoWorld world, int entity)
+        protected virtual void OnApply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             
         }

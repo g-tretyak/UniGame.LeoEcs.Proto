@@ -39,9 +39,9 @@
 
         public bool IsRuntime => Application.isPlaying;
         
-        public abstract void Apply(GameObject target, ProtoWorld world, int entity);
+        public abstract void Apply(GameObject target, ProtoWorld world, ProtoEntity entity);
         
-        public void Apply(ProtoWorld world, int entity)
+        public void Apply(ProtoWorld world, ProtoEntity entity)
         {
             if (!world.HasComponent<GameObjectComponent>(entity)) return;
 

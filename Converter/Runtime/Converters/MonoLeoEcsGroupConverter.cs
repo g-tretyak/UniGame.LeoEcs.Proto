@@ -33,14 +33,14 @@
         [SerializeReference]
         private List<IEcsComponentConverter> _converters = new();
 
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var gameObjectComponent = ref world
                 .GetOrAddComponent<GameObjectComponent>(entity);
             gameObjectComponent.Value = target;
             
             foreach (var converter  in _converters)
-                converter.Apply(world, entity);
+                converter.Apply(world, (ProtoEntity)entity);
         }
     }
 }

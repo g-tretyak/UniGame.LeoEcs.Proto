@@ -15,7 +15,7 @@
         [SerializeField] 
         public bool addDisabledOnAwake = false;
         
-        public override void Apply(ProtoWorld world, int entity)
+        public override void Apply(ProtoWorld world, ProtoEntity entity)
         {
             world.AddComponent<CanDisableComponent>(entity);
 

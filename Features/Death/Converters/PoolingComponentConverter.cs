@@ -12,7 +12,7 @@
     [Serializable]
     public class PoolingComponentConverter : GameObjectConverter
     {
-        protected override void OnApply(GameObject target,ProtoWorld world, int entity)
+        protected override void OnApply(GameObject target,ProtoWorld world, ProtoEntity entity)
         {
             world.GetOrAddComponent<PoolingComponent>(entity);
         }

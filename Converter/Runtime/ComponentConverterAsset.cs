@@ -17,7 +17,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         public string Name => name;
         
-        public abstract void Apply(ProtoWorld world, int entity);
+        public abstract void Apply(ProtoWorld world, ProtoEntity entity);
         
         public virtual bool IsMatch(string searchString)
         {

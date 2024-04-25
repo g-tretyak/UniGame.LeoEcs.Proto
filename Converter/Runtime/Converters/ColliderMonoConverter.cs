@@ -13,7 +13,7 @@
         [SerializeField]    
         public Collider _collider;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var colliderComponent = ref world.GetOrAddComponent<ColliderComponent>(entity);
             colliderComponent.Value = _collider;
@@ -26,7 +26,7 @@
         [SerializeField]
         public Collider colliderValue;
         
-        public override void Apply(GameObject target, ProtoWorld world, int entity)
+        public override void Apply(GameObject target, ProtoWorld world, ProtoEntity entity)
         {
             ref var colliderComponent = ref world.GetOrAddComponent<ColliderComponent>(entity);
             colliderComponent.Value = colliderValue;
