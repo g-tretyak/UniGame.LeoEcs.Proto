@@ -81,7 +81,7 @@
                 converter.Apply(world, _parentEntity);
         }
 
-        public void OnEntityDestroy(ProtoWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity entity)
         {
             var packedParent = _parentEntity.PackEntity(world);
             if(!packedParent.Unpack(world,out var parentEntity)) return;
@@ -89,11 +89,11 @@
             foreach (var converter in converters)
             {
                 if (converter is IConverterEntityDestroyHandler destroyHandler)
-                    destroyHandler.OnEntityDestroy(world, (int)parentEntity);
+                    destroyHandler.OnEntityDestroy(world, parentEntity);
             }
 
             foreach (var converter in configurations)
-                converter.OnEntityDestroy(world,(int)parentEntity);
+                converter.OnEntityDestroy(world,parentEntity);
         }
     }
 }

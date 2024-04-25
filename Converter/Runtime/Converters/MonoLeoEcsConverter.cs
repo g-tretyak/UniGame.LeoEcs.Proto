@@ -69,7 +69,7 @@
             World = world;
         }
         
-        public virtual void OnEntityDestroy(ProtoWorld world, int entity)
+        public virtual void OnEntityDestroy(ProtoWorld world, ProtoEntity entity)
         {
             if(converter is IConverterEntityDestroyHandler destroyHandler)
                 destroyHandler.OnEntityDestroy(world, entity);

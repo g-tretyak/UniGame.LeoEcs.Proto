@@ -36,7 +36,7 @@
             animatorComponent.Value = animator;
         }
 
-        public void OnEntityDestroy(ProtoWorld world, int entity)
+        public void OnEntityDestroy(ProtoWorld world, ProtoEntity entity)
         {
             world.TryRemoveComponent<AnimatorComponent>(entity);
         }
