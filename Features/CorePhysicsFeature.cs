@@ -11,7 +11,7 @@
     [UsedImplicitly]
     public sealed class CorePhysicsFeature : LeoEcsSystemAsyncFeature
     {
-        public override UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public override UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             ecsSystems.Add(new UpdateGroundInfoSystem());
             

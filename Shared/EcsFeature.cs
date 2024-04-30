@@ -15,7 +15,7 @@
 
         public virtual string FeatureName => string.IsNullOrEmpty(name) ? GetType().Name : name;
 
-        public async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             if (!isEnabled) return;
             await OnInitializeFeatureAsync(ecsSystems);

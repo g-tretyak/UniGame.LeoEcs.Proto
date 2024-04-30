@@ -26,15 +26,15 @@
 
         #endregion
 
-        public sealed override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public sealed override async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             if (!IsFeatureEnabled) return;
             
             foreach (var featureAsset in subFeatures)
-                await featureAsset.InitializeFeatureAsync(ecsSystems);
+                await featureAsset.InitializeAsync(ecsSystems);
 
             foreach (var ecsFeature in serializableFeatures)
-                await ecsFeature.InitializeFeatureAsync(ecsSystems);
+                await ecsFeature.InitializeAsync(ecsSystems);
 
             await OnInitializeFeatureAsync(ecsSystems);
         }
@@ -88,7 +88,7 @@
 
         protected override async UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
-            await feature.InitializeFeatureAsync(ecsSystems);
+            await feature.InitializeAsync(ecsSystems);
 
         }
     }

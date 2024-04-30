@@ -81,7 +81,7 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
             systems.AddRange(EcsSystems);
         }
 
-        public async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             if (!IsFeatureEnabled) return;
 
@@ -98,7 +98,7 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
                 timer.Restart();
 #endif
                 
-                await featureInstance.InitializeFeatureAsync(ecsSystems);
+                await featureInstance.InitializeAsync(ecsSystems);
 
 #if DEBUG
                 var elapsed = timer.ElapsedMilliseconds;
@@ -113,7 +113,7 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
 #if DEBUG  
                 timer.Restart();
 #endif
-                await ecsFeature.InitializeFeatureAsync(ecsSystems);
+                await ecsFeature.InitializeAsync(ecsSystems);
 #if DEBUG
                 var elapsed = timer.ElapsedMilliseconds;
                 timer.Stop();

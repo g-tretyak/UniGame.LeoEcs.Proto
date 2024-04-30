@@ -35,7 +35,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime
 
         public virtual bool ShowFeatureInfo => true;
 
-        public virtual UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public virtual UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }

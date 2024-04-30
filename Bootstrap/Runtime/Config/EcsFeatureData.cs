@@ -93,10 +93,10 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
             return false;
         }
 
-        public UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             if(Feature == null) return UniTask.CompletedTask;
-            return Feature.InitializeFeatureAsync(ecsSystems);
+            return Feature.InitializeAsync(ecsSystems);
         }
     }
 }

@@ -31,7 +31,7 @@
         
         public string FeatureName => nameof(TimerFeature);
         
-        public UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             ecsSystems.Add(new AutoRestartTimerSystem());
             

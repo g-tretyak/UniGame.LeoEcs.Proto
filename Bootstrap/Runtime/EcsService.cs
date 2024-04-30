@@ -253,7 +253,7 @@
                 var featureLifeTime = new LifeTimeDefinition();
                     
                 await initializeFeature
-                    .InitializeFeatureAsync(ecsSystems)
+                    .InitializeAsync(ecsSystems)
                     .AttachTimeoutLogAsync(GetErrorMessage(initializeFeature),_featureTimeout,featureLifeTime.Token);
                     
                 featureLifeTime.Terminate();
@@ -284,7 +284,7 @@
                     timer.Restart();
 #endif
                     await initFeature
-                        .InitializeFeatureAsync(ecsSystems)
+                        .InitializeAsync(ecsSystems)
                         .AttachTimeoutLogAsync(GetErrorMessage(initFeature),_featureTimeout,featureLifeTime.Token);
                     
 #if DEBUG

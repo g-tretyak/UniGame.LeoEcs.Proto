@@ -22,7 +22,7 @@
         
         protected override async UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
         {
-            await gameTimeFeature.InitializeFeatureAsync(ecsSystems);
+            await gameTimeFeature.InitializeAsync(ecsSystems);
             
             ecsSystems.Add(new KillMeNextTimeHandleSystem());
             ecsSystems.Add(new ProcessDestroySilentSystem());
@@ -52,7 +52,7 @@
             
             ecsSystems.Add(new ProcessDestroySilentSystem());
 
-            await timerFeature.InitializeFeatureAsync(ecsSystems);
+            await timerFeature.InitializeAsync(ecsSystems);
         }
     }
 }

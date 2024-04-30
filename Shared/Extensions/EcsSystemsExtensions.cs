@@ -30,6 +30,13 @@ namespace UniGame.LeoEcs.Shared.Extensions
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TService AddService<TService>(this IProtoSystems systems, TService service) where TService : class
+        {
+            systems.Services()[typeof(TService)] = service;
+            return service;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TService GetShared<TService>(this IProtoSystems systems) where TService : class
         {
             return GetService<TService>(systems);

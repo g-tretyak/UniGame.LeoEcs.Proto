@@ -26,7 +26,7 @@
 #endif
         public string name = EcsEmptyFeatureName;
         
-        public UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             return UniTask.CompletedTask;
         }

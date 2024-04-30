@@ -10,9 +10,9 @@
     {
         public CoreFeature coreFeature = new();
         
-        public override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public override async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
-            await coreFeature.InitializeFeatureAsync(ecsSystems);
+            await coreFeature.InitializeAsync(ecsSystems);
         }
     }
     

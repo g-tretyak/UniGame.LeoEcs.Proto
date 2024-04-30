@@ -10,9 +10,9 @@
     {
         public CoreLateUpdateFeature coreLateUpdateFeature = new();
         
-        public override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public override async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
-            await coreLateUpdateFeature.InitializeFeatureAsync(ecsSystems);
+            await coreLateUpdateFeature.InitializeAsync(ecsSystems);
         }
     }
 }

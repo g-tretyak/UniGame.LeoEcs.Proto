@@ -18,7 +18,7 @@
             ? this.GetType().Name
             : featureName;
         
-        public abstract UniTask InitializeFeatureAsync(IProtoSystems ecsSystems);
+        public abstract UniTask InitializeAsync(IProtoSystems ecsSystems);
 
         public virtual bool IsMatch(string searchString)
         {

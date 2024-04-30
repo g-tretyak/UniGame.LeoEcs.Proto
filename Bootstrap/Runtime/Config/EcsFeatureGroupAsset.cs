@@ -57,7 +57,7 @@
 
         #endregion
         
-        public sealed override async UniTask InitializeFeatureAsync(IProtoSystems ecsSystems)
+        public sealed override async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
 #if DEBUG
             var timer = Stopwatch.StartNew();   
@@ -69,7 +69,7 @@
             timer.Stop();
             GameLog.LogRuntime($"\tECS FEATURE SOURCE: SELF LOAD TIME {FeatureName} | {GetType().Name} = {elapsed} ms");
 #endif
-            await features.InitializeFeatureAsync(ecsSystems);
+            await features.InitializeAsync(ecsSystems);
             await OnPostInitializeFeatureAsync(ecsSystems);
             
 #if DEBUG

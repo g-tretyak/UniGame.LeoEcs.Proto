@@ -6,6 +6,6 @@
 
     public interface ILeoEcsInitializableFeature
     {
-        UniTask InitializeFeatureAsync(IProtoSystems ecsSystems);
+        UniTask InitializeAsync(IProtoSystems ecsSystems);
     }
 }
