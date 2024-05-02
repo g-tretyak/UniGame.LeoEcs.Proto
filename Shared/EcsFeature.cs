@@ -18,7 +18,7 @@
         public async UniTask InitializeAsync(IProtoSystems ecsSystems)
         {
             if (!isEnabled) return;
-            await OnInitializeFeatureAsync(ecsSystems);
+            await OnInitializeAsync(ecsSystems);
         }
 
         public virtual bool IsMatch(string searchString)
@@ -31,7 +31,7 @@
             return ContainsSearchString(FeatureName, searchString);
         }
 
-        protected abstract UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems);
+        protected abstract UniTask OnInitializeAsync(IProtoSystems ecsSystems);
 
         protected bool ContainsSearchString(string source, string filter)
         {

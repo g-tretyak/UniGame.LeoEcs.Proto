@@ -20,15 +20,17 @@
         public TimerFeature timerFeature = new();
         public GameTimeFeature gameTimeFeature = new();
         
-        protected override async UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
+        protected override async UniTask OnInitializeAsync(IProtoSystems ecsSystems)
         {
+            ecsSystems.Add(new AddTransformComponentsSystem());
+            ecsSystems.Add(new UpdateTransformDataSystem());
+            
             await gameTimeFeature.InitializeAsync(ecsSystems);
             
             ecsSystems.Add(new KillMeNextTimeHandleSystem());
             ecsSystems.Add(new ProcessDestroySilentSystem());
             
             ecsSystems.Add(new UpdateRenderStatusSystem());
-            
             ecsSystems.Add(new DisableColliderSystem());
             ecsSystems.Add(new ProcessDeadSimpleEntitiesSystem());
             ecsSystems.Add(new ProcessDeadTransformEntitiesSystem());

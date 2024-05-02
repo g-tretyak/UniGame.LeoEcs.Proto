@@ -11,7 +11,7 @@
 #if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
 #endif
-    
+
     public class LeoEcsFeatureAsset : BaseLeoEcsFeature , ILeoEcsFeature
     {
         #region inspector

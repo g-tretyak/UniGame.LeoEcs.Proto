@@ -1,0 +1,17 @@
+﻿namespace UniGame.LeoEcs.Bootstrap.Runtime
+{
+    using Abstract;
+    using Cysharp.Threading.Tasks;
+    using Leopotam.EcsProto;
+
+    public class EcsFeatureAsset<TFeature> : BaseLeoEcsFeature
+        where TFeature : ILeoEcsFeature, new()
+    {
+        public TFeature feature = new TFeature();
+        
+        public override async UniTask InitializeAsync(IProtoSystems ecsSystems)
+        {
+            await feature.InitializeAsync(ecsSystems);
+        }
+    }
+}

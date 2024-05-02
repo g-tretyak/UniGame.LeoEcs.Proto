@@ -4,6 +4,7 @@
     using Components;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniGame.LeoEcs.Bootstrap.Runtime.Abstract;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.LeoEcs.Shared.Components;
@@ -17,23 +18,16 @@
 #endif
     [Serializable]
     [ECSDI]
-    public sealed class AddTransformComponentsSystem : IProtoRunSystem,IProtoInitSystem
+    public sealed class AddTransformComponentsSystem : IProtoRunSystem
     {
-        private EcsFilter _filter;
         private ProtoWorld _world;
-
         private UnityAspect _unityAspect;
 
-        public void Init(IProtoSystems systems)
-        {
-            _world = systems.GetWorld();
-            
-            _filter = _world
-                .Filter<TransformComponent>()
-                .Exc<TransformPositionComponent>()
-                .Exc<PrepareToDeathComponent>()
-                .End();
-        }
+        private ProtoItExc _filter = It
+            .Chain<TransformComponent>()
+            .Exc<TransformPositionComponent>()
+            .Exc<PrepareToDeathComponent>()
+            .End();
         
         public void Run()
         {

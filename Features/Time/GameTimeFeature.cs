@@ -10,7 +10,7 @@ namespace Game.Ecs.Time
     [Serializable]
     public class GameTimeFeature : EcsFeature
     {
-        protected override UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
+        protected override UniTask OnInitializeAsync(IProtoSystems ecsSystems)
         {
             ecsSystems.Add(new UpdateEntityTimeSystem());
             return UniTask.CompletedTask;

@@ -10,10 +10,9 @@
     [Serializable]
     public sealed class CoreLateUpdateFeature : EcsFeature
     {
-        protected override UniTask OnInitializeFeatureAsync(IProtoSystems ecsSystems)
+        protected override UniTask OnInitializeAsync(IProtoSystems ecsSystems)
         {
-            ecsSystems.Add(new AddTransformComponentsSystem());
-            ecsSystems.Add(new UpdateTransformDataSystem());
+
             
             return UniTask.CompletedTask;
         }
