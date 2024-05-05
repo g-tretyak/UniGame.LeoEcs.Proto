@@ -1,10 +1,10 @@
 {
   "name": "com.unigame.ecs.proto.tool",
-  "author": "UniGame LeoEcs Proto Tool",
-  "displayName": "UniGame LeoEcs Proto Tool",
+  "author": "UniGame",
+  "displayName": "UniGame LeoEcs Proto Tools",
   "description": "Tooling for LeoEcs Proto",
   "unity": "2020.2",
-  "version": "2024.0.0",
+  "version": "2024.0.1",
   "license": "MIT",
   "keywords": [
     "ecs",
