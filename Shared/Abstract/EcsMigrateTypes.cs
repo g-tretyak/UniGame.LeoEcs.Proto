@@ -1,36 +1,21 @@
 ﻿namespace Leopotam.EcsLite
 {
     using System.Runtime.CompilerServices;
-    using Leopotam.EcsProto;
+    using EcsProto;
+    
 
 #if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+    using Unity.IL2CPP.CompilerServices;
 #endif
+    
     public interface IEcsSystem : IProtoSystem { }
     
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
     public interface IEcsSystems : IProtoSystems { }
 
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
     public interface IEcsRunSystem : IEcsSystem,IProtoRunSystem { }
     
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
     public interface IEcsInitSystem : IEcsSystem,IProtoInitSystem { }
     
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
     public interface IEcsDestroySystem : IEcsSystem,IProtoDestroySystem { }
 
 #if ENABLE_IL2CPP
@@ -66,9 +51,5 @@
         public ProtoWorld World() => pool.World();
     }
     
-#if ENABLE_IL2CPP
-    [Il2CppSetOption (Option.NullChecks, false)]
-    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
-#endif
     public interface IEcsAutoReset<T> : IProtoAutoReset<T> where T : struct { }
 }

@@ -7,7 +7,6 @@
     using Leopotam.EcsProto.QoL;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.LeoEcs.Shared.Extensions;
-    using UnityEngine;
 
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;

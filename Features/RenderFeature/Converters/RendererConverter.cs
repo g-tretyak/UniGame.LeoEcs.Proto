@@ -3,7 +3,6 @@
     using System;
     using Converter.Runtime;
     using Extensions;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Unity.IL2CPP.CompilerServices;
     using UnityEngine;

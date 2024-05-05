@@ -4,6 +4,7 @@
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using Unity.IL2CPP.CompilerServices;
 
     public static class EcsMigrationExtensions
     {

@@ -8,6 +8,10 @@ namespace UniGame.LeoEcs.Shared.Extensions
     using Abstract;
     using UnityEngine;
 
+#if ENABLE_IL2CPP
+    using Unity.IL2CPP.CompilerServices;
+#endif
+    
     public static class EntityExtensions
     {
         public readonly static ProtoEntity InvalidEntity = ProtoEntity.FromIdx(-1);

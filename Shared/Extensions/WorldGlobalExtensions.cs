@@ -6,8 +6,10 @@
     using UniModules.UniCore.Runtime.Extension;
     using UniModules.UniCore.Runtime.Utils;
     using UniModules.UniGame.Context.Runtime.Context;
-
+    
 #if ENABLE_IL2CPP
+    using Unity.IL2CPP.CompilerServices;
+    
     [Il2CppSetOption (Option.NullChecks, false)]
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif

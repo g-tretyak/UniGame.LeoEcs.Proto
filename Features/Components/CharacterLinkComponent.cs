@@ -1,6 +1,4 @@
 using System;
-using Leopotam.EcsLite;
-using UnityEngine;
 
 namespace Game.Ecs.Core.Components
 {

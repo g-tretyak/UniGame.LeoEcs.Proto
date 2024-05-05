@@ -1,7 +1,5 @@
 ﻿namespace Game.Ecs.Core.Systems
 {
-    using System;
-    using Cysharp.Threading.Tasks;
     using Components;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;

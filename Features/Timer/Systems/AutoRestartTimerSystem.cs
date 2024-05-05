@@ -3,7 +3,6 @@
     using System;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
-    using Time.Service;
     using UniGame.LeoEcs.Bootstrap.Runtime.Abstract;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.LeoEcs.Shared.Extensions;

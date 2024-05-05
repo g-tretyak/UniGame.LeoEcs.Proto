@@ -1,7 +1,6 @@
 ﻿namespace UniGame.LeoEcs.Shared.Components
 {
     using System;
-    using Leopotam.EcsLite;
     using Bootstrap.Runtime.Abstract;
     using Leopotam.EcsProto;
 

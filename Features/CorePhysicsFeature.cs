@@ -3,7 +3,6 @@
     using Systems;
     using Cysharp.Threading.Tasks;
     using JetBrains.Annotations;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using UniGame.LeoEcs.Bootstrap.Runtime;
     using UniGame.LeoEcs.Shared.Extensions;

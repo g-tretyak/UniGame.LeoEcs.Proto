@@ -1,6 +1,5 @@
 ﻿namespace Game.Ecs.Core.Death.Components
 {
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto.QoL;
 
     /// <summary>

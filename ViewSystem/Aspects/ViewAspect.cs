@@ -13,6 +13,7 @@
     {
         public ProtoPool<ViewComponent> View;
         public ProtoPool<ViewModelComponent> Model;
+        public ProtoPool<ViewEntityLifeTimeComponent> LifeTime;
         
         public ProtoPool<ViewStatusComponent> Status;
         public ProtoPool<ViewOrderComponent> Order;
