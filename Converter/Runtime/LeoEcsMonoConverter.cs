@@ -6,8 +6,6 @@ namespace UniGame.LeoEcs.Converter.Runtime
     using Abstract;
     using Core.Runtime;
     using Cysharp.Threading.Tasks;
-    using Editor;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
@@ -15,6 +13,10 @@ namespace UniGame.LeoEcs.Converter.Runtime
     using UnityEngine;
     using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
+    using Editor;
+#endif
+    
 #if TRI_INSPECTOR
     using TriInspector;
 #endif
@@ -64,7 +66,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 #endif
         [Space(8)]
         [SerializeReference]
-        public List<IEcsComponentConverter> serializableConverters = new List<IEcsComponentConverter>();
+        public List<IEcsComponentConverter> serializableConverters = new();
 
         [Space(8)] 
 #if ODIN_INSPECTOR
@@ -77,7 +79,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 #if TRI_INSPECTOR
         [ListDrawerSettings()]
 #endif
-        public List<LeoEcsConverterAsset> assetConverters = new List<LeoEcsConverterAsset>();
+        public List<LeoEcsConverterAsset> assetConverters = new();
 
 #if ODIN_INSPECTOR
         [BoxGroup("runtime info")] 
@@ -90,7 +92,14 @@ namespace UniGame.LeoEcs.Converter.Runtime
         [ShowIf(nameof(IsRuntime))] 
 #endif
         public ProtoEntity entity = ProtoEntity.FromIdx(-1);
-
+        
+#if ODIN_INSPECTOR
+        [BoxGroup("runtime info")] 
+        [InlineProperty]
+        [HideLabel]
+#endif
+        public EntityInfoView components = new();
+        
 #endregion
 
 #region private data
@@ -98,8 +107,8 @@ namespace UniGame.LeoEcs.Converter.Runtime
         private EntityState _state = EntityState.Destroyed;
         private ProtoPackedEntity _packedEntity;
         private ProtoWorld _world;
-        private List<IEcsComponentConverter> _converters = new List<IEcsComponentConverter>();
-        private LifeTimeDefinition _entityLifeTime = new LifeTimeDefinition();
+        private List<IEcsComponentConverter> _converters = new();
+        private LifeTimeDefinition _entityLifeTime = new();
         private int _generation;
         
 #endregion
@@ -170,6 +179,9 @@ namespace UniGame.LeoEcs.Converter.Runtime
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Convert(ProtoWorld world, ProtoEntity ecsEntity)
         {
+            components.World = world;
+            components.Entity = world.PackEntity(ecsEntity);
+            
             ConnectEntity(world,ecsEntity);
             gameObject.ConvertGameObjectToEntity(world,ecsEntity);
         }
@@ -352,5 +364,4 @@ namespace UniGame.LeoEcs.Converter.Runtime
         Created,
         Destroyed,
     }
-
 }

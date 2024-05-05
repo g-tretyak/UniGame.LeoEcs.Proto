@@ -26,7 +26,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
         /// <summary>
         /// base common converters for gameobjects
         /// </summary>
-        public static List<IEcsComponentConverter> DefaultGameObjectConverters = new List<IEcsComponentConverter>()
+        public static List<IEcsComponentConverter> DefaultGameObjectConverters = new()
         {
             new BaseGameObjectComponentConverter(),
             new ParentEntityComponentConverter(),

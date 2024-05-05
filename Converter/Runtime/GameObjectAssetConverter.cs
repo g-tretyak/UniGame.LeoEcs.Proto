@@ -22,7 +22,7 @@
         [HideLabel]
         [InlineProperty]
 #endif
-        public GameObjectConverter converter = new GameObjectConverter();
+        public GameObjectConverter converter = new();
 
         public string Name => GetType().Name;
         

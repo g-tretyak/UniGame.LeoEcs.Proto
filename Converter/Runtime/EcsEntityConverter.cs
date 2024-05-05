@@ -32,7 +32,7 @@
 #if  ODIN_INSPECTOR || TRI_INSPECTOR
         [InlineProperty]
 #endif
-        public List<ComponentConverterValue> converters = new List<ComponentConverterValue>();
+        public List<ComponentConverterValue> converters = new();
         
         #endregion
 

@@ -19,8 +19,11 @@
         
         public void Init(ProtoWorld world)
         {
+            var worldAspects = world.Aspects();
             foreach (var aspect in aspects)
             {
+                if(worldAspects.ContainsKey(aspect.Key) )
+                    continue;
                 aspect.Value.Init(world);
             }
         }

@@ -8,6 +8,7 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime.Abstract
         IReadOnlyList<EcsPlugin> Plugins { get; }
         IReadOnlyList<EcsConfigGroup> FeatureGroups { get; }
         
+        public bool EnableUnityModules { get; }
         public WorldConfiguration WorldConfiguration { get; }
         public AspectsData AspectsData { get; }
     }

@@ -46,7 +46,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 #if  ODIN_INSPECTOR || TRI_INSPECTOR
         [ShowIf(nameof(useConverters))]
 #endif
-        public List<ComponentConverterValue> converters = new List<ComponentConverterValue>();
+        public List<ComponentConverterValue> converters = new();
 
         public bool IsEnabled => enabled;
 

@@ -1,4 +1,4 @@
-﻿namespace UniGame.LeoEcs.Bootstrap.Runtime
+﻿    namespace UniGame.LeoEcs.Bootstrap.Runtime
 {
     using System;
     using UniGame.Core.Runtime;
@@ -15,6 +15,7 @@
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using Leopotam.EcsProto.Unity;
     using Shared.Extensions;
     using UniCore.Runtime.ProfilerTools;
     using UniModules.UniCore.Runtime.DataFlow;
@@ -105,6 +106,11 @@
             
             foreach (var systems in _systemsMap.Values)
             {
+                if (_config.EnableUnityModules)
+                {
+                    systems.AddModule(new UnityModule(bakeComponentsInName:false));
+                }
+                
                 foreach (var plugin in plugins)
                 {
                     plugin.Init(systems);

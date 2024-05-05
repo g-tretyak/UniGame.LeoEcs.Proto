@@ -40,7 +40,7 @@
 #if TRI_INSPECTOR || ODIN_INSPECTOR
         [InlineEditor]
 #endif
-        public List<LeoEcsConverterAsset> configurations = new List<LeoEcsConverterAsset>();
+        public List<LeoEcsConverterAsset> configurations = new();
         
 #if ODIN_INSPECTOR
         [Searchable(FilterOptions = SearchFilterOptions.ISearchFilterableInterface)] 
@@ -51,7 +51,7 @@
 #endif
         [Space(8)]
         [SerializeReference]
-        public List<IEcsComponentConverter> converters = new List<IEcsComponentConverter>();
+        public List<IEcsComponentConverter> converters = new();
 
         private ProtoEntity _parentEntity = ProtoEntity.FromIdx(-1);
         

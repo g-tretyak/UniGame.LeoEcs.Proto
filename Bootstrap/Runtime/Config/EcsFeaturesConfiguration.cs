@@ -33,6 +33,8 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
 #endif
         public WorldConfiguration worldConfiguration = new WorldConfiguration();
         
+        public bool enableUnityModule = true;
+        
         [Space(8)]
         [SerializeField]
 #if ODIN_INSPECTOR
@@ -65,7 +67,8 @@ namespace UniGame.Ecs.Bootstrap.Runtime.Config
                 plugin = new EcsDiPlugin()
             },
         };
-        
+
+        public bool EnableUnityModules => enableUnityModule;
         public WorldConfiguration WorldConfiguration => worldConfiguration;
 
         public AspectsData AspectsData => aspectsData;
