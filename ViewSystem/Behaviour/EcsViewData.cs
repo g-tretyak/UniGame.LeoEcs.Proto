@@ -2,7 +2,6 @@
 {
     using System;
     using Leopotam.EcsLite;
-    using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
     using UniModules.UniGame.UiSystem.Runtime;
     using UnityEngine;

@@ -3,7 +3,6 @@ namespace UniGame.LeoEcs.Bootstrap.Runtime
     using System;
     using System.Runtime.CompilerServices;
     using Abstract;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using UnityEngine;
 

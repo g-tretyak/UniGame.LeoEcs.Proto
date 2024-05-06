@@ -1,9 +1,9 @@
-﻿namespace Game.Ecs.Core.Components
+﻿namespace UniGame.LeoEcs.Proto.Components
 {
-    using Leopotam.EcsProto.QoL;
+    using System;
 
     /// <summary>
-    /// ready to death
+    /// int id of type
     /// </summary>
 #if ENABLE_IL2CPP
     using Unity.IL2CPP.CompilerServices;
@@ -12,8 +12,9 @@
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 #endif
-    public struct PrepareToDeathComponent
+    [Serializable]
+    public struct TypeIdComponent
     {
-        public ProtoPackedEntity Source;
+        public uint Value;
     }
 }

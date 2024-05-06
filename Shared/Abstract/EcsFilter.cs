@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using EcsProto;
-    using Unity.IL2CPP.CompilerServices;
     using UnityEngine.Pool;
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
@@ -71,6 +70,7 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IProtoIt Init(ProtoWorld protoWorld)
         {
+            world = protoWorld;
             return it.Init(protoWorld);
         }
 
@@ -108,7 +108,6 @@
         {
             return it.Entity();
         }
-        
         
     }
 }

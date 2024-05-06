@@ -239,7 +239,7 @@ namespace UniGame.LeoEcs.Converter.Runtime
 
         private void DestroyEcsEntity()
         {
-            if (_world.IsAlive() == false) return;
+            if (_world == null || _world.IsAlive() == false) return;
             if ((int)entity < 0) return;
             if (!_packedEntity.Unpack(_world, out var targetEntity)) return;
             

@@ -1,7 +1,6 @@
 ﻿namespace Game.Ecs.TargetSelection
 {
     using System;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto.QoL;
 
     [Serializable]

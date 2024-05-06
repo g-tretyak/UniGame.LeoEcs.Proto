@@ -4,7 +4,6 @@ namespace UniGame.LeoEcs.Shared.Extensions
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
     using UniGame.Core.Runtime;

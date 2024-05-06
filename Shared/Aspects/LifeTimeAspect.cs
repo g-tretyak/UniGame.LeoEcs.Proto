@@ -5,7 +5,6 @@
     using LeoEcsLite.LeoEcs.Shared.Components;
     using Leopotam.EcsProto;
     using Shared.Components;
-    using UniGame.LeoEcs.Bootstrap.Runtime.Abstract;
 
     /// <summary>
     /// lifetime management proto aspect

@@ -3,8 +3,8 @@
     using System;
     using LeoEcsLite.LeoEcs.Shared.Components;
     using Leopotam.EcsProto;
+    using Proto.Components;
     using Shared.Components;
-    using UniGame.LeoEcs.Bootstrap.Runtime.Abstract;
 
     /// <summary>
     /// shared components
@@ -22,5 +22,6 @@
         public ProtoPool<ActiveComponent> Active;
         public ProtoPool<HashComponent> Hash;
         public ProtoPool<NameComponent> Name;
+        public ProtoPool<TypeIdComponent> TypeId;
     }
 }

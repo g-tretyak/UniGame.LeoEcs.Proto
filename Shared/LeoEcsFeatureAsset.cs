@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using Abstract;
     using Cysharp.Threading.Tasks;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using UnityEngine;
 

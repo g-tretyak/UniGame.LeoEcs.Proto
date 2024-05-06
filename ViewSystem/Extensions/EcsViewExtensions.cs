@@ -10,19 +10,72 @@ namespace UniGame.LeoEcs.ViewSystem.Extensions
     using System.Runtime.CompilerServices;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using Proto.Components;
     using UniGame.ViewSystem.Runtime;
     using UniModules.UniCore.Runtime.Utils;
 
+#if ENABLE_IL2CPP
+    using Unity.IL2CPP.CompilerServices;
+
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+#endif
+    public static class ViewIt
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoItChain ViewChain()
+        {
+            return It.Chain<ViewModelComponent>()
+                .Inc<ViewComponent>()
+                .Inc<TypeIdComponent>()
+                .Inc<ViewInitializedComponent>();
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoItChain ViewChain<TModel>()
+            where TModel : IViewModel
+        {
+            return ViewChain().Inc<ViewComponent<TModel>>();
+        }
+    }
+    
+#if ENABLE_IL2CPP
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+#endif
     public static class EcsViewExtensions
     {
-        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static EcsFilter ViewFilter<TModel>(this ProtoWorld world)
             where TModel : IViewModel
         {
             return world
                 .Filter<ViewModelComponent>()
-                .Inc<ViewDataComponent<TModel>>()
+                .Inc<ViewComponent>()
+                .Inc<ViewComponent<TModel>>()
+                .Inc<ViewInitializedComponent>();
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoItChain ViewChain<TModel>(this ProtoItChain chain)
+            where TModel : IViewModel
+        {
+            return chain
+                .Inc<ViewModelComponent>()
+                .Inc<ViewComponent<TModel>>()
+                .Inc<ViewComponent>()
+                .Inc<ViewInitializedComponent>();
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ProtoItChain.ProtoItChainExc ViewChain<TModel>(this ProtoItChain.ProtoItChainExc chain)
+            where TModel : IViewModel
+        {
+            return chain.Inc<ViewModelComponent>()
+                .Inc<ViewComponent>() 
+                .Inc<ViewComponent<TModel>>()
                 .Inc<ViewInitializedComponent>();
         }
 

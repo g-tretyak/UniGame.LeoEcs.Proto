@@ -9,4 +9,10 @@ namespace UniGame.LeoEcs.ViewSystem.Components
         public IView View;
         public Type Type;
     }
+    
+    [Serializable]
+    public struct ViewComponent<TData>
+    {
+        
+    }
 }

@@ -4,7 +4,6 @@
     using System.Runtime.CompilerServices;
     using Cysharp.Threading.Tasks;
     using UnityEngine;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Shared.Extensions;
     using UniModules.UniCore.Runtime.DataFlow;

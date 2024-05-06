@@ -1,7 +1,5 @@
 ﻿namespace Game.Ecs.Core.Components
 {
-	using System;
-	using Leopotam.EcsLite;
 	using Leopotam.EcsProto.QoL;
 
 	/// <summary>

@@ -70,7 +70,12 @@
             {
                 if (!aspect.enabled) continue;
                 var aspectType = (Type)aspect.aspectType;
+                
                 if (aspectType == null) continue;
+                
+                if (aspectType.IsGenericType && !aspectType.IsConstructedGenericType)
+                    continue;
+                
                 var aspectInstance = aspectType.CreateWithDefaultConstructor() as IProtoAspect;
                 worldAspect.AddAspect(aspectInstance);
             }

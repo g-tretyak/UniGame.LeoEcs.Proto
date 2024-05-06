@@ -1,7 +1,5 @@
 namespace UniGame.LeoEcs.Shared.Abstract
 {
-    using System.Threading;
-
     public interface IApplyableComponent <TComponent>
         where TComponent : struct
     {

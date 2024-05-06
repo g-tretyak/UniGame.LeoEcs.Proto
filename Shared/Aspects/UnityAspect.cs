@@ -2,7 +2,6 @@
 {
     using System;
     using Game.Ecs.Core.Components;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto;
     using Shared.Components;
 

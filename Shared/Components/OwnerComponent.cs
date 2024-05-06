@@ -1,7 +1,6 @@
 ﻿namespace Game.Ecs.Core.Components
 {
     using System;
-    using Leopotam.EcsLite;
     using Leopotam.EcsProto.QoL;
     using UnityEngine.Serialization;
 

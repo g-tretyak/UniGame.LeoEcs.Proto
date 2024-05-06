@@ -3,7 +3,6 @@
     using System;
     using Leopotam.EcsLite;
     using Unity.Mathematics;
-    using UnityEngine;
 
     /// <summary>
     /// point in the world space

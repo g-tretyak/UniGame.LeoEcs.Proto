@@ -7,7 +7,6 @@ namespace UniGame.LeoEcs.Shared.Extensions
     using Ecs.Shared;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
-    using Extensions;
     using Leopotam.EcsProto.QoL;
 
 #if ENABLE_IL2CPP

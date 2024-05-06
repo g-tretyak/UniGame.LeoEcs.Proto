@@ -3,6 +3,7 @@
     using System;
     using Leopotam.EcsLite;
     using Leopotam.EcsProto;
+    using Leopotam.EcsProto.QoL;
     using UniGame.LeoEcs.Bootstrap.Runtime.Attributes;
     using UniGame.LeoEcs.Shared.Extensions;
     using UniGame.LeoEcs.ViewSystem.Components;
@@ -21,25 +22,21 @@
 #endif
     [Serializable]
     [ECSDI]
-    public class CloseOnSystem<TEvent,TViewModel> : IProtoInitSystem, IProtoRunSystem
+    public class CloseOnSystem<TEvent,TViewModel> : IProtoRunSystem
         where TEvent : struct
         where TViewModel : IViewModel
     {
         private ProtoWorld _world;
-        private EcsFilter _eventFilter;
-        private EcsFilter _viewFilter;
+        
+        private ProtoIt _eventFilter = It
+            .Chain<TEvent>()
+            .End();
+        
+        private ProtoIt _viewFilter = ViewIt
+            .ViewChain()
+            .End();
 
         private ProtoPool<ViewComponent> _viewPool;
-
-        public void Init(IProtoSystems systems)
-        {
-            _world = systems.GetWorld();
-            _eventFilter = _world.Filter<TEvent>().End();
-            _viewFilter = _world
-                .ViewFilter<TViewModel>()
-                .Inc<ViewComponent>()
-                .End();
-        }
 
         public void Run()
         {

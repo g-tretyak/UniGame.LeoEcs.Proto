@@ -1,5 +1,8 @@
 ﻿namespace UniGame.LeoEcs.ViewSystem.Converters
 {
+    using System;
+    using Bootstrap.Runtime.Abstract;
+    using Components;
     using Converter.Runtime;
     using Converter.Runtime.Abstract;
     using Leopotam.EcsProto;
@@ -50,7 +53,18 @@
         
         public bool IsMatch(string searchString)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(searchString)) return true;
+            if (Name.Contains(searchString, System.StringComparison.OrdinalIgnoreCase))
+                return true;
+            if(name.Contains(searchString, System.StringComparison.OrdinalIgnoreCase))
+                return true;
+            return false;
+        }
+        
+        [Serializable]
+        public class EcsViewAspect : EcsAspect
+        {
+            public ProtoPool<ViewComponent<TViewModel>> ViewMarker;
         }
     }
 }

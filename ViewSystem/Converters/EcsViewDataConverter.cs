@@ -6,11 +6,13 @@
     using Converter.Runtime.Components;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
+    using Proto.Components;
     using Shared.Extensions;
     using Sirenix.OdinInspector;
     using UiSystem.Runtime;
     using UniGame.ViewSystem.Runtime;
     using UniModules.UniCore.Runtime.DataFlow;
+    using UniModules.UniCore.Runtime.Utils;
     using UniRx;
     using UnityEngine;
 
@@ -58,7 +60,10 @@
             _world = world;
             _viewPackedEntity = world.PackEntity(entity);
             
-            ref var dataComponent = ref world.GetOrAddComponent<ViewDataComponent<TData>>(entity);
+            ref var typeIdComponent = ref world.GetOrAddComponent<TypeIdComponent>(entity);
+            typeIdComponent.Value = typeof(TData).GetTypeId();
+            
+            //ref var dataComponent = ref world.GetOrAddComponent<ViewComponent<TData>>(entity);
             ref var viewComponent = ref world.GetOrAddComponent<ViewComponent>(entity);
             ref var viewStatusComponent = ref world.GetOrAddComponent<ViewStatusComponent>(entity);
 
@@ -83,7 +88,8 @@
             if (settings.followEntityLifeTime)
             {
                 var lifeTimeEntity = world.NewEntity();
-                ref var lifeTimeComponent = ref world.AddComponent<ViewEntityLifeTimeComponent>(lifeTimeEntity);
+                ref var lifeTimeComponent = ref world
+                    .AddComponent<ViewEntityLifeTimeComponent>(lifeTimeEntity);
                 lifeTimeComponent.View = _view;
                 lifeTimeComponent.Value = _viewPackedEntity;
             }

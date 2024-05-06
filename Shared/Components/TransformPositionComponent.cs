@@ -2,7 +2,6 @@
 {
     using System;
     using Unity.Mathematics;
-    using UnityEngine.Serialization;
 
     /// <summary>
     /// Component with single transform data 

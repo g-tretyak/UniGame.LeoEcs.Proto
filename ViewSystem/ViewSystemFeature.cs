@@ -1,5 +1,7 @@
 namespace UniGame.LeoEcs.ViewSystem
 {
+    using System;
+    using System.Collections.Generic;
     using Behavriour;
     using Bootstrap.Runtime;
     using Cysharp.Threading.Tasks;
@@ -14,8 +16,16 @@ namespace UniGame.LeoEcs.ViewSystem
     using Leopotam.EcsProto.QoL;
     using Shared.Extensions;
     using Systems;
+    using UiSystem.Runtime.Settings;
     using UniGame.ViewSystem.Runtime;
     using UnityEngine;
+    using UnityEngine.AddressableAssets;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+    using UniModules.Editor;
+    using UniModules.UniGame.AddressableExtensions.Editor;
+#endif
     
     [CreateAssetMenu(menuName = "UniGame/Ecs Proto/Features/Views Feature", fileName = "ECS Views Feature")]
     public class ViewSystemFeature : BaseLeoEcsFeature
@@ -72,6 +82,13 @@ namespace UniGame.LeoEcs.ViewSystem
             ecsSystems.DelHere<CloseViewSelfRequest>();
             ecsSystems.DelHere<UpdateViewRequest>();
         }
+    }
 
+    [Serializable]
+    public class ViewSettingsReference : AssetReferenceT<ViewsSettings>
+    {
+        public ViewSettingsReference(string guid) : base(guid)
+        {
+        }
     }
 }
