@@ -31,9 +31,9 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async UniTask<ProtoWorld> WaitAliveWorld()
         {
-            if (World.IsAlive()) return World;
+            if (World!=null && World.IsAlive()) return World;
 
-            await UniTask.WaitWhile(() => !World.IsAlive())
+            await UniTask.WaitWhile(() => World!=null && !World.IsAlive())
                 .AttachExternalCancellation(LifeTime.Token);
 
             return World;
