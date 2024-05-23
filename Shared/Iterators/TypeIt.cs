@@ -24,7 +24,7 @@
         public TypeIt(IProtoIt protoIt,Type target)
         {
             it = protoIt;
-            id = target.GetTypeId();
+            id = (uint) target.GetTypeId();
             world = protoIt.World();
             pool = world.GetPool<TypeIdComponent>();
         }
