@@ -61,7 +61,7 @@
             _viewPackedEntity = world.PackEntity(entity);
             
             ref var typeIdComponent = ref world.GetOrAddComponent<TypeIdComponent>(entity);
-            typeIdComponent.Value = (uint) typeof(TData).GetTypeId();
+            typeIdComponent.Value = typeof(TData).GetTypeId();
             
             //ref var dataComponent = ref world.GetOrAddComponent<ViewComponent<TData>>(entity);
             ref var viewComponent = ref world.GetOrAddComponent<ViewComponent>(entity);
