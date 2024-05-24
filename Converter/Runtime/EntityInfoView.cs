@@ -3,10 +3,13 @@
     using System;
     using Leopotam.EcsProto;
     using Leopotam.EcsProto.QoL;
-    using Leopotam.EcsProto.Unity.Editor;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
+#if UNITY_EDITOR
+    using Leopotam.EcsProto.Unity.Editor;
+#endif
+    
     [Serializable]
     public class EntityInfoView
     {
