@@ -51,6 +51,13 @@
             var world = systems.World();
             return world.SetGlobal(value);
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T GetGlobal<T>(this IProtoSystems systems)
+        {
+            var world = systems.World();
+            return world.GetGlobal<T>();
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T SetGlobal<T>(this ProtoWorld world, T value)

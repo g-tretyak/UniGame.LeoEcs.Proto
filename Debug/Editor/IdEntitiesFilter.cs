@@ -8,7 +8,7 @@
     [Serializable]
     public class IdEntitiesFilter : IProtoWorldSearchFilter
     {
-        public Slice<int> entities = new();
+        public Slice<ProtoEntity> entities = new();
 
         public EcsFilterData Execute(EcsFilterData filterData)
         {
@@ -24,7 +24,8 @@
             for (var i = 0; i < len; i++)
             {
                 var entity = data[i];
-                var idValue = entity.ToStringFromCache();
+                var intEntity = (int)entity;
+                var idValue = intEntity.ToStringFromCache();
                 var isValid = isEmptyFilter || 
                               idValue.Contains(filterData.filter, StringComparison.OrdinalIgnoreCase);
                 

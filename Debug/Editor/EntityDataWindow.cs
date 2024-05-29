@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using Converter.Runtime;
+    using Leopotam.EcsProto;
     using Unity.EditorCoroutines.Editor;
     using UnityEngine;
 
@@ -85,7 +86,7 @@
             if (world == null || world.IsAlive() == false) return;
             
             _viewBuilder.Initialize(world);
-            entityView = _viewBuilder.Create(entityId, world);
+            entityView = _viewBuilder.Create((ProtoEntity)entityId, world);
         }
 
         public void SetAutoUpdate(bool enabled)

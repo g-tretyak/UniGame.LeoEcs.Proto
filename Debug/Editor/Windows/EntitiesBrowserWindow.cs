@@ -70,7 +70,7 @@ namespace UniGame.LeoEcs.Debug.Editor
 
         #endregion
         
-        private Slice<int> Entities = new();
+        private Slice<ProtoEntity> Entities = new();
 
         public bool HasProtoWorld => World != null;
 

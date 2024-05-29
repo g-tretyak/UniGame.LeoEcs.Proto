@@ -18,6 +18,6 @@
         public string errorMessage;
         public string message = string.Empty;
         public ResultType type = ResultType.None;
-        public List<int> entities = new List<int>();
+        public List<ProtoEntity> entities = new List<ProtoEntity>();
     }
 }

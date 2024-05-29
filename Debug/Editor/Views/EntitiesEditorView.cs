@@ -49,7 +49,7 @@
         #endregion
 
         private ProtoWorld _world;
-        private HashSet<int> _uniqueEntities = new HashSet<int>();
+        private HashSet<ProtoEntity> _uniqueEntities = new HashSet<ProtoEntity>();
         private EcsFilterData _cachedFilter = EcsFilterData.NoneFilterData;
         private EcsEditorFilter _filter = new EcsEditorFilter();
         private EditorEntityViewBuilder _viewBuilder = new EditorEntityViewBuilder();

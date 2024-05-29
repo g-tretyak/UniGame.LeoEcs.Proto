@@ -27,12 +27,12 @@
                 viewBuilder.Initialize(world);
         }
 
-        public EntityEditorView Create(int entity,ProtoWorld world)
+        public EntityEditorView Create(ProtoEntity entity,ProtoWorld world)
         {
             var view = ClassPool.Spawn<EntityEditorView>();
-            view.id = entity;
+            view.id = (int)entity;
             view.packedEntity = world.PackEntity(entity);
-            view.name = entity.ToStringFromCache();
+            view.name = view.id.ToStringFromCache();
             
             var packed = world.PackEntity(entity);
             if(packed.Unpack(world, out _) == false) return view;
