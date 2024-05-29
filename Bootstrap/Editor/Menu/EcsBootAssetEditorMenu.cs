@@ -2,12 +2,16 @@
 {
     using UniGame.Ecs.Bootstrap.Runtime.Config;
     using UniGame.LeoEcs.Bootstrap.Runtime;
+    using UnityEngine;
+    
+#if UNITY_EDITOR
     using UniModules.Editor;
     using UnityEditor;
-    using UnityEngine;
+#endif
 
     public static class EcsBootAssetEditorMenu
     {
+#if UNITY_EDITOR  
         [MenuItem("Assets/Create/UniGame/Ecs Proto/Create Ecs Configuration")]
         public static void CreateEcsServiceMenu()
         {
@@ -29,6 +33,6 @@
             source.updatesMap = map;
             source.SaveAsset(path);
         }
-        
+#endif
     }
 }
