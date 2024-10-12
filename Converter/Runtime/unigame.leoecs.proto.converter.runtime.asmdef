@@ -29,8 +29,8 @@
     ],
     "versionDefines": [
         {
-            "name": "com.leopotam.proto",
-            "expression": "2024",
+            "name": "com.leopotam.ecsproto",
+            "expression": "2024.0.0",
             "define": "LEO_ECS_PROTO_ENABLED"
         },
         {

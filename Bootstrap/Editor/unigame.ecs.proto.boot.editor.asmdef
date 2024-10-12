@@ -16,6 +16,12 @@
     "defineConstraints": [
         "LEO_ECS_PROTO_ENABLED"
     ],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.leopotam.ecsproto",
+            "expression": "",
+            "define": "LEO_ECS_PROTO_ENABLED"
+        }
+    ],
     "noEngineReferences": false
 }
